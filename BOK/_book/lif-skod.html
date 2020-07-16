@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Tölfræði fyrir almenning</title>
+  <meta name="description" content="Drög að efni fyrir vefinn" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Tölfræði fyrir almenning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Drög að efni fyrir vefinn" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Tölfræði fyrir almenning" />
+  
+  <meta name="twitter:description" content="Drög að efni fyrir vefinn" />
+  
+
+<meta name="author" content="Sigurbjörg Anna Guðnadóttir" />
+
+
+<meta name="date" content="2020-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="KM.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="lif-skod.html"><a href="lif-skod.html"><i class="fa fa-check"></i><b>1</b> Skoðun lifunargagna</a><ul>
+<li class="chapter" data-level="1.1" data-path="lif-skod.html"><a href="lif-skod.html#sækjum-gögnin-og-lögum-til"><i class="fa fa-check"></i><b>1.1</b> Sækjum gögnin og lögum til</a></li>
+<li class="chapter" data-level="1.2" data-path="lif-skod.html"><a href="lif-skod.html#tökum-létta-skoðun-á-gögnunum"><i class="fa fa-check"></i><b>1.2</b> Tökum létta skoðun á gögnunum</a></li>
+<li class="chapter" data-level="1.3" data-path="lif-skod.html"><a href="lif-skod.html#veldisvísisfallið"><i class="fa fa-check"></i><b>1.3</b> Veldisvísisfallið</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="KM.html"><a href="KM.html"><i class="fa fa-check"></i><b>2</b> Kaplan Meier</a><ul>
+<li class="chapter" data-level="2.1" data-path="KM.html"><a href="KM.html#kaplan-meier-metilinn"><i class="fa fa-check"></i><b>2.1</b> Kaplan Meier metilinn</a></li>
+<li class="chapter" data-level="2.2" data-path="KM.html"><a href="KM.html#kaplan-meier-gröf"><i class="fa fa-check"></i><b>2.2</b> Kaplan Meier gröf</a></li>
+<li class="chapter" data-level="2.3" data-path="KM.html"><a href="KM.html#log-rank-próf"><i class="fa fa-check"></i><b>2.3</b> Log-rank próf</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="prof-haz.html"><a href="prof-haz.html"><i class="fa fa-check"></i><b>3</b> Hlutfallsleg áhætta</a></li>
+<li class="chapter" data-level="4" data-path="cox.html"><a href="cox.html"><i class="fa fa-check"></i><b>4</b> Cox líkanið</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tölfræði fyrir almenning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Tölfræði fyrir almenning</h1>
+<p class="author"><em>Sigurbjörg Anna Guðnadóttir</em></p>
+<p class="date"><em>2020-07-16</em></p>
+</div>
+<div id="lif_skod" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Skoðun lifunargagna</h1>
+<p>Western Collaborative Group Study (WCGS) gagnasafnið er í epitools- pakkanum. Þetta eru gögn úr rannsókn þar sem meginmarkmið hennar var að skoða tengsl persónuleikagerðar og hjartasjúkdóma og því eru hjartasjúkdómar aðalútkomubreytan okkar. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, eða létust, eða þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961.</p>
+<p>Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáföll með og án skýribreytna. A og B flokkunin vísar í hvernig fólk meðhöndlar streitu og álag. Þeir sem eru í A hópi eru með meira keppnisskap, óþolinmóðari og árásagjarnari en þeir sem eru í hópi B. Þær skýribreytur sem við munum skoða eru aldur, magn kólesteról í blóði, blóðþrýstings, reykinga og BMI stuðull.</p>
+<div id="sækjum-gögnin-og-lögum-til" class="section level2">
+<h2><span class="header-section-number">1.1</span> Sækjum gögnin og lögum til</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="lif-skod.html#cb7-1"></a><span class="kw">data</span>(wcgs,<span class="dt">package =</span> <span class="st">&quot;epitools&quot;</span>)</span>
+<span id="cb7-2"><a href="lif-skod.html#cb7-2"></a>wcgs &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(wcgs)</span>
+<span id="cb7-3"><a href="lif-skod.html#cb7-3"></a></span>
+<span id="cb7-4"><a href="lif-skod.html#cb7-4"></a>wcgs &lt;-<span class="st"> </span>wcgs <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-5"><a href="lif-skod.html#cb7-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">surv_time_y =</span> time169 <span class="op">/</span><span class="st"> </span><span class="fl">365.24</span>,</span>
+<span id="cb7-6"><a href="lif-skod.html#cb7-6"></a>         <span class="dt">agec =</span> age0 <span class="op">-</span><span class="st"> </span><span class="dv">46</span>,</span>
+<span id="cb7-7"><a href="lif-skod.html#cb7-7"></a>         <span class="dt">cholmmol =</span> chol0 <span class="op">/</span><span class="st"> </span><span class="dv">39</span>,</span>
+<span id="cb7-8"><a href="lif-skod.html#cb7-8"></a>         <span class="dt">sbp10 =</span> sbp0 <span class="op">/</span><span class="st"> </span><span class="dv">10</span>,</span>
+<span id="cb7-9"><a href="lif-skod.html#cb7-9"></a>         <span class="dt">dibpat =</span> <span class="kw">factor</span>(dibpat0, <span class="dt">levels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>)),</span>
+<span id="cb7-10"><a href="lif-skod.html#cb7-10"></a>         <span class="dt">smoker =</span> <span class="kw">factor</span>(<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>(ncigs0 <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>)),</span>
+<span id="cb7-11"><a href="lif-skod.html#cb7-11"></a>         <span class="dt">bmi =</span> ((weight0 <span class="op">*</span><span class="st"> </span><span class="fl">2.54</span>) <span class="op">/</span><span class="st"> </span><span class="dv">100</span>) <span class="op">/</span><span class="st"> </span>(height0 <span class="op">*</span><span class="st"> </span><span class="fl">2.54</span>)<span class="op">^</span><span class="dv">2</span>,</span>
+<span id="cb7-12"><a href="lif-skod.html#cb7-12"></a>         <span class="dt">bmiq3 =</span> <span class="kw">cut</span>(bmi, <span class="dt">breaks =</span> <span class="kw">quantile</span>(bmi, <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)),</span>
+<span id="cb7-13"><a href="lif-skod.html#cb7-13"></a>                       <span class="dt">include.lowest =</span> T, <span class="dt">right =</span> F)</span>
+<span id="cb7-14"><a href="lif-skod.html#cb7-14"></a>         )</span>
+<span id="cb7-15"><a href="lif-skod.html#cb7-15"></a>wcgs_dat &lt;-<span class="st"> </span>wcgs <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-16"><a href="lif-skod.html#cb7-16"></a><span class="st">  </span><span class="kw">select</span>(id, <span class="dt">surv_time =</span> time169, surv_time_y, <span class="dt">status=</span>chd69,  agec, cholmmol, sbp10, smoker, dibpat, bmi,bmiq3, arcus0) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-17"><a href="lif-skod.html#cb7-17"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">complete.cases</span>(.)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">statusf=</span><span class="kw">factor</span>(status,<span class="dt">levels=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,<span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;No event&quot;</span>,<span class="st">&quot;Yes event&quot;</span>)))</span>
+<span id="cb7-18"><a href="lif-skod.html#cb7-18"></a></span>
+<span id="cb7-19"><a href="lif-skod.html#cb7-19"></a>wcgs_dat<span class="op">$</span>dibpat &lt;-<span class="st"> </span><span class="kw">relevel</span>(wcgs_dat<span class="op">$</span>dibpat, <span class="st">&quot;A&quot;</span>)</span></code></pre></div>
+<p>Tíminn time169 er í dögum en við reiknum nýja breytu sem mælir tímann í árum.<br />
+Við búum til nýja aldursbreytu þar sem við erum búin að staðla hana m.v. meðaldurinn í hópnum. Meðalaldurinn er 46.28 og drögum við þvi 46 frá aldrinum. Það mun auðvelda túlkun á líkönum.<br />
+!!! ATH af hverju deilum við með 10 og 39?.<br />
+Breytan dibpat0 eru persónuleikagerðirnar, við setjum hana sem flokkabreytu (e. factor).<br />
+Við skilgreinum reykingamann þann sem reykir amk 1 sígaréttu á dag og höfum breytuna sem flokkabreytu.<br />
+Til þess að reikna BMI þá þurfum við að breyta hæðinni í metra og þyngdinni í kíló. Útbúum einnig flokkabretytu fyrir bmi þar sem við skiptum henni í 3 jafna hluta.
+Breytan chd69 segir til um hvort karlmennirnir fengu hjartasjúkdóm eða ekki og setjum við hana því sem “status”, það hvort atburður hafi átt sér stað eða ekki er oft kallað “status”.</p>
+<p>Við notum bara þá einstaklinga sem hafa allar breyturnar sem við ætlum að skoða, aðra fjarlægjum við úr gagnasafninu.</p>
+</div>
+<div id="tökum-létta-skoðun-á-gögnunum" class="section level2">
+<h2><span class="header-section-number">1.2</span> Tökum létta skoðun á gögnunum</h2>
+<p>Fyrsta skrefið er alltaf að skoða gögnin og sjá hvað einfaldur reikningur gefur okkur. Við skoðum gögnin miða við ár sem tímalengd.</p>
+<p><em>Helstu tölur</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="lif-skod.html#cb8-1"></a><span class="co"># Hversu margir eru í safninu og í hvorum hópi fyrir sig?</span></span>
+<span id="cb8-2"><a href="lif-skod.html#cb8-2"></a>rownames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Allir&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb8-3"><a href="lif-skod.html#cb8-3"></a>fj_t &lt;-<span class="st"> </span><span class="kw">dim</span>(wcgs_dat)[<span class="dv">1</span>]</span>
+<span id="cb8-4"><a href="lif-skod.html#cb8-4"></a>fj_g &lt;-<span class="st"> </span>wcgs_dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-5"><a href="lif-skod.html#cb8-5"></a><span class="st">  </span><span class="kw">group_by</span>(dibpat) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-6"><a href="lif-skod.html#cb8-6"></a><span class="st">  </span><span class="kw">count</span>()</span>
+<span id="cb8-7"><a href="lif-skod.html#cb8-7"></a></span>
+<span id="cb8-8"><a href="lif-skod.html#cb8-8"></a>fj &lt;-<span class="st"> </span><span class="kw">rbind</span>(fj_t,fj_g[[<span class="dv">1</span>,<span class="dv">2</span>]],fj_g[[<span class="dv">2</span>,<span class="dv">2</span>]])</span>
+<span id="cb8-9"><a href="lif-skod.html#cb8-9"></a></span>
+<span id="cb8-10"><a href="lif-skod.html#cb8-10"></a><span class="co"># Hversu margir fengu hjartaáfall í heildina og í hvorum hópi fyrir sig?</span></span>
+<span id="cb8-11"><a href="lif-skod.html#cb8-11"></a></span>
+<span id="cb8-12"><a href="lif-skod.html#cb8-12"></a>st_t &lt;-<span class="st"> </span><span class="kw">sum</span>(wcgs_dat<span class="op">$</span>status)</span>
+<span id="cb8-13"><a href="lif-skod.html#cb8-13"></a>st_g &lt;-<span class="st"> </span>wcgs_dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-14"><a href="lif-skod.html#cb8-14"></a><span class="st">  </span><span class="kw">group_by</span>(dibpat) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-15"><a href="lif-skod.html#cb8-15"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">tidni =</span> <span class="kw">sum</span>(status))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="lif-skod.html#cb10-1"></a>st &lt;-<span class="st"> </span><span class="kw">rbind</span>(st_t,st_g[[<span class="dv">1</span>,<span class="dv">2</span>]],st_g[[<span class="dv">2</span>,<span class="dv">2</span>]])</span>
+<span id="cb10-2"><a href="lif-skod.html#cb10-2"></a></span>
+<span id="cb10-3"><a href="lif-skod.html#cb10-3"></a><span class="co"># Hver er eftirfylgnitíminn og lambda fyrir all hópana?</span></span>
+<span id="cb10-4"><a href="lif-skod.html#cb10-4"></a></span>
+<span id="cb10-5"><a href="lif-skod.html#cb10-5"></a>ef_t &lt;-<span class="st"> </span>wcgs_dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-6"><a href="lif-skod.html#cb10-6"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sum_time =</span> <span class="kw">sum</span>(surv_time_y),<span class="dt">lambda =</span> <span class="kw">sum</span>(status) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(surv_time_y))</span>
+<span id="cb10-7"><a href="lif-skod.html#cb10-7"></a></span>
+<span id="cb10-8"><a href="lif-skod.html#cb10-8"></a>ef_g &lt;-<span class="st"> </span>wcgs_lambda &lt;-<span class="st"> </span>wcgs_dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-9"><a href="lif-skod.html#cb10-9"></a><span class="st">  </span><span class="kw">group_by</span>(dibpat) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-10"><a href="lif-skod.html#cb10-10"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sum_time =</span> <span class="kw">sum</span>(surv_time_y),<span class="dt">lambda =</span> <span class="kw">sum</span>(status) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(surv_time_y))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="lif-skod.html#cb12-1"></a>ef &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(ef_t[[<span class="dv">1</span>]],<span class="dv">2</span>), <span class="kw">round</span>(ef_g[[<span class="dv">1</span>,<span class="dv">2</span>]],<span class="dv">2</span>), <span class="kw">round</span>(ef_g[[<span class="dv">2</span>,<span class="dv">2</span>]],<span class="dv">2</span>))</span>
+<span id="cb12-2"><a href="lif-skod.html#cb12-2"></a>lambda &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(ef_t[[<span class="dv">2</span>]],<span class="dv">4</span>), <span class="kw">round</span>(ef_g[[<span class="dv">1</span>,<span class="dv">3</span>]],<span class="dv">4</span>), <span class="kw">round</span>(ef_g[[<span class="dv">2</span>,<span class="dv">3</span>]],<span class="dv">4</span>))</span>
+<span id="cb12-3"><a href="lif-skod.html#cb12-3"></a></span>
+<span id="cb12-4"><a href="lif-skod.html#cb12-4"></a><span class="co"># Setjum í eina töflu</span></span>
+<span id="cb12-5"><a href="lif-skod.html#cb12-5"></a>stats &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">cbind</span>(rownames,fj,st,ef,lambda))</span></code></pre></div>
+<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.
+## Using compatibility `.name_repair`.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="lif-skod.html#cb14-1"></a><span class="co"># !!! ATH betra útlit</span></span>
+<span id="cb14-2"><a href="lif-skod.html#cb14-2"></a>stats &lt;-stats <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>( Hópar= rownames, Heildarfjö<span class="dt">ldi =</span> V2,  <span class="dt">Tilfelli =</span> V3, Eftirfylgnití<span class="dt">mi =</span> V4, <span class="dt">lambda =</span> V5)</span>
+<span id="cb14-3"><a href="lif-skod.html#cb14-3"></a>stats</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 5
+##   Hópar Heildarfjöldi Tilfelli Eftirfylgnitími lambda
+##   &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt; 
+## 1 Allir 3140          255      23072.54        0.0111
+## 2 A     1583          177      11330.47        0.0156
+## 3 B     1557          78       11742.07        0.0066</code></pre>
+<p>Eftirfylgnitíminn er sá tími sem einstaklingur er í rannsókninni, hámark 10 ár í þessari rannsókn. Lambda er fjöldi atburða á tímaeiningu, í þessu tilfelli er það eitt ár. Svo 0.0111 eða 1.11 % er eins árs meðaláhætta fyrir heildarhópinn.</p>
+<p><em>Áhættuhlutfallið</em>
+Áhættuhlutfallið er hlutfallið af líkunum á því að atburðurinn gerist í meðferðarhópnum á móti líkunum á því að atburðurinn gerist í viðmiðunarhópnum. Við lítum á persónuleikagerð A sem meðferðarhópinn og persónuleikagerð B sem viðmiðunarhópinn.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="lif-skod.html#cb16-1"></a>hz &lt;-<span class="st"> </span>wcgs_lambda<span class="op">$</span>lambda[<span class="dv">2</span>]<span class="op">/</span>wcgs_lambda<span class="op">$</span>lambda[<span class="dv">1</span>] </span></code></pre></div>
+<p>Áhættuhlutfallið er 0.43 og því er einstaklingur með persónuleikagerð A í -57% meiri áhættu til að fá hjartaáfall ef allir aðrir þættir eru eins.</p>
+<p>Af þessum gildum höfum við mestan áhuga áhættunni (þ.e. lambda) fyrir hvora persónuleikagerð fyrir sig og áhættuhlutfallinu. Fallið <span class="math inline">\(flexsurvreg\)</span> úr pakkanum <span class="math inline">\(flexsurv\)</span> hentar vel til þess að reikna það. Einnig notum við fallið <span class="math inline">\(Surv\)</span> úr pakkanum <span class="math inline">\(survival\)</span>.<br />
+Fallið <span class="math inline">\(Surv\)</span> er notað til að útbúa breytu af gerðinni lifunarhlutur (e. survival object). Það tekur inn í sig tvær breytur; annars vegar hversu langur tími leið fram að atburði eða skerðingu og hins vegar hvort atburður eða skerðing átti stað á þeim tímapunkti. Þeir sem hafa ekki fengið hjartaáfall eru með skerðingu.</p>
+<p>Líkanið sem við köllum VL_O er notað til að reikna lambda fyrir allan hópinn en VL_1 til þess að reikna lambda fyrir hópa A og B.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="lif-skod.html#cb17-1"></a>VL_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,<span class="dt">data=</span>wcgs_dat,<span class="dt">dist=</span><span class="st">&quot;exponential&quot;</span>)</span>
+<span id="cb17-2"><a href="lif-skod.html#cb17-2"></a>VL_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">flexsurvreg</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span>dibpat,<span class="dt">data=</span>wcgs_dat,<span class="dt">dist=</span><span class="st">&quot;exponential&quot;</span>)</span>
+<span id="cb17-3"><a href="lif-skod.html#cb17-3"></a></span>
+<span id="cb17-4"><a href="lif-skod.html#cb17-4"></a>lambda_<span class="dv">0</span> &lt;-<span class="st"> </span>VL_<span class="dv">0</span><span class="op">$</span>res[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb17-5"><a href="lif-skod.html#cb17-5"></a>lambda_a &lt;-<span class="st"> </span>VL_<span class="dv">1</span><span class="op">$</span>res[<span class="dv">1</span>,<span class="dv">1</span>] </span>
+<span id="cb17-6"><a href="lif-skod.html#cb17-6"></a>lambda_b &lt;-<span class="st"> </span><span class="kw">exp</span>(VL_<span class="dv">1</span><span class="op">$</span>res[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">+</span><span class="kw">log</span>(VL_<span class="dv">1</span><span class="op">$</span>res[<span class="dv">1</span>,<span class="dv">1</span>])) </span>
+<span id="cb17-7"><a href="lif-skod.html#cb17-7"></a></span>
+<span id="cb17-8"><a href="lif-skod.html#cb17-8"></a></span>
+<span id="cb17-9"><a href="lif-skod.html#cb17-9"></a>lambda_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(lambda_<span class="dv">0</span>,<span class="dv">4</span>), <span class="kw">round</span>(lambda_a,<span class="dv">4</span>), <span class="kw">round</span>(lambda_b,<span class="dv">4</span>))</span>
+<span id="cb17-10"><a href="lif-skod.html#cb17-10"></a></span>
+<span id="cb17-11"><a href="lif-skod.html#cb17-11"></a><span class="co"># Setjum í eina töflu</span></span>
+<span id="cb17-12"><a href="lif-skod.html#cb17-12"></a>stats2 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">cbind</span>(rownames, lambda, lambda_<span class="dv">2</span>))</span>
+<span id="cb17-13"><a href="lif-skod.html#cb17-13"></a></span>
+<span id="cb17-14"><a href="lif-skod.html#cb17-14"></a><span class="co"># !!! ATH betra útlit</span></span>
+<span id="cb17-15"><a href="lif-skod.html#cb17-15"></a>stats2 &lt;-<span class="st"> </span>stats2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>( Hópar= rownames, Lambda_handreiknað =<span class="st"> </span>V2,  Lambda_með<span class="dt">_falli =</span> V3)</span>
+<span id="cb17-16"><a href="lif-skod.html#cb17-16"></a>stats2</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   Hópar Lambda_handreiknað Lambda_með_falli
+##   &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt;           
+## 1 Allir 0.0111             0.0111          
+## 2 A     0.0156             0.0156          
+## 3 B     0.0066             0.0066</code></pre>
+<p>Getum líka reiknað áhættuhlutfallið</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="lif-skod.html#cb19-1"></a>hz_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">exp</span>(VL_<span class="dv">1</span><span class="op">$</span>res[<span class="dv">2</span>,<span class="dv">1</span>])</span></code></pre></div>
+<p>Áhættuhlutfallið er 0.43 sem er það sama og við fengum með handreikningi.</p>
+</div>
+<div id="veldisvísisfallið" class="section level2">
+<h2><span class="header-section-number">1.3</span> Veldisvísisfallið</h2>
+<p>Ef við gerum ráð fyrir veldisvísivexti þá er hægt að meta t.d. 5 ára áhættu fyrir hvorn hóp. Athugið að hér erum við að gera ráð fyrir að áhættan í sérhverjum hópi haldist óbreytt út tímabilið.</p>
+<p>Við notum formúluna <span class="math inline">\(1-e^{-\lambda*ár}\)</span>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="lif-skod.html#cb20-1"></a>ar &lt;-<span class="st"> </span><span class="dv">5</span> <span class="co"># Hægt að velja hvaða árafjölda sem er, svo lengi sem hann er innan tímalengdar rannsóknar</span></span>
+<span id="cb20-2"><a href="lif-skod.html#cb20-2"></a>VL_<span class="dv">0</span>_ahaetta &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span>lambda_<span class="dv">0</span><span class="op">*</span>ar)</span>
+<span id="cb20-3"><a href="lif-skod.html#cb20-3"></a>VL_A_ahaetta &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span>lambda_a<span class="op">*</span>ar)</span>
+<span id="cb20-4"><a href="lif-skod.html#cb20-4"></a>VL_B_ahaetta &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span>lambda_b<span class="op">*</span>ar)</span>
+<span id="cb20-5"><a href="lif-skod.html#cb20-5"></a></span>
+<span id="cb20-6"><a href="lif-skod.html#cb20-6"></a>ar_ahaetta &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(VL_<span class="dv">0</span>_ahaetta,<span class="dv">4</span>), <span class="kw">round</span>(VL_A_ahaetta,<span class="dv">4</span>), <span class="kw">round</span>(VL_B_ahaetta,<span class="dv">4</span>))</span>
+<span id="cb20-7"><a href="lif-skod.html#cb20-7"></a></span>
+<span id="cb20-8"><a href="lif-skod.html#cb20-8"></a>stats3 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">cbind</span>(rownames,fj,st,ef,lambda_<span class="dv">2</span>,ar_ahaetta))</span>
+<span id="cb20-9"><a href="lif-skod.html#cb20-9"></a></span>
+<span id="cb20-10"><a href="lif-skod.html#cb20-10"></a><span class="co"># !!! ATH betra útlit</span></span>
+<span id="cb20-11"><a href="lif-skod.html#cb20-11"></a>stats3 &lt;-<span class="st"> </span>stats3 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>( Hópar= rownames, Heildarfjö<span class="dt">ldi =</span> V2,  <span class="dt">Tilfelli =</span> V3, Eftirfylgnití<span class="dt">mi =</span> V4, <span class="dt">lambda =</span> V5, áhætta5á<span class="dt">r =</span> V6)</span>
+<span id="cb20-12"><a href="lif-skod.html#cb20-12"></a>stats3</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 6
+##   Hópar Heildarfjöldi Tilfelli Eftirfylgnitími lambda áhætta5ár
+##   &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;    
+## 1 Allir 3140          255      23072.54        0.0111 0.0538   
+## 2 A     1583          177      11330.47        0.0156 0.0751   
+## 3 B     1557          78       11742.07        0.0066 0.0327</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="KM.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BOK.pdf", "BOK.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

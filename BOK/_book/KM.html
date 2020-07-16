@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Kaplan Meier | Tölfræði fyrir almenning</title>
+  <meta name="description" content="Drög að efni fyrir vefinn" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Kaplan Meier | Tölfræði fyrir almenning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Drög að efni fyrir vefinn" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Kaplan Meier | Tölfræði fyrir almenning" />
+  
+  <meta name="twitter:description" content="Drög að efni fyrir vefinn" />
+  
+
+<meta name="author" content="Sigurbjörg Anna Guðnadóttir" />
+
+
+<meta name="date" content="2020-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lif-skod.html"/>
+<link rel="next" href="prof-haz.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="lif-skod.html"><a href="lif-skod.html"><i class="fa fa-check"></i><b>1</b> Skoðun lifunargagna</a><ul>
+<li class="chapter" data-level="1.1" data-path="lif-skod.html"><a href="lif-skod.html#sækjum-gögnin-og-lögum-til"><i class="fa fa-check"></i><b>1.1</b> Sækjum gögnin og lögum til</a></li>
+<li class="chapter" data-level="1.2" data-path="lif-skod.html"><a href="lif-skod.html#tökum-létta-skoðun-á-gögnunum"><i class="fa fa-check"></i><b>1.2</b> Tökum létta skoðun á gögnunum</a></li>
+<li class="chapter" data-level="1.3" data-path="lif-skod.html"><a href="lif-skod.html#veldisvísisfallið"><i class="fa fa-check"></i><b>1.3</b> Veldisvísisfallið</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="KM.html"><a href="KM.html"><i class="fa fa-check"></i><b>2</b> Kaplan Meier</a><ul>
+<li class="chapter" data-level="2.1" data-path="KM.html"><a href="KM.html#kaplan-meier-metilinn"><i class="fa fa-check"></i><b>2.1</b> Kaplan Meier metilinn</a></li>
+<li class="chapter" data-level="2.2" data-path="KM.html"><a href="KM.html#kaplan-meier-gröf"><i class="fa fa-check"></i><b>2.2</b> Kaplan Meier gröf</a></li>
+<li class="chapter" data-level="2.3" data-path="KM.html"><a href="KM.html#log-rank-próf"><i class="fa fa-check"></i><b>2.3</b> Log-rank próf</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="prof-haz.html"><a href="prof-haz.html"><i class="fa fa-check"></i><b>3</b> Hlutfallsleg áhætta</a></li>
+<li class="chapter" data-level="4" data-path="cox.html"><a href="cox.html"><i class="fa fa-check"></i><b>4</b> Cox líkanið</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tölfræði fyrir almenning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="KM" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Kaplan Meier</h1>
+<div id="kaplan-meier-metilinn" class="section level2">
+<h2><span class="header-section-number">2.1</span> Kaplan Meier metilinn</h2>
+<p>Næst skoðum við Kaplan Meier metilinn en hann er ein langmest notaða tölfræðiaðferðin þegar framkvæmd er lifunargreining, meðal annars vegna þess að á honum byggja svo kölluð Kaplan-Meier gröf sem eru ein algengasta leiðin til að lýsa lifunargögnum.</p>
+<p>Fyrst skulum við kynna til sögunnar svokallað <strong>lifunarfall</strong> (e. survival curve). Lifunarfallið er yfirleitt táknað með <span class="math inline">\(S(t)\)</span> og túlkun fallsins er svohljóðandi</p>
+<p><span class="math display">\[ 
+S(t) = \text{Líkur þess að einstaklingur fá ekki atburð fram að tíma $t$.}
+\]</span></p>
+<p>Lifunarfallið miðar alltaf við einhvern tiltekinn atburð. Oft er sá atburður dauði, en hann er einnig mjög oft eitthvað annað eins og til dæmis greining á sjúkdómi. Lifunarfallið gefur okkur þá líkurnar á því að hafa ekki fengið sjúkdóm innan tiltekins tíma.</p>
+<p>Í okkar tilfelli væri <span class="math inline">\(S(5)\)</span> líkur þess að einstaklingur fái ekki hjartasjúkdóm innan 5 ára. Ef ekki væri fyrir skerðingu væri lítill vandi að meta hvert það gildi væri, sem við samkvæmt venju köllum <span class="math inline">\(\hat S(5)\)</span>. Besta matið á <span class="math inline">\(\hat S(5)\)</span> væri einfaldlega fjöldi þeirra sem fengu hjartasjúkdóm innan 5 ára af allri heildinni. En skerðingarinnar vegna vandast málin.</p>
+<p>Kaplan Meier metilinn er stærðfræðileg regla til að meta <span class="math inline">\(\hat S(t)\)</span>. Hann er metinn á sérhverjum tímapunkti þegar <em>atburður</em> á sér stað (en ekki skerðing). Í gögnunum okkar fengu 257 karlmenn hjartasjúkdóm svo þessir tímapunktar eru að hámarki 257. Við nánari athugun reynast stundum fleiri en einn karlmaður fá hjartasjúkdóm eftir jafnlangan tíma svo tímapunktarnir eru alls 248. Ef við gefum þeim heiti eftir stærðarröð þeirra, <span class="math inline">\(t_1, \ldots , t_{248}\)</span>, þá væri:</p>
+<ul>
+<li><span class="math inline">\(t_1 =\)</span> 18, sem er sá tímapunktur þegar fyrsti maðurinn fékk hjartasjúkdóm,</li>
+<li><span class="math inline">\(t_2 =\)</span> 21 væri sá tímapunktur þegar næsti maður fékk hjartasjúkdóm</li>
+<li><span class="math inline">\(t_{248} =\)</span> 3229, væri að lokum sá tímapunktur þegar síðasti maðurinn fékk hjartasjúkdóm.</li>
+</ul>
+<p>Kaplan Meier metilinn er metinn á sérhverjum þessara 248 tímapunkta. Formúla metilsins er</p>
+<p><span class="math display">\[ \hat S(t) = \Pi_{i=1}^k \left( 1- \frac{d_i}{n_i} \right)\]</span></p>
+<p>þar sem <span class="math inline">\(d_i\)</span> táknar fjölda þeirra sem fengu atburðinn á tímapunkti <span class="math inline">\(i\)</span> en <span class="math inline">\(n_i\)</span> er fjöldi þeirra sem er <em>enn í áhættu</em> að fá atburðinn á tímapunkti <span class="math inline">\(i\)</span>, þ.e.a.s. hafa hvorki fengið atburðinn, né verið skertir.</p>
+<p>Í fyrsta tímapunktinum er Kaplan Meier metillinn hreinlega hlutfall þeirra sem ekki var kominn með hjartasjúkdóm af þeim sem ekki voru orðnir skertir á þeim tímapunkti (þ.e.a.s. af þeim sem voru enn í eftirfylgd). Fyrir næsta tímapunkt þarf að reikna einn mínus hlutfall fjölda þeirra sem fékk hjartasjúkdóm <em>á þeim tímapunkti</em> af þeim sem enn voru í eftirfylgd á þeim tímapunkti og margfalda það gildi við síðasta reiknaða Kaplan-Meier gildið. Þannig er haldið áfram koll af kolli fyrir alla tímapunktana. Athugið að Kaplan Meier matið er eingöngu metið á þeim tímapunktum þegar atburður á sér stað. Ef við viljum meta lifunarfallið á tímapunktum sem lenda á milli þessara gilda notum við Kaplan-Meier matið fyrir <em>næsta tímapunkt á undan</em>.</p>
+<p>Notum aðferð Kaplan Meier til að meta 5 ára áhættu á hjartasjúkdómi hjá öllum annars vegar og hópunum tveimur hins vegar. Notum fallið <span class="math inline">\(survfit\)</span> úr pakkanum <span class="math inline">\(survival\)</span>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="KM.html#cb22-1"></a><span class="co"># Allur hópurinn</span></span>
+<span id="cb22-2"><a href="KM.html#cb22-2"></a>KM_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb22-3"><a href="KM.html#cb22-3"></a>KM_<span class="dv">0</span>_sum_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">1</span>) <span class="co"># times = 1 fyrir 1 ár</span></span>
+<span id="cb22-4"><a href="KM.html#cb22-4"></a>KM_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">0</span>_sum_<span class="dv">1</span><span class="op">$</span>surv</span>
+<span id="cb22-5"><a href="KM.html#cb22-5"></a>KM_<span class="dv">0</span>_sum_<span class="dv">5</span> &lt;-<span class="st">  </span><span class="kw">summary</span>(KM_<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">5</span>) <span class="co"># times = 5 fyrir 5 ár</span></span>
+<span id="cb22-6"><a href="KM.html#cb22-6"></a>KM_<span class="dv">0</span>_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">0</span>_sum_<span class="dv">5</span><span class="op">$</span>surv</span>
+<span id="cb22-7"><a href="KM.html#cb22-7"></a></span>
+<span id="cb22-8"><a href="KM.html#cb22-8"></a><span class="co"># Persónuleikagerð A og B</span></span>
+<span id="cb22-9"><a href="KM.html#cb22-9"></a>KM_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb22-10"><a href="KM.html#cb22-10"></a>KM_<span class="dv">1</span>_sum_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">1</span>, <span class="dt">times =</span> <span class="dv">1</span>) <span class="co"># times = 1 fyrir 1 ár</span></span>
+<span id="cb22-11"><a href="KM.html#cb22-11"></a>KM_<span class="dv">1</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">1</span>_sum_<span class="dv">1</span><span class="op">$</span>surv</span>
+<span id="cb22-12"><a href="KM.html#cb22-12"></a>KM_<span class="dv">1</span>_sum_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">1</span>, <span class="dt">times =</span> <span class="dv">5</span>) <span class="co"># times = 5 fyrir 5 ár</span></span>
+<span id="cb22-13"><a href="KM.html#cb22-13"></a>KM_<span class="dv">1</span>_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">1</span>_sum_<span class="dv">5</span><span class="op">$</span>surv</span>
+<span id="cb22-14"><a href="KM.html#cb22-14"></a></span>
+<span id="cb22-15"><a href="KM.html#cb22-15"></a>ahaetta_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(KM_<span class="dv">0</span>_<span class="dv">1</span>,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">1</span>[<span class="dv">1</span>] ,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">1</span>[<span class="dv">2</span>], <span class="dv">4</span>))</span>
+<span id="cb22-16"><a href="KM.html#cb22-16"></a>ahaetta_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(KM_<span class="dv">0</span>_<span class="dv">5</span>,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">5</span>[<span class="dv">1</span>] ,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">5</span>[<span class="dv">2</span>], <span class="dv">4</span>))</span>
+<span id="cb22-17"><a href="KM.html#cb22-17"></a></span>
+<span id="cb22-18"><a href="KM.html#cb22-18"></a><span class="co"># Setjum upp í töflu og berum saman við fyrri niðurstöður.</span></span>
+<span id="cb22-19"><a href="KM.html#cb22-19"></a>stats4 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">cbind</span>(rownames,lambda_<span class="dv">2</span>,ar_ahaetta, ahaetta_<span class="dv">1</span>, ahaetta_<span class="dv">5</span>))</span>
+<span id="cb22-20"><a href="KM.html#cb22-20"></a></span>
+<span id="cb22-21"><a href="KM.html#cb22-21"></a><span class="co"># !!! ATH betra útlit</span></span>
+<span id="cb22-22"><a href="KM.html#cb22-22"></a><span class="co">#stats4 &lt;- stats4 %&gt;% rename( Hópar= rownames, Heildarfjöldi = V2,  Tilfelli = V3, Eftirfylgnitími = V4, lambda = V5, áhætta5ár = V6)</span></span>
+<span id="cb22-23"><a href="KM.html#cb22-23"></a>stats4</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 5
+##   rownames V2     V3     V4     V5    
+##   &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+## 1 Allir    0.0111 0.0538 0.0048 0.0455
+## 2 A        0.0156 0.0751 0.0082 0.0656
+## 3 B        0.0066 0.0327 0.0013 0.0253</code></pre>
+<p>Getum líka hugsað þetta út frá lifun, ef við skoðun KM_1_sum_5 þá sést að 5 ára lifun fyrir A hópinn er 0.9344 og öryggisbilið er (0.9221,0.947) og 5 ára lifun fyrir B hópinn er 0.9747 og öryggisbilið er (0.9668,0.9827).</p>
+<p>!!! ATH mjög ólíkar tölur milli veldisvísisfallsins og KM, hvernig er best að skýra það?</p>
+</div>
+<div id="kaplan-meier-gröf" class="section level2">
+<h2><span class="header-section-number">2.2</span> Kaplan Meier gröf</h2>
+<p>Kaplan Meier gröf eru langalgengasta myndræna framsetningin á lifunargögnum. Þau eru leið til að lýsa lifunarfallinu myndrænt, þ.e.a.s. hversu hátt hlutfall þátttakanda hefur ekki fengið atburð eftir því sem tíminn líður. Gröfin teikna Kaplan Meier matið í sérhverjum tímapunkti og flatar línur milli punktanna. Gröfin eru látin “falla” á þeim tímapunktum sem atburðir eiga sér stað í samræmi við það hvernig matið er reiknað. Til þessa að teikna lifunarföllin þá notum við fallið <span class="math inline">\(ggsurvplot\)</span> úr <span class="math inline">\(survminer\)</span>.</p>
+<p>Skoðum fyrst Kaplan-Meier graf fyrir fyrstu 100 dagana fyrir allan hópinn og notum því tímaeininguna dagur.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="KM.html#cb24-1"></a>KM_<span class="dv">0</span>_day &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(time169,chd69)<span class="op">~</span><span class="dv">1</span>,<span class="dt">data=</span>wcgs)</span>
+<span id="cb24-2"><a href="KM.html#cb24-2"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">0</span>_day,<span class="dt">risk.table =</span> T,<span class="dt">break.time.by=</span><span class="dv">10</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">110</span>),</span>
+<span id="cb24-3"><a href="KM.html#cb24-3"></a>                      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.99</span>,<span class="dv">1</span>)) </span>
+<span id="cb24-4"><a href="KM.html#cb24-4"></a>km.plot </span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Grafið byrjar í <span class="math inline">\(y=1.00\)</span>, þegar <span class="math inline">\(t=0\)</span>, enda hefur enginn fengið hjartasjúkdóm við byrjun rannsóknarinnar. Á tíma <span class="math inline">\(t=18\)</span> fékk fyrsti maðurinn hjartasjúkdóm. Þar dettur línan úr 1.00 í 0.9997. Næsta “fall” verður við <span class="math inline">\(t=21\)</span> þegar næsti maður fékk hjartaáfall og svo koll af kolli.</p>
+<p>Stækkum nú tímarammann okkar og skoðum Kaplan-Meier grafið fyrir fyrstu 365 dagana:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="KM.html#cb25-1"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">0</span>_day,<span class="dt">risk.table =</span> T,<span class="dt">break.time.by=</span><span class="dv">30</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">365</span>),</span>
+<span id="cb25-2"><a href="KM.html#cb25-2"></a>                      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.99</span>,<span class="dv">1</span>)) </span>
+<span id="cb25-3"><a href="KM.html#cb25-3"></a>km.plot </span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Núna hafa nokkur lóðrétt strik bæst við. Þar eiga skerðingar sér stað þ.e. á þeim tímapunktum hefur einhver þátttakandi hætt í eftirfylgd af einhverjum ástæðum. Kaplan-Meier metilinn er bara metinn á þeim tímapunktum sem atburðir eiga sér stað, svo grafið breytist ekki á þeim tímapunktum sem skerðingar eiga sér stað. Sum tímarit kjósa að fá Kaplan-Meier gröf með slíkum merkingum þegar skerðingar eru en önnur ekki. Það er ætíð hægt að stilla til í R (nota censor = FALSE í ggsurvplot).</p>
+<p>Skoðun nú Kaplan Meier gröfin eftir persónuleikagerð. Breytum skalanum aftur í ár.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="KM.html#cb26-1"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">1</span>,<span class="dt">risk.table =</span> T,</span>
+<span id="cb26-2"><a href="KM.html#cb26-2"></a>                        <span class="dt">break.time.by=</span><span class="dv">1</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>),<span class="dt">tables.height=</span><span class="fl">0.3</span>) </span>
+<span id="cb26-3"><a href="KM.html#cb26-3"></a>km.plot</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Á þessari mynd virðist vera mikill munur á tíðni hjartasjúkdóma eftir persónuleikagerð. Rauði ferillinn, sem táknar persónuleikagerð A, er allur fyrir neðan bláa ferilinn sem táknar persónuleikagerð B. Þar af leiðandi metum við að lifunarfallið sé lægra, þ.e. að líkur þess að vera <strong>án</strong> hjartasjúkdóms eru minni, sem þýðir að líkurnar á því að <strong>fá</strong> hjartasjúkdóm eru hærri.</p>
+</div>
+<div id="log-rank-próf" class="section level2">
+<h2><span class="header-section-number">2.3</span> Log-rank próf</h2>
+<p>Nú skoðum við hvort sá munur á tíðni hjartasjúkdóma eftir persónuleikagerðunum sem við sáum bæði með Kaplan Meier metlinum og í Kaplan Meier grafinu sé tölfræðilega marktækur en allt bendir til þess að svo sé. Ein leið til að prófa þann mun er með <strong>log-rank prófi</strong> en það prófar hvort munur sé á tveimur lifunarföllum. Skipunin sem við notum er <span class="math inline">\(survdiff\)</span> og er úr <span class="math inline">\(survival\)</span> pakkanum.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="KM.html#cb27-1"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(surv_time_y, status) ~ dibpat, data = wcgs_dat)
+## 
+##             N Observed Expected (O-E)^2/E (O-E)^2/V
+## dibpat=A 1583      177      125      21.3      41.9
+## dibpat=B 1557       78      130      20.6      41.9
+## 
+##  Chisq= 41.9  on 1 degrees of freedom, p= 9e-11</code></pre>
+<p>Munurinn reyndist marktækur, p-gildið er <span class="math inline">\(1 \cdot 10^{-10}\)</span>. Logrank prófið er líka hægt að nota þegar hóparnir eru fleiri en tveir og prófa það þá núlltilgátuna hvort allir ferlarnir séu eins.</p>
+<p>Núlltilgátan er að atburðir séu jafn tíðir milli hópanna. Taflan sýnir <em>Expected</em> eða væntanlegan fjölda miðað við þá tilgátu. En gögnin sýna (<em>Observed</em>) að atburðir eru færri í B hóp og fleiri í A hóp en búast mætti við ef tilgátan væri sönn. Við höfnum þeirri tilgátu og drögum þá ályktun að tíðni atburða sé meiri í A hóp.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lif-skod.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prof-haz.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BOK.pdf", "BOK.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

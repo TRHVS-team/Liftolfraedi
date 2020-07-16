@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Cox líkanið | Tölfræði fyrir almenning</title>
+  <meta name="description" content="Drög að efni fyrir vefinn" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Cox líkanið | Tölfræði fyrir almenning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Drög að efni fyrir vefinn" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Cox líkanið | Tölfræði fyrir almenning" />
+  
+  <meta name="twitter:description" content="Drög að efni fyrir vefinn" />
+  
+
+<meta name="author" content="Sigurbjörg Anna Guðnadóttir" />
+
+
+<meta name="date" content="2020-07-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="prof-haz.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="lif-skod.html"><a href="lif-skod.html"><i class="fa fa-check"></i><b>1</b> Skoðun lifunargagna</a><ul>
+<li class="chapter" data-level="1.1" data-path="lif-skod.html"><a href="lif-skod.html#sækjum-gögnin-og-lögum-til"><i class="fa fa-check"></i><b>1.1</b> Sækjum gögnin og lögum til</a></li>
+<li class="chapter" data-level="1.2" data-path="lif-skod.html"><a href="lif-skod.html#tökum-létta-skoðun-á-gögnunum"><i class="fa fa-check"></i><b>1.2</b> Tökum létta skoðun á gögnunum</a></li>
+<li class="chapter" data-level="1.3" data-path="lif-skod.html"><a href="lif-skod.html#veldisvísisfallið"><i class="fa fa-check"></i><b>1.3</b> Veldisvísisfallið</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="KM.html"><a href="KM.html"><i class="fa fa-check"></i><b>2</b> Kaplan Meier</a><ul>
+<li class="chapter" data-level="2.1" data-path="KM.html"><a href="KM.html#kaplan-meier-metilinn"><i class="fa fa-check"></i><b>2.1</b> Kaplan Meier metilinn</a></li>
+<li class="chapter" data-level="2.2" data-path="KM.html"><a href="KM.html#kaplan-meier-gröf"><i class="fa fa-check"></i><b>2.2</b> Kaplan Meier gröf</a></li>
+<li class="chapter" data-level="2.3" data-path="KM.html"><a href="KM.html#log-rank-próf"><i class="fa fa-check"></i><b>2.3</b> Log-rank próf</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="prof-haz.html"><a href="prof-haz.html"><i class="fa fa-check"></i><b>3</b> Hlutfallsleg áhætta</a></li>
+<li class="chapter" data-level="4" data-path="cox.html"><a href="cox.html"><i class="fa fa-check"></i><b>4</b> Cox líkanið</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tölfræði fyrir almenning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cox" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Cox líkanið</h1>
+<p>Cox kom með ákveðna aðferð til að smíða likelihood fall fyrir lifunargreiningu, sjá:</p>
+<p>Cox, David R (1972). “Regression Models and Life-Tables”. Journal of the Royal Statistical Society, Series B. 34 (2): 187–220.</p>
+<p>Aðferðin fellst í því að nota líkan fyrir hættufallið <span class="math inline">\(h(t)\)</span> út frá skýribreytum þannig að grunn-hættufallið (basline hazard) er margfaldað með línulegri samantekt af skýribreytum með veldis-tengifalli.</p>
+<p><span class="math display">\[
+h(t) = h_0(t) \exp(\beta_1 x_1 + \cdots + \beta_p x_p),
+\]</span>
+Athugið að þegar allar skýribreytur eru með gildið 0 þá er <span class="math inline">\(h(t) = h_0(t)\)</span>. M.ö.o. grunn-hættufallið fæst með því að stilla allar skýribreytur á 0 (Því er oft gott að draga meðaltalið frá gildunum eins og við gerðum fyrir aldur).</p>
+<p>Takið svo eftir að logrinn af hættuhlutfallinu er línuleg samantekt af skýribreytum.</p>
+<p><span class="math display">\[
+\log \left( \frac{h(t)}{h_0(t)} \right) = \beta_1 x_1 + \cdots + \beta_j x_j + \cdots + \beta_p x_p.
+\]</span></p>
+<p>Hækkum nú <span class="math inline">\(x_j\)</span> um eina einingu og skrifum</p>
+<p><span class="math display">\[
+\log \left( \frac{h&#39;(t)}{h_0(t)} \right) = \beta_1 x_1 + \cdots + \beta_j ( x_j+1) + \cdots + \beta_p x_p.
+\]</span>
+þar sem <span class="math inline">\(h&#39;\)</span> táknar hér hættufallið miðað við að <span class="math inline">\(x_j\)</span> hafi hækkað um eina einingu. Hér er <strong>ekki</strong> verið að diffra, heldur er komman notuð til að merkja <span class="math inline">\(h\)</span>.</p>
+<p>Drögum svo vinstri hliðar og hægri hliðar að ofan frá jöfnunni sem við vorum að skrifa. Þá fæst</p>
+<p><span class="math display">\[
+\log \left( \frac{h&#39;(t)}{h(t)} \right) = \beta_j.
+\]</span></p>
+<p>Hættuhlutfallið þegar <span class="math inline">\(x_j\)</span> hækkar um eina einingu er þar með <span class="math inline">\(e^{\beta_j}\)</span> eða <span class="math inline">\(\exp(\beta_j)\)</span>. Hefðum við hækkað <span class="math inline">\(x_j\)</span> um <span class="math inline">\(\Delta\)</span> einingar væri hættuhlutfallið <span class="math inline">\(\exp(\Delta \beta_j)\)</span>.</p>
+<p>Takið eftir hvernig <span class="math inline">\(h_0\)</span> styttist út í svona útreikningum. Hér notum við að <span class="math inline">\(\log(u) - \log(v) = \log(\frac{u}{v})\)</span> og að</p>
+<p><span class="math display">\[
+\log(a/c) - \log(b/c) = \log \left(\frac{a}{c} \cdot  \frac{c}{b} \right) = \log \left(\frac{a}{b} \right).  
+\]</span></p>
+<p>Cox notar svo skilyrt líkindi <span class="math inline">\(P(A|B) = P(A \cap B) / P(B)\)</span> til að búa til hálíknafallið og nýtir sér að <span class="math inline">\(h_0\)</span> styttist út. Við leitum svo með tölulegum aðferðum af því gildi á <span class="math inline">\(\boldsymbol{\beta}\)</span> sem hámarkar það fall. Það er ekkert sem segir að <span class="math inline">\(\boldsymbol{\beta}\)</span> þurfi að vera eins yfir allan tímaskalann.</p>
+<p>Cox líkanið er í raun <em>relative risk model</em> og það eru óþarfa hömlur að hugsa um Cox líkanið sem proportional hazards líkan. Það má auðveldlega leyfa áhrifum skýribreytna að breytast í tíma sem og gildunum á þeim.</p>
+<p>Við byrjum á því að gera Cox-líkanið fyrir persónuleikagerðirnar án nokkurra frekari skýribreytna. Notum daga sem tímaeiningu.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="cox.html#cb40-1"></a>Cox_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span></code></pre></div>
+<p>!!! ATH, hvernær notum við ties = “breslow”?</p>
+<p>Prófum hvort hlutfallsleg áhætta gildir með því að meta leitnina í hættuhlutfallinu yfir tíma. Ef hlutfallslega áhætta gildir þá ætti beta(t) fallið að vera lárétt lína.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="cox.html#cb41-1"></a>Cox_<span class="fl">1.</span>zph &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="cox.html#cb42-1"></a><span class="kw">plot</span>(Cox_<span class="fl">1.</span>zph)</span>
+<span id="cb42-2"><a href="cox.html#cb42-2"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">coef</span>(Cox_<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkunin er þó ekki marktæk tölfræðilega. Sem staðfestir að okkur er óhætt að nota Cox-líkanið.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="cox.html#cb43-1"></a>Cox_<span class="fl">1.</span>zph</span></code></pre></div>
+<pre><code>##        chisq df    p
+## dibpat   2.6  1 0.11
+## GLOBAL   2.6  1 0.11</code></pre>
+<p>!!! ATH, setja frekari útskýringar varðandi myndina og töfluna fyrir ofan.<br />
+!!! ATH, þetta er í raun sama myndin en með transform = “rank”, hvaða áhrif hefur það?</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="cox.html#cb45-1"></a>czp_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">1</span>,<span class="dt">transform =</span> <span class="st">&quot;rank&quot;</span>)</span>
+<span id="cb45-2"><a href="cox.html#cb45-2"></a></span>
+<span id="cb45-3"><a href="cox.html#cb45-3"></a><span class="kw">plot</span>(czp_<span class="dv">2</span>)</span>
+<span id="cb45-4"><a href="cox.html#cb45-4"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">coef</span>(Cox_<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>Skoðum nú niðurstöðu Cox-líkansins fyrir áhættuhlutfallið og berum saman við fyrri niðurstöður. Samkvæmt Cox er áhættuhlutfallið 0.43 og öryggisbilið ( 0.33, 0.56). Við fengum sama áhættuhlutfall með handreikningi og með því að gera ráð fyrir veldisvísidreifingu. !!! ATH er það rétt skilið hjá mér að það sé ekki rétt að reikna áhættuhlutfall fyrir Kaplan Meier metilinn?</p>
+<p>Skoðum núna Cox-líkanið fyrir BMI, getum hérna notað upphaflegu samfelldu breytuna.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="cox.html#cb46-1"></a>Cox_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st"> </span>bmi, <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb46-2"><a href="cox.html#cb46-2"></a>Cox_<span class="dv">2</span></span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(surv_time, status) ~ bmi, data = wcgs_dat)
+## 
+##      coef exp(coef) se(coef)     z        p
+## bmi 15842       Inf     4101 3.863 0.000112
+## 
+## Likelihood ratio test=14.1  on 1 df, p=0.0001731
+## n= 3140, number of events= 255</code></pre>
+<p>Prófum hvort hlutfallleg áhætta gildir með því að meta leitnina í hættuhlutfallinu yfir tíma.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="cox.html#cb48-1"></a>Cox_<span class="fl">2.</span>zph &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">2</span>)</span>
+<span id="cb48-2"><a href="cox.html#cb48-2"></a>Cox_<span class="fl">2.</span>zph</span></code></pre></div>
+<pre><code>##           chisq df p
+## bmi    4.17e-06  1 1
+## GLOBAL 4.17e-06  1 1</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="cox.html#cb50-1"></a><span class="kw">plot</span>(Cox_<span class="fl">2.</span>zph)</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Niðurstaðan er að hlutfallsleg áhætta virðist einnig halda fyrir bmi.</p>
+<p>Reyndar er niðurstaðan sú sama fyrir allar helstu breytur í þessu gagnasafni. Sjáum það þegar við gerum Cox-aðhvarfslíkanið með mörgum skýribreytum.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="cox.html#cb51-1"></a>Cox_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st">  </span>agec <span class="op">+</span><span class="st"> </span>cholmmol <span class="op">+</span><span class="st"> </span>sbp10 <span class="op">+</span>smoker <span class="op">+</span><span class="st"> </span>bmi  <span class="op">+</span><span class="st"> </span>dibpat <span class="op">+</span><span class="st"> </span>arcus0  , <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb51-2"><a href="cox.html#cb51-2"></a>Cox_<span class="dv">3</span></span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(surv_time, status) ~ agec + cholmmol + sbp10 + 
+##     smoker + bmi + dibpat + arcus0, data = wcgs_dat)
+## 
+##                 coef  exp(coef)   se(coef)      z        p
+## agec       5.719e-02  1.059e+00  1.135e-02  5.040 4.64e-07
+## cholmmol   3.234e-01  1.382e+00  4.137e-02  7.817 5.39e-15
+## sbp10      1.844e-01  1.202e+00  3.802e-02  4.849 1.24e-06
+## smokerYes  6.108e-01  1.842e+00  1.319e-01  4.630 3.66e-06
+## bmi        1.015e+04        Inf  4.367e+03  2.325   0.0201
+## dibpatB   -6.664e-01  5.135e-01  1.371e-01 -4.861 1.17e-06
+## arcus0     2.156e-01  1.241e+00  1.322e-01  1.631   0.1030
+## 
+## Likelihood ratio test=198.4  on 7 df, p=&lt; 2.2e-16
+## n= 3140, number of events= 255</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="cox.html#cb53-1"></a><span class="kw">cox.zph</span>(Cox_<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##           chisq df    p
+## agec     1.4371  1 0.23
+## cholmmol 0.3531  1 0.55
+## sbp10    0.0032  1 0.95
+## smoker   0.7884  1 0.37
+## bmi      0.0692  1 0.79
+## dibpat   2.1032  1 0.15
+## arcus0   0.5778  1 0.45
+## GLOBAL   5.7704  7 0.57</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="cox.html#cb55-1"></a>cox_<span class="dv">3</span>_coef &lt;-<span class="st"> </span>Cox_<span class="dv">3</span><span class="op">$</span>coefficients</span></code></pre></div>
+<p>Öll p-gildin eru vel yfir 0.05 sem bendir til þess að hlutfallsleg áhætta gildir fyrir allar þessar breytur.</p>
+<p>Lifunarlíkanið sem við fáum ef við notum allar þessar breytur er <span class="math inline">\(h_{1}(t)=e^{0.0572*agec+0.3234*cholmmol+0.1844*sbp10+0.6108*smoke+1.0154599\times 10^{4}*bmi+-0.6664*dibpat +0.2156*arcus}*h_{0}(t)\)</span> Þar sem <span class="math inline">\(h_{0}(t)\)</span> er hazard-fallið þegar allar samfelldu breyturnar eru 0, sem þýðir að upphaflega aldursbreytan er 46, reykingar og arcus eru nei og hegðunarhópurinn er B.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="prof-haz.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BOK.pdf", "BOK.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

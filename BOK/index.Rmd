@@ -1,0 +1,28 @@
+--- 
+title: "Tölfræði fyrir almenning"
+author: "Sigurbjörg Anna Guðnadóttir"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Drög að efni fyrir vefinn"
+---
+
+
+Þeir pakkar sem við notum eru:  
+```{r}
+library(tidyverse)
+library(survival)
+library(flexsurv)
+library(survminer)
+```
+
+```{r, include=FALSE}
+### ATH ég veit ekki hvað þetta gerir en held þessu inni eins og er.
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown','tidyverse','stringr','ggpubr'
+), 'packages.bib')
+```

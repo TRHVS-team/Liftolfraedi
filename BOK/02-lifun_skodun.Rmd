@@ -1,0 +1,135 @@
+# Skoðun lifunargagna {#lif_skod}
+Western Collaborative Group Study (WCGS) gagnasafnið er í epitools- pakkanum. Þetta eru gögn úr rannsókn þar sem meginmarkmið hennar var að skoða tengsl persónuleikagerðar og hjartasjúkdóma og því eru hjartasjúkdómar aðalútkomubreytan okkar. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, eða létust, eða þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961.  
+  
+Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáföll með og án skýribreytna. A og B flokkunin vísar í hvernig fólk meðhöndlar streitu og álag. Þeir sem eru í A hópi eru með meira keppnisskap, óþolinmóðari og árásagjarnari en þeir sem eru í hópi B.  Þær skýribreytur sem við munum skoða eru aldur, magn kólesteról í blóði, blóðþrýstings, reykinga og BMI stuðull.  
+
+##  Sækjum gögnin og lögum til
+```{r}
+data(wcgs,package = "epitools")
+wcgs <- as_tibble(wcgs)
+
+wcgs <- wcgs %>% 
+  mutate(surv_time_y = time169 / 365.24,
+         agec = age0 - 46,
+         cholmmol = chol0 / 39,
+         sbp10 = sbp0 / 10,
+         dibpat = factor(dibpat0, levels = 0:1, labels = c("B", "A")),
+         smoker = factor(1 * (ncigs0 > 0), levels = c(0, 1), labels = c("No", "Yes")),
+         bmi = ((weight0 * 2.54) / 100) / (height0 * 2.54)^2,
+         bmiq3 = cut(bmi, breaks = quantile(bmi, seq(0, 1, 1/3)),
+                       include.lowest = T, right = F)
+         )
+wcgs_dat <- wcgs %>% 
+  select(id, surv_time = time169, surv_time_y, status=chd69,  agec, cholmmol, sbp10, smoker, dibpat, bmi,bmiq3, arcus0) %>% 
+  filter(complete.cases(.)) %>% mutate(statusf=factor(status,levels=0:1,labels = c("No event","Yes event")))
+
+wcgs_dat$dibpat <- relevel(wcgs_dat$dibpat, "A")
+```
+Tíminn time169 er í dögum en við reiknum nýja breytu sem mælir tímann í árum.  
+Við búum til nýja aldursbreytu þar sem við erum búin að staðla hana m.v. meðaldurinn í hópnum. Meðalaldurinn er 46.28 og drögum við þvi 46 frá aldrinum. Það mun auðvelda túlkun á líkönum.  
+!!! ATH af hverju deilum við með 10 og 39?.  
+Breytan dibpat0 eru persónuleikagerðirnar, við setjum hana sem flokkabreytu (e. factor).  
+Við skilgreinum reykingamann þann sem reykir amk 1 sígaréttu á dag og höfum breytuna sem flokkabreytu.  
+Til þess að reikna BMI þá þurfum við að breyta hæðinni í metra og þyngdinni í kíló. Útbúum einnig flokkabretytu fyrir bmi þar sem við skiptum henni í 3 jafna hluta. 
+Breytan chd69 segir til um hvort karlmennirnir fengu hjartasjúkdóm eða ekki og setjum við hana því sem "status", það hvort atburður hafi átt sér stað eða ekki er oft kallað "status".   
+   
+Við notum bara þá einstaklinga sem hafa allar breyturnar sem við ætlum að skoða, aðra fjarlægjum við úr gagnasafninu.  
+  
+## Tökum létta skoðun á gögnunum
+Fyrsta skrefið er alltaf að skoða gögnin og sjá hvað einfaldur reikningur gefur okkur. Við skoðum gögnin miða við ár sem tímalengd.
+
+*Helstu tölur*
+```{r}
+# Hversu margir eru í safninu og í hvorum hópi fyrir sig?
+rownames <- c("Allir", "A", "B")
+fj_t <- dim(wcgs_dat)[1]
+fj_g <- wcgs_dat %>% 
+  group_by(dibpat) %>% 
+  count()
+
+fj <- rbind(fj_t,fj_g[[1,2]],fj_g[[2,2]])
+
+# Hversu margir fengu hjartaáfall í heildina og í hvorum hópi fyrir sig?
+
+st_t <- sum(wcgs_dat$status)
+st_g <- wcgs_dat %>% 
+  group_by(dibpat) %>% 
+  summarise(tidni = sum(status))
+
+st <- rbind(st_t,st_g[[1,2]],st_g[[2,2]])
+
+# Hver er eftirfylgnitíminn og lambda fyrir all hópana?
+
+ef_t <- wcgs_dat %>% 
+  summarise(sum_time = sum(surv_time_y),lambda = sum(status) / sum(surv_time_y))
+
+ef_g <- wcgs_lambda <- wcgs_dat %>% 
+  group_by(dibpat) %>% 
+  summarise(sum_time = sum(surv_time_y),lambda = sum(status) / sum(surv_time_y))
+
+ef <- rbind(round(ef_t[[1]],2), round(ef_g[[1,2]],2), round(ef_g[[2,2]],2))
+lambda <- rbind(round(ef_t[[2]],4), round(ef_g[[1,3]],4), round(ef_g[[2,3]],4))
+
+# Setjum í eina töflu
+stats <- as_tibble(cbind(rownames,fj,st,ef,lambda))
+
+# !!! ATH betra útlit
+stats <-stats %>% rename( Hópar= rownames, Heildarfjöldi = V2,  Tilfelli = V3, Eftirfylgnitími = V4, lambda = V5)
+stats
+```
+Eftirfylgnitíminn er sá tími sem einstaklingur er í rannsókninni, hámark 10 ár í þessari rannsókn. Lambda er fjöldi atburða á tímaeiningu, í þessu tilfelli er það eitt ár. Svo `r stats[1,5]`  eða `r round(ef_t[[2]],4)*100` % er eins árs meðaláhætta fyrir heildarhópinn.  
+  
+*Áhættuhlutfallið*
+Áhættuhlutfallið er hlutfallið af líkunum á því að atburðurinn gerist í meðferðarhópnum á móti líkunum á því að atburðurinn gerist í viðmiðunarhópnum. Við lítum á persónuleikagerð A sem meðferðarhópinn og persónuleikagerð B sem viðmiðunarhópinn.  
+```{r}
+hz <- wcgs_lambda$lambda[2]/wcgs_lambda$lambda[1] 
+```
+Áhættuhlutfallið er `r round(hz,2)` og því er einstaklingur með persónuleikagerð A í `r round((hz-1)*100,0)`% meiri áhættu til að fá hjartaáfall ef allir aðrir þættir eru eins.  
+  
+Af þessum gildum höfum við mestan áhuga áhættunni (þ.e. lambda) fyrir hvora persónuleikagerð fyrir sig og áhættuhlutfallinu. Fallið $flexsurvreg$ úr pakkanum $flexsurv$ hentar vel til þess að reikna það. Einnig notum við fallið $Surv$ úr pakkanum $survival$.  
+Fallið $Surv$ er notað til að útbúa breytu af gerðinni lifunarhlutur (e. survival object). Það tekur inn í sig tvær breytur; annars vegar hversu langur tími leið fram að atburði eða skerðingu og hins vegar hvort atburður eða skerðing átti stað á þeim tímapunkti. Þeir sem hafa ekki fengið hjartaáfall eru með skerðingu. 
+  
+Líkanið sem við köllum VL_O er notað til að reikna lambda fyrir allan hópinn en VL_1 til þess að reikna lambda fyrir hópa A og B. 
+```{r}
+VL_0 <- flexsurvreg(Surv(surv_time_y, status) ~ 1,data=wcgs_dat,dist="exponential")
+VL_1 <- flexsurvreg(Surv(surv_time_y, status) ~ dibpat,data=wcgs_dat,dist="exponential")
+
+lambda_0 <- VL_0$res[1,1]
+lambda_a <- VL_1$res[1,1] 
+lambda_b <- exp(VL_1$res[2,1]+log(VL_1$res[1,1])) 
+
+
+lambda_2 <- rbind(round(lambda_0,4), round(lambda_a,4), round(lambda_b,4))
+
+# Setjum í eina töflu
+stats2 <- as_tibble(cbind(rownames, lambda, lambda_2))
+
+# !!! ATH betra útlit
+stats2 <- stats2 %>% rename( Hópar= rownames, Lambda_handreiknað = V2,  Lambda_með_falli = V3)
+stats2
+```
+  
+Getum líka reiknað áhættuhlutfallið
+```{r}
+hz_2 <- exp(VL_1$res[2,1])
+```
+Áhættuhlutfallið er `r round(hz_2,2)` sem er það sama og við fengum með handreikningi.  
+ 
+## Veldisvísisfallið
+Ef við gerum ráð fyrir veldisvísivexti þá er hægt að meta t.d. 5 ára áhættu fyrir hvorn hóp. Athugið að hér erum við að gera ráð fyrir að áhættan í sérhverjum hópi haldist óbreytt út tímabilið. 
+  
+Við notum formúluna $1-e^{-\lambda*ár}$.  
+```{r}
+ar <- 5 # Hægt að velja hvaða árafjölda sem er, svo lengi sem hann er innan tímalengdar rannsóknar
+VL_0_ahaetta <- 1-exp(-lambda_0*ar)
+VL_A_ahaetta <- 1-exp(-lambda_a*ar)
+VL_B_ahaetta <- 1-exp(-lambda_b*ar)
+
+ar_ahaetta <- rbind(round(VL_0_ahaetta,4), round(VL_A_ahaetta,4), round(VL_B_ahaetta,4))
+
+stats3 <- as_tibble(cbind(rownames,fj,st,ef,lambda_2,ar_ahaetta))
+
+# !!! ATH betra útlit
+stats3 <- stats3 %>% rename( Hópar= rownames, Heildarfjöldi = V2,  Tilfelli = V3, Eftirfylgnitími = V4, lambda = V5, áhætta5ár = V6)
+stats3
+```
