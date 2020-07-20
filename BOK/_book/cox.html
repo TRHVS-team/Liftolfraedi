@@ -24,7 +24,7 @@
 <meta name="author" content="Sigurbjörg Anna Guðnadóttir" />
 
 
-<meta name="date" content="2020-07-16" />
+<meta name="date" content="2020-07-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,7 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="lif-skod.html"><a href="lif-skod.html"><i class="fa fa-check"></i><b>1</b> Skoðun lifunargagna</a><ul>
 <li class="chapter" data-level="1.1" data-path="lif-skod.html"><a href="lif-skod.html#sækjum-gögnin-og-lögum-til"><i class="fa fa-check"></i><b>1.1</b> Sækjum gögnin og lögum til</a></li>
 <li class="chapter" data-level="1.2" data-path="lif-skod.html"><a href="lif-skod.html#tökum-létta-skoðun-á-gögnunum"><i class="fa fa-check"></i><b>1.2</b> Tökum létta skoðun á gögnunum</a></li>
-<li class="chapter" data-level="1.3" data-path="lif-skod.html"><a href="lif-skod.html#veldisvísisfallið"><i class="fa fa-check"></i><b>1.3</b> Veldisvísisfallið</a></li>
+<li class="chapter" data-level="1.3" data-path="lif-skod.html"><a href="lif-skod.html#tafla-1"><i class="fa fa-check"></i><b>1.3</b> Tafla 1</a></li>
+<li class="chapter" data-level="1.4" data-path="lif-skod.html"><a href="lif-skod.html#veldisvísisfallið"><i class="fa fa-check"></i><b>1.4</b> Veldisvísisfallið</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="KM.html"><a href="KM.html"><i class="fa fa-check"></i><b>2</b> Kaplan Meier</a><ul>
 <li class="chapter" data-level="2.1" data-path="KM.html"><a href="KM.html#kaplan-meier-metilinn"><i class="fa fa-check"></i><b>2.1</b> Kaplan Meier metilinn</a></li>
@@ -197,65 +198,65 @@ Athugið að þegar allar skýribreytur eru með gildið 0 þá er <span class="
 <p>Cox notar svo skilyrt líkindi <span class="math inline">\(P(A|B) = P(A \cap B) / P(B)\)</span> til að búa til hálíknafallið og nýtir sér að <span class="math inline">\(h_0\)</span> styttist út. Við leitum svo með tölulegum aðferðum af því gildi á <span class="math inline">\(\boldsymbol{\beta}\)</span> sem hámarkar það fall. Það er ekkert sem segir að <span class="math inline">\(\boldsymbol{\beta}\)</span> þurfi að vera eins yfir allan tímaskalann.</p>
 <p>Cox líkanið er í raun <em>relative risk model</em> og það eru óþarfa hömlur að hugsa um Cox líkanið sem proportional hazards líkan. Það má auðveldlega leyfa áhrifum skýribreytna að breytast í tíma sem og gildunum á þeim.</p>
 <p>Við byrjum á því að gera Cox-líkanið fyrir persónuleikagerðirnar án nokkurra frekari skýribreytna. Notum daga sem tímaeiningu.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="cox.html#cb40-1"></a>Cox_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="cox.html#cb49-1"></a>Cox_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span></code></pre></div>
 <p>!!! ATH, hvernær notum við ties = “breslow”?</p>
 <p>Prófum hvort hlutfallsleg áhætta gildir með því að meta leitnina í hættuhlutfallinu yfir tíma. Ef hlutfallslega áhætta gildir þá ætti beta(t) fallið að vera lárétt lína.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="cox.html#cb41-1"></a>Cox_<span class="fl">1.</span>zph &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">1</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="cox.html#cb42-1"></a><span class="kw">plot</span>(Cox_<span class="fl">1.</span>zph)</span>
-<span id="cb42-2"><a href="cox.html#cb42-2"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">coef</span>(Cox_<span class="dv">1</span>))</span></code></pre></div>
-<p><img src="BOK_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="cox.html#cb50-1"></a>Cox_<span class="fl">1.</span>zph &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="cox.html#cb51-1"></a><span class="kw">plot</span>(Cox_<span class="fl">1.</span>zph)</span>
+<span id="cb51-2"><a href="cox.html#cb51-2"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">coef</span>(Cox_<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkunin er þó ekki marktæk tölfræðilega. Sem staðfestir að okkur er óhætt að nota Cox-líkanið.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="cox.html#cb43-1"></a>Cox_<span class="fl">1.</span>zph</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="cox.html#cb52-1"></a>Cox_<span class="fl">1.</span>zph</span></code></pre></div>
 <pre><code>##        chisq df    p
 ## dibpat   2.6  1 0.11
 ## GLOBAL   2.6  1 0.11</code></pre>
 <p>!!! ATH, setja frekari útskýringar varðandi myndina og töfluna fyrir ofan.<br />
 !!! ATH, þetta er í raun sama myndin en með transform = “rank”, hvaða áhrif hefur það?</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="cox.html#cb45-1"></a>czp_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">1</span>,<span class="dt">transform =</span> <span class="st">&quot;rank&quot;</span>)</span>
-<span id="cb45-2"><a href="cox.html#cb45-2"></a></span>
-<span id="cb45-3"><a href="cox.html#cb45-3"></a><span class="kw">plot</span>(czp_<span class="dv">2</span>)</span>
-<span id="cb45-4"><a href="cox.html#cb45-4"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">coef</span>(Cox_<span class="dv">1</span>))</span></code></pre></div>
-<p><img src="BOK_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="cox.html#cb54-1"></a>czp_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">1</span>,<span class="dt">transform =</span> <span class="st">&quot;rank&quot;</span>)</span>
+<span id="cb54-2"><a href="cox.html#cb54-2"></a></span>
+<span id="cb54-3"><a href="cox.html#cb54-3"></a><span class="kw">plot</span>(czp_<span class="dv">2</span>)</span>
+<span id="cb54-4"><a href="cox.html#cb54-4"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">coef</span>(Cox_<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>Skoðum nú niðurstöðu Cox-líkansins fyrir áhættuhlutfallið og berum saman við fyrri niðurstöður. Samkvæmt Cox er áhættuhlutfallið 0.43 og öryggisbilið ( 0.33, 0.56). Við fengum sama áhættuhlutfall með handreikningi og með því að gera ráð fyrir veldisvísidreifingu. !!! ATH er það rétt skilið hjá mér að það sé ekki rétt að reikna áhættuhlutfall fyrir Kaplan Meier metilinn?</p>
 <p>Skoðum núna Cox-líkanið fyrir BMI, getum hérna notað upphaflegu samfelldu breytuna.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="cox.html#cb46-1"></a>Cox_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st"> </span>bmi, <span class="dt">data =</span> wcgs_dat)</span>
-<span id="cb46-2"><a href="cox.html#cb46-2"></a>Cox_<span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="cox.html#cb55-1"></a>Cox_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st"> </span>bmi, <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb55-2"><a href="cox.html#cb55-2"></a>Cox_<span class="dv">2</span></span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(surv_time, status) ~ bmi, data = wcgs_dat)
 ## 
-##      coef exp(coef) se(coef)     z        p
-## bmi 15842       Inf     4101 3.863 0.000112
+##        coef exp(coef) se(coef)     z        p
+## bmi 0.08863   1.09268  0.02294 3.863 0.000112
 ## 
 ## Likelihood ratio test=14.1  on 1 df, p=0.0001731
 ## n= 3140, number of events= 255</code></pre>
 <p>Prófum hvort hlutfallleg áhætta gildir með því að meta leitnina í hættuhlutfallinu yfir tíma.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="cox.html#cb48-1"></a>Cox_<span class="fl">2.</span>zph &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">2</span>)</span>
-<span id="cb48-2"><a href="cox.html#cb48-2"></a>Cox_<span class="fl">2.</span>zph</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="cox.html#cb57-1"></a>Cox_<span class="fl">2.</span>zph &lt;-<span class="st"> </span><span class="kw">cox.zph</span>(Cox_<span class="dv">2</span>)</span>
+<span id="cb57-2"><a href="cox.html#cb57-2"></a>Cox_<span class="fl">2.</span>zph</span></code></pre></div>
 <pre><code>##           chisq df p
 ## bmi    4.17e-06  1 1
 ## GLOBAL 4.17e-06  1 1</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="cox.html#cb50-1"></a><span class="kw">plot</span>(Cox_<span class="fl">2.</span>zph)</span></code></pre></div>
-<p><img src="BOK_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="cox.html#cb59-1"></a><span class="kw">plot</span>(Cox_<span class="fl">2.</span>zph)</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>Niðurstaðan er að hlutfallsleg áhætta virðist einnig halda fyrir bmi.</p>
 <p>Reyndar er niðurstaðan sú sama fyrir allar helstu breytur í þessu gagnasafni. Sjáum það þegar við gerum Cox-aðhvarfslíkanið með mörgum skýribreytum.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="cox.html#cb51-1"></a>Cox_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st">  </span>agec <span class="op">+</span><span class="st"> </span>cholmmol <span class="op">+</span><span class="st"> </span>sbp10 <span class="op">+</span>smoker <span class="op">+</span><span class="st"> </span>bmi  <span class="op">+</span><span class="st"> </span>dibpat <span class="op">+</span><span class="st"> </span>arcus0  , <span class="dt">data =</span> wcgs_dat)</span>
-<span id="cb51-2"><a href="cox.html#cb51-2"></a>Cox_<span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="cox.html#cb60-1"></a>Cox_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(surv_time, status) <span class="op">~</span><span class="st">  </span>agec <span class="op">+</span><span class="st"> </span>cholmmol <span class="op">+</span><span class="st"> </span>sbp10 <span class="op">+</span>smoker <span class="op">+</span><span class="st"> </span>bmi  <span class="op">+</span><span class="st"> </span>dibpat <span class="op">+</span><span class="st"> </span>arcus0  , <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb60-2"><a href="cox.html#cb60-2"></a>Cox_<span class="dv">3</span></span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(surv_time, status) ~ agec + cholmmol + sbp10 + 
 ##     smoker + bmi + dibpat + arcus0, data = wcgs_dat)
 ## 
-##                 coef  exp(coef)   se(coef)      z        p
-## agec       5.719e-02  1.059e+00  1.135e-02  5.040 4.64e-07
-## cholmmol   3.234e-01  1.382e+00  4.137e-02  7.817 5.39e-15
-## sbp10      1.844e-01  1.202e+00  3.802e-02  4.849 1.24e-06
-## smokerYes  6.108e-01  1.842e+00  1.319e-01  4.630 3.66e-06
-## bmi        1.015e+04        Inf  4.367e+03  2.325   0.0201
-## dibpatB   -6.664e-01  5.135e-01  1.371e-01 -4.861 1.17e-06
-## arcus0     2.156e-01  1.241e+00  1.322e-01  1.631   0.1030
+##               coef exp(coef) se(coef)      z        p
+## agec       0.05719   1.05886  0.01135  5.040 4.64e-07
+## cholmmol   0.32339   1.38181  0.04137  7.817 5.39e-15
+## sbp10      0.18436   1.20245  0.03802  4.849 1.24e-06
+## smokerYes  0.61075   1.84182  0.13192  4.630 3.66e-06
+## bmi        0.05681   1.05846  0.02443  2.325   0.0201
+## dibpatB   -0.66644   0.51353  0.13711 -4.861 1.17e-06
+## arcus0     0.21561   1.24061  0.13223  1.631   0.1030
 ## 
 ## Likelihood ratio test=198.4  on 7 df, p=&lt; 2.2e-16
 ## n= 3140, number of events= 255</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="cox.html#cb53-1"></a><span class="kw">cox.zph</span>(Cox_<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="cox.html#cb62-1"></a><span class="kw">cox.zph</span>(Cox_<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##           chisq df    p
 ## agec     1.4371  1 0.23
 ## cholmmol 0.3531  1 0.55
@@ -265,9 +266,10 @@ Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkun
 ## dibpat   2.1032  1 0.15
 ## arcus0   0.5778  1 0.45
 ## GLOBAL   5.7704  7 0.57</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="cox.html#cb55-1"></a>cox_<span class="dv">3</span>_coef &lt;-<span class="st"> </span>Cox_<span class="dv">3</span><span class="op">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="cox.html#cb64-1"></a>cox_<span class="dv">3</span>_coef &lt;-<span class="st"> </span>Cox_<span class="dv">3</span><span class="op">$</span>coefficients</span></code></pre></div>
 <p>Öll p-gildin eru vel yfir 0.05 sem bendir til þess að hlutfallsleg áhætta gildir fyrir allar þessar breytur.</p>
-<p>Lifunarlíkanið sem við fáum ef við notum allar þessar breytur er <span class="math inline">\(h_{1}(t)=e^{0.0572*agec+0.3234*cholmmol+0.1844*sbp10+0.6108*smoke+1.0154599\times 10^{4}*bmi+-0.6664*dibpat +0.2156*arcus}*h_{0}(t)\)</span> Þar sem <span class="math inline">\(h_{0}(t)\)</span> er hazard-fallið þegar allar samfelldu breyturnar eru 0, sem þýðir að upphaflega aldursbreytan er 46, reykingar og arcus eru nei og hegðunarhópurinn er B.</p>
+<p>Lifunarlíkanið sem við fáum ef við notum allar þessar breytur er <span class="math inline">\(h_{1}(t)=e^{0.0572*agec+0.3234*cholmmol+0.1844*sbp10+0.6108*smoke+0.0568*bmi+-0.6664*dibpat +0.2156*arcus}*h_{0}(t)\)</span> Þar sem <span class="math inline">\(h_{0}(t)\)</span> er hazard-fallið þegar allar samfelldu breyturnar eru 0, sem þýðir að upphaflega aldursbreytan er 46, reykingar og arcus eru nei og hegðunarhópurinn er B.</p>
+<p>Þegar líkönin eru borin saman sést að stuðullinn fyrir bmi í óleiðrétta líkaninu er 0.0886 og í því leiðrétta 0.0568. !!! ATH segja eitthvað meira um túlkun á þessu.</p>
 
 </div>
             </section>

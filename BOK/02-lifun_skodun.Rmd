@@ -15,7 +15,7 @@ wcgs <- wcgs %>%
          sbp10 = sbp0 / 10,
          dibpat = factor(dibpat0, levels = 0:1, labels = c("B", "A")),
          smoker = factor(1 * (ncigs0 > 0), levels = c(0, 1), labels = c("No", "Yes")),
-         bmi = ((weight0 * 2.54) / 100) / (height0 * 2.54)^2,
+         bmi = (weight0 * 0.454) / ((height0 * 2.54)/100)^2,
          bmiq3 = cut(bmi, breaks = quantile(bmi, seq(0, 1, 1/3)),
                        include.lowest = T, right = F)
          )
@@ -114,7 +114,26 @@ Getum líka reiknað áhættuhlutfallið
 hz_2 <- exp(VL_1$res[2,1])
 ```
 Áhættuhlutfallið er `r round(hz_2,2)` sem er það sama og við fengum með handreikningi.  
- 
+
+## Tafla 1
+Þar sem við gerum yfirleitt líkön með skýribreytum þá er gott að útbúa töflu 1 til þess að fá tilfinningu fyrir dreifingu þeirra. Til eru ýmsar skipanir til að gera þessa töflu, meðal annars $tableyby$ í pakkanum $arsenal$. Gott er að nefna breyturnar fyrst með skiljanlegum heitum. Notum til þess $label$ úr pakkanum table1 
+  
+```{r}
+label(wcgs_dat$dibpat) <- "Hegðunarhópur"
+label(wcgs_dat$agec) <- "Aldur"
+label(wcgs_dat$cholmmol) <- "Kólestról"
+label(wcgs_dat$sbp10) <- "Blóðþrýstingur"
+label(wcgs_dat$smoker) <- "Reykingar"
+label(wcgs_dat$bmi) <- "BMI"
+label(wcgs_dat$arcus0) <- "Hornhimnubogi" ## !!! ATH er þetta rétt íslenska?
+```
+
+
+```{r}
+tab1 <- tableby(dibpat ~ bmi + agec + cholmmol + sbp10 + smoker + bmi + arcus0, data= wcgs_dat)
+summary(tab1, text = TRUE)
+```
+
 ## Veldisvísisfallið
 Ef við gerum ráð fyrir veldisvísivexti þá er hægt að meta t.d. 5 ára áhættu fyrir hvorn hóp. Athugið að hér erum við að gera ráð fyrir að áhættan í sérhverjum hópi haldist óbreytt út tímabilið. 
   

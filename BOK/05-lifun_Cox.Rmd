@@ -108,3 +108,6 @@ cox_3_coef <- Cox_3$coefficients
 
 Lifunarlíkanið sem við fáum ef við notum allar þessar breytur er $h_{1}(t)=e^{`r round(cox_3_coef[1],4)`*agec+`r round(cox_3_coef[2],4)`*cholmmol+`r round(cox_3_coef[3],4)`*sbp10+`r round(cox_3_coef[4],4)`*smoke+`r round(cox_3_coef[5],4)`*bmi+`r round(cox_3_coef[6],4)`*dibpat +`r round(cox_3_coef[7],4)`*arcus}*h_{0}(t)$ Þar sem $h_{0}(t)$ er hazard-fallið þegar allar samfelldu breyturnar eru 0, sem þýðir að upphaflega aldursbreytan er 46, reykingar og arcus eru nei og hegðunarhópurinn er B. 
 
+
+Þegar líkönin eru borin saman sést að stuðullinn fyrir bmi í óleiðrétta líkaninu er `r round(Cox_2$coefficients[1],4)` og í því leiðrétta `r round(cox_3_coef[5],4)`. !!! ATH segja eitthvað meira um túlkun á þessu. 
+
