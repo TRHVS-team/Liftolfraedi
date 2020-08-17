@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2020.6.2)  17 AUG 2020 14:17
-=======
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.7.14)  20 JUL 2020 13:21
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2020.6.2)  17 AUG 2020 15:40
 entering extended mode
 **./BOK.tex
 (BOK.tex
@@ -684,7 +680,8 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibsep=\skip59
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count299
-) (BOK.aux)
+)
+No file BOK.aux.
 \openout1 = `BOK.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
@@ -997,6 +994,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 118.
 LaTeX Info: Redefining \pageref on input line 118.
 LaTeX Info: Redefining \nameref on input line 118.
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 12.0pt on input line 120.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
@@ -1036,24 +1036,7 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 ] [2
 
-] (BOK.toc
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00107pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00075pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00053pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99893pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 2.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 2.
-)
+]
 \tf@toc=\write4
 \openout4 = `BOK.toc'.
 
@@ -1063,461 +1046,185 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
 
 ]
 Chapter 1.
+
+Underfull \hbox (badness 1817) in paragraph at lines 158--159
+\TU/lmr/m/n/10 Western Collaborative Group Study (WCGS) gagnasafnið er í epitoo
+ls-
+ []
+
 [5] [6
 
-<<<<<<< HEAD
 ]
 Chapter 2.
 [7] [8]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 230--230
+Overfull \hbox (17.25pt too wide) in paragraph at lines 236--236
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 249--249
+Overfull \hbox (17.25pt too wide) in paragraph at lines 255--255
 []\TU/lmtt/m/n/10 ## []summarise()[] ungrouping output (override with [].groups
 [] argument)[] 
  []
 
 [9]
-Missing character: There is no á in font lmmi7!
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 293.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 293.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.00107pt on input line 293.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00075pt on input line 293.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00053pt on input line 293.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.99893pt on input line 293.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 293.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 293.
 [10]
-Overfull \hbox (1.5pt too wide) in paragraph at lines 363--363
-=======
-Underfull \hbox (badness 1502) in paragraph at lines 141--142
-\TU/lmr/m/n/10 Western Collaborative Group Study (WCGS) gagnasafnið er í epitoo
-ls-
- []
+Chapter 3.
 
-[5] [6]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 211--211
-[]\TU/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
-rgument)[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 230--230
-[]\TU/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
-rgument)[] 
- []
-
-[7] [8]
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |               |   A (N=1583)    |   B (N=1557)    | Tota
 l (N=3140)  | p value|[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |:--------------|:---------------:|:---------------:|:----
 -----------:|-------:|[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |BMI            |                 |                 |     
             |   0.130|[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Mean (SD)   | 24.609 (2.600)  | 24.470 (2.531)  | 24.5
 40 (2.567)  |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Range       | 11.202 - 37.285 | 15.676 - 38.986 | 11.2
 02 - 38.986 |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |Aldur          |                 |                 |     
             | < 0.001|[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Mean (SD)   |  0.769 (5.697)  | -0.228 (5.282)  |  0.2
 75 (5.517)  |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Range       | -7.000 - 13.000 | -7.000 - 13.000 | -7.0
 00 - 13.000 |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |Kólestról      |                 |                 |     
             |   0.001|[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Mean (SD)   |  5.867 (1.135)  |  5.740 (1.088)  |  5.8
 04 (1.113)  |        |[] 
  []
 
+[11
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Range       | 2.641 - 16.538  | 2.821 - 10.256  | 2.64
 1 - 16.538  |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |Blóðþrýstingur |                 |                 |     
             | < 0.001|[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Mean (SD)   | 12.977 (1.568)  | 12.742 (1.430)  | 12.8
 60 (1.506)  |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Range       | 10.000 - 21.200 | 9.800 - 23.000  | 9.80
 0 - 23.000  |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |Reykingar      |                 |                 |     
             | < 0.001|[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  No          |   782 (49.4%)   |   864 (55.5%)   |  164
 6 (52.4%)   |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Yes         |   801 (50.6%)   |   693 (44.5%)   |  149
 4 (47.6%)   |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |Hornhimnubogi  |                 |                 |     
             |   0.010|[] 
  []
 
-[9]
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Mean (SD)   |  0.320 (0.466)  |  0.277 (0.448)  |  0.2
 99 (0.458)  |        |[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 360--360
+Overfull \hbox (90.75pt too wide) in paragraph at lines 389--389
 []\TU/lmtt/m/n/10 ## |-  Range       |  0.000 - 1.000  |  0.000 - 1.000  |  0.0
 00 - 1.000  |        |[] 
  []
 
-Missing character: There is no á in font lmmi7!
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 393--393
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-[]\TU/lmtt/m/n/10 ##   Hópar Heildarfjöldi Tilfelli Eftirfylgnitími lambda áhæt
-ta5ár[] 
- []
+! LaTeX Error: Too deeply nested.
 
-<<<<<<< HEAD
-[11] [12]
-File: BOK_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-10-1.pdf>
-=======
-[10]
-Chapter 2.
-[11
-
-] [12]
-Underfull \hbox (badness 2426) in paragraph at lines 479--480
-\TU/lmr/m/n/10 Kaplan Meier gröf eru langalgengasta myndræna framsetningin á li
-fu-
- []
-
-File: BOK_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-12-1.pdf>
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-
-Underfull \vbox (badness 4072) has occurred while \output is active []
-
-[13]
-File: BOK_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-13-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[14]
-File: BOK_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-14-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[15]
-<<<<<<< HEAD
-Overfull \hbox (43.5pt too wide) in paragraph at lines 514--514
-=======
-Overfull \hbox (43.5pt too wide) in paragraph at lines 544--544
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-[]\TU/lmtt/m/n/10 ## survdiff(formula = Surv(surv_time_y, status) ~ dibpat, dat
-a = wcgs_dat)[] 
- []
-
-<<<<<<< HEAD
-[16] [17]
-File: BOK_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-15-1.pdf>
-File: BOK_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-16-1.pdf>
-=======
-[16] [17] [18
-
-]
-Chapter 3.
-[19]
-File: BOK_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-17-1.pdf>
-[20]
-File: BOK_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-18-1.pdf>
-File: BOK_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-19-1.pdf>
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-
-Underfull \vbox (badness 4608) has occurred while \output is active []
-
-<<<<<<< HEAD
-[18]
-File: BOK_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-17-1.pdf>
-[19]
-File: BOK_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-18-1.pdf>
-File: BOK_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-19-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[20]
-File: BOK_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-21-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[21]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 654--654
-[]\TU/lmtt/m/n/10 ## Warning: Vectorized input to []element_text()[] is not off
-icially supported.[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 654--654
-=======
-[21]
-File: BOK_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-20-1.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 643--645
-[][]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[22]
-File: BOK_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-21-1.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 652--654
-[][]
- []
-
-[23]
-File: BOK_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-23-1.pdf>
-
-Overfull \hbox (59.25pt too wide) in paragraph at lines 684--684
-[]\TU/lmtt/m/n/10 ## Warning: Vectorized input to `element_text()` is not offic
-ially supported.[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 684--684
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-[]\TU/lmtt/m/n/10 ## Results may be unexpected or may change in future versions
- of ggplot2.[] 
- []
-
-File: BOK_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-24-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-<<<<<<< HEAD
-[22]
-File: BOK_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-23-1.pdf>
-
-Underfull \vbox (badness 3930) has occurred while \output is active []
-
-[23]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/bx/n' will be
-(Font)              scaled to size 10.0pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/bx/n' will be
-(Font)              scaled to size 7.0pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/bx/n' will be
-(Font)              scaled to size 5.0pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/bx/n' will be
-(Font)              scaled to size 10.00107pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/bx/n' will be
-(Font)              scaled to size 7.00075pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/bx/n' will be
-(Font)              scaled to size 5.00053pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/bx/n' will be
-(Font)              scaled to size 9.99893pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/bx/n' will be
-(Font)              scaled to size 6.99925pt on input line 709.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/bx/n' will be
-(Font)              scaled to size 4.99947pt on input line 709.
-[24]
-File: BOK_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-26-1.pdf>
-[25]
-File: BOK_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-28-1.pdf>
-
-Overfull \hbox (1.5pt too wide) in paragraph at lines 787--787
-=======
-[24]
-File: BOK_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-25-1.pdf>
-[25] [26
-
-]
-Chapter 4.
-[27]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.00092pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.00064pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.00046pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 9.99893pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 6.99925pt on input line 739.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 4.99947pt on input line 739.
-File: BOK_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-28-1.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 768--770
-[][]
- []
-
-
-Underfull \vbox (badness 3590) has occurred while \output is active []
-
-[28]
-File: BOK_files/figure-latex/unnamed-chunk-30-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-30-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[29]
-Overfull \hbox (1.5pt too wide) in paragraph at lines 817--817
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-[]\TU/lmtt/m/n/10 ## coxph(formula = Surv(surv_time, status) ~ bmi, data = wcgs
-_dat)[] 
- []
-
-<<<<<<< HEAD
-[26]
-File: BOK_files/figure-latex/unnamed-chunk-31-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-31-1.pdf>
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 839--839
-=======
-[30]
-File: BOK_files/figure-latex/unnamed-chunk-33-1.pdf Graphic file (type pdf)
-<use BOK_files/figure-latex/unnamed-chunk-33-1.pdf>
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 869--869
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-[]\TU/lmtt/m/n/10 ## coxph(formula = Surv(surv_time, status) ~ agec + cholmmol 
-+ sbp10 +[] 
- []
-
-<<<<<<< HEAD
-[27]
-Overfull \hbox (62.33209pt too wide) in paragraph at lines 867--868
-=======
-[31]
-Overfull \hbox (33.06609pt too wide) in paragraph at lines 897--898
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
-[][] []
- []
-
-No file BOK.bbl.
-<<<<<<< HEAD
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 871.
-[28]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 871.
-(BOK.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 871.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 871.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.400 \begin{quote}
+                    
 Here is how much of TeX's memory you used:
- 31158 strings out of 427669
- 564130 string characters out of 3151449
- 770433 words of memory out of 3000000
- 34948 multiletter control sequences out of 15000+200000
- 540217 words of font info for 90 fonts, out of 3000000 for 9000
+ 31033 strings out of 427669
+ 559869 string characters out of 3151449
+ 766508 words of memory out of 3000000
+ 34858 multiletter control sequences out of 15000+200000
+ 538748 words of font info for 79 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,6n,118p,804b,2146s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on BOK.pdf (28 pages).
-=======
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 903.
-[32]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 903.
-(./BOK.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 903.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 903.
-Package rerunfilecheck Info: File `BOK.out' has not changed.
-(rerunfilecheck)             Checksum: 6B68137CC73D482D66E767BB05992875;1612.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 903.
- ) 
-Here is how much of TeX's memory you used:
- 17498 strings out of 481269
- 312126 string characters out of 5923327
- 728771 words of memory out of 5000000
- 34761 multiletter control sequences out of 15000+600000
- 540274 words of font info for 90 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 53i,6n,118p,897b,461s stack positions out of 5000i,500n,10000p,200000b,80000s
-
-Output written on BOK.pdf (32 pages).
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
+Output written on BOK.pdf (11 pages).

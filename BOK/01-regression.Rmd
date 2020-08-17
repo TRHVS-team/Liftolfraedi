@@ -1,13 +1,150 @@
-# Aðhvarfsgreining {#reg }
+# Línuleg aðhvarfsgreining {#reg }
+Í línulegri aðhvarfsgreiningu gildir að útkoman þarf að vera línuleg breyta. Það gildir ekki um skýribreyturnar.  
 
 
-## Línuleg aðhvarfsgreining
+Þeir pakkar sem við notum eru:  
+```{r}
+library(tidyverse)
+library(epitools)
+library(arsenal)
+library(ggpubr)
+library(table1)
+```
 
-### Lýsandi tölfræði
+## Lýsandi tölfræði
+Western Collaborative Group Study (WCGS) gagnasafnið er í epitools- pakkanum. Gagnasafnið byggir á rannsókn sem var með meginmarkmið að skoða tengsl persónuleikagerðar og hjartasjúkdóma. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, létust, þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961. Í þessum kafla og næstu ætlum við að skoða tengsl kólesteróls  og reykinga.  
 
-### Líkanagerð
+###  Sækjum gögnin og lögum til  
+```{r}
+data(wcgs)
+wcgs <- as_tibble(wcgs)
 
-### Emmeans
+wcgs <- wcgs %>% 
+  mutate(agec = age0 - 46,
+         cholmmol = chol0 / 39,
+         sbp10 = sbp0 / 10,
+         dibpat = factor(dibpat0, levels = 0:1, labels = c("B", "A")),
+         smoker = factor(1 * (ncigs0 > 0), levels = c(0, 1), labels = c("No", "Yes")), # ATH, sé til hvort ég nota
+         bmi = (weight0 * 0.454) / ((height0 * 2.54)/100)^2,
+         bmiq3 = cut(bmi, breaks = quantile(bmi, seq(0, 1, 1/3)), # ATH, veit ekki hvort ég held þessu
+                     include.lowest = T, right = F)
+  )
+
+wcgs_dat <- wcgs %>% 
+  select(id, agec, cholmmol, sbp10, ncigs0, dibpat, bmi, arcus0) %>% 
+  filter(complete.cases(.)) 
+
+wcgs_dat$dibpat <- relevel(wcgs_dat$dibpat, "A")
+```
+Við búum til nýja aldursbreytu þar sem við erum búin að staðla hana m.v. meðaldurinn í hópnum. Meðalaldurinn er 46.28 og drögum við þvi 46 frá aldrinum. Það mun auðvelda túlkun á líkönum.  
+!!! ATH af hverju deilum við með 10 og 39?.  
+Breytan dibpat0 eru persónuleikagerðirnar, við setjum hana sem flokkabreytu (e. factor).  
+Til þess að reikna BMI þá þurfum við að breyta hæðinni í metra og þyngdinni í kíló. Útbúum einnig flokkabreytu fyrir bmi þar sem við skiptum henni í 3 jafna hluta.   
+  
+   
+Í þessari úrvinnslu notum við bara þá einstaklinga sem hafa allar breyturnar sem við ætlum að skoða, aðra fjarlægjum við úr gagnasafninu.
+
+Gott er að setja "label" á breyturnar til að hafa íslensku í gröfum og öðrum myndum. Notum til þess skipunina $label$ úr pakkanum $arsenal$  
+```{r}
+label(wcgs_dat$cholmmol) <- "Kólesteról"
+label(wcgs_dat$agec) <- "Miðjaður Aldur"
+label(wcgs_dat$bmi) <- "BMI"
+label(wcgs_dat$dibpat) <- "Hegðunarhópur"
+label(wcgs_dat$sbp10) <- "Blóðþrýstingur"
+label(wcgs_dat$ncigs0) <- "Fjöldi sígaréttna"
+label(wcgs_dat$arcus0) <- "Arcus"  # ATH!!! Hvað er arcus?
+```
 
 
-## Tvíkosta aðhvarfsgreining
+Mikilvægt skref í allri tölfræðiúrvinnslu er hreinsun gagnanna, t.d. skoða hvort öll gildi séu eðlileg. Við gerum það ekki hérna en við skoðum töflu 1, helstu lýsistærðir og dreifingu gagnanna.  
+
+
+### Dreifing helstu breytna
+Skoðum dreifingu þeirra breytna sem við höfum mestan áhuga á, það er kólesteról og reykingar. Gott getur verið að skoða skýribreyturnar á svipaðan hátt. Við gerð grafa notum við skipanir úr pakkanum $tidyverse$, einnig notum við skipunina $ggarrange$ úr pakkanum $ggpubr$.     
+```{r}
+kol <- wcgs_dat %>% 
+  ggplot(mapping = aes(x = cholmmol)) + 
+  geom_bar(fill=4) +
+  ggtitle("Kólesteról") +
+  labs(x='Kólesteról', y='Count') +
+  theme_bw()
+
+reyk <- wcgs_dat %>% 
+  ggplot(mapping = aes(x = ncigs0)) + 
+  geom_bar(fill=4) +
+  ggtitle("Reykingar") +
+  labs(x='Reykingar', y='Count') +  
+  theme_bw()
+
+ggarrange(kol, reyk,ncol=2, nrow=1) %>% 
+  annotate_figure(
+    top = text_grob("Dreifing útkomu og útsetningar",face = "bold", size = 14))
+```
+
+Oft er líka áhugavert að skoða hvernig fjórðungsmörkin eru fyrir breyturnar.   
+```{r}
+qu_chol <- quantile(wcgs_dat$cholmmol)
+qu_chol 
+qu_cig <- quantile(wcgs_dat$ncigs0)
+qu_cig
+```
+Hérna sést t.d. að 50% karlmannanna er með kólesteról á bílinu `r round(qu_chol[[2]], 2)` til `r round(qu_chol[[4]],2)`.  Einnig að langflestir reykja ekki, en 25% af karlmönnum reykja `r qu_cig[[4]]` sígaréttur eða meira.  
+
+### Tafla 1
+ATH!!! Vantar text um  tilgang töflu 1.
+ATH!!! Myndum við vilja hafa aðra breytu efst.
+Í töflu 1 þá verður breytan sem er í hausnum að vera flokkabreyta, ef breytan sem við viljum skipta hópnum eftir er ekki flokkabreyta þá er hægt að útbúa hana með einhvers konar bilskiptingu. Hérna prófum við að skipta að kólestrólinu með fjórðungsmörkunum. Aðrar breytur geta verið hvort sem er flokkabreytur eða samfelldar.   
+```{r}
+wcgs_dat <- wcgs_dat %>% 
+  mutate(chol_q = cut(cholmmol, breaks = quantile(cholmmol, seq(0, 1, 1/4)), 
+                      include.lowest = T, right = F))
+```
+Til eru ýmsir skipanir til þess að gera töflu 1, sú sem við notum hérna er $tableby$ úr pakkanum $arsenal$  
+
+```{r, results="asis"}
+tab_wcgs <- tableby(chol_q ~ ncigs0 + agec + bmi + dibpat + sbp10 + arcus0, data = wcgs_dat)
+summary(tab_wcgs)
+```
+
+Ýmsar leiðir eru til að skoða gögnin frekar og ætlum við að sýna nokkur dæmi um það, en það er alls ekki tæmandi listi og oft gott að gera fyrir fleiri breytur en við gerum hérna.  
+  
+Skoðum myndrænt meðaltal og staðalfrávik fjölda sígaréttna út frá kólestrólhópum. Það gerum við með "boxplotti".  
+```{r}
+wcgs_dat %>% 
+  ggplot(aes(x=as.factor(chol_q),  y=ncigs0, fill=as.factor(chol_q))) +
+  geom_boxplot() +
+  labs(x='Kólesteról', y='Sígaréttufjöldi') +
+  ggtitle("Kólestról og reykingar") +
+  theme_bw() +
+  theme(legend.position="none")
+```
+Við sjáum að meðaltal hækkar í seinni tveimur hópunum en staðalfrávikin virðast svipuð. 
+  
+Stundum er gott að sjá hvort það séu einhver víxláhrif á milli breytna. Skoðum því hvort áhrif sígaréttna á kólestról sé eins hjá hegðunarhópunum tveimur. Hérna notum við upphaflegu samfelldu kólesteról breytuna en skiptum sígaréttureykingum í 3 flokka: Reykja ekki, 1 pakki, meira en einn pakki.  
+```{r}
+wcgs_dat <- wcgs_dat %>% 
+  mutate(ncigs0_3 = ifelse(ncigs0 == 0, "Reyklaus",ifelse(ncigs0 <=20,"1 pakki","Meira")))
+
+# Endurröðum
+wcgs_dat$ncigs0_3 <- as.factor(wcgs_dat$ncigs0_3)
+wcgs_dat$ncigs0_3 <- relevel(wcgs_dat$ncigs0_3,"1 pakki")
+wcgs_dat$ncigs0_3 <- relevel(wcgs_dat$ncigs0_3,"Reyklaus")
+
+wcgs_dat  %>%
+  ggplot(fill=4) +
+  aes(x = ncigs0_3, color = dibpat, group = dibpat, y = cholmmol) +
+  labs(x='Fjöldi sígaréttna', y='Kólesteról') +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+  ggtitle("Kólesteról og reykingar") +
+  labs(color = "Hegðunarhópur") +
+  theme_bw()
+```
+Sjáum að hóparnir tveir koma ekki alveg eins út. Um þá sem reykja ekki gildir að, þeir sem eru í hegðunarhópi A er kólesterólið mun hærra en þegar við skoðum þá sem reykja 1 pakka á dag eða minna þá minnkar munurinn. Svo frá einum pakka og yfir í meira þá stendur hópur B í stað en hópur A hækkar og bilið á milli þeirra eykst. Svo víxláhrif virðast til staðar. 
+
+
+## Líkanagerð
+
+## Emmeans
+
+# Tvíkosta aðhvarfsgreining
