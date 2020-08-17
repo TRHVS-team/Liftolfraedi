@@ -1,4 +1,4 @@
-# Hlutfallsleg áhætta {#prof_haz}
+## Hlutfallsleg áhætta {#prof_haz}
 Log-rank prófið segir okkur bara að munur sé á lifun milli hópa en ekki hve mikill hann er. Í log-rank prófinu er hægt að leiðrétta með því að gera stratified próf en það er ekki hægt að leiðrétta fyrir samfelldum breytum. Það er aftur á móti hægt í Cox líkaninu sem er aðhvarfsgreiningarlíkan. Við viljum færa okkur yfir í afhvarfsgreiningu til að meta áhrifsstærðir og til að geta leiðrétt fyrir skýribreytum (e. explanatory variables).
 
 Cox líkanið felur í sér hlutfallslega áhættu á tímabili sem er til skoðunar.  

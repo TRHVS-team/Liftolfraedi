@@ -1,9 +1,11 @@
-# Skoðun lifunargagna {#lif_skod}
-Western Collaborative Group Study (WCGS) gagnasafnið er í epitools- pakkanum. Þetta eru gögn úr rannsókn þar sem meginmarkmið hennar var að skoða tengsl persónuleikagerðar og hjartasjúkdóma og því eru hjartasjúkdómar aðalútkomubreytan okkar. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, eða létust, eða þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961.  
+# Lifunargreining{#lif }
+Í þessum kafla munun við styðjast við Western Collaborative Group Study (WCGS) gagnasafnið sem er í epitools- pakkanum. Þetta eru gögn úr rannsókn þar sem meginmarkmið hennar var að skoða tengsl persónuleikagerðar og hjartasjúkdóma og því eru hjartasjúkdómar aðalútkomubreytan okkar. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, eða létust, eða þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961.  
   
-Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáföll með og án skýribreytna. A og B flokkunin vísar í hvernig fólk meðhöndlar streitu og álag. Þeir sem eru í A hópi eru með meira keppnisskap, óþolinmóðari og árásagjarnari en þeir sem eru í hópi B.  Þær skýribreytur sem við munum skoða eru aldur, magn kólesteról í blóði, blóðþrýstings, reykinga og BMI stuðull.  
+Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáföll með og án skýribreytna. A og B flokkunin vísar í hvernig fólk meðhöndlar streitu og álag. Þeir sem eru í A hópi eru með meira keppnisskap, óþolinmóðari og árásagjarnari en þeir sem eru í hópi B.  Þær skýribreytur sem við munum skoða eru aldur, magn kólesteról í blóði, blóðþrýstings, reykinga og BMI stuðull. 
 
-##  Sækjum gögnin og lögum til
+## Skoðun lifunargagna {#lif_skod}
+
+### Sækjum gögnin og lögum til
 ```{r}
 data(wcgs,package = "epitools")
 wcgs <- as_tibble(wcgs)
@@ -35,7 +37,7 @@ Breytan chd69 segir til um hvort karlmennirnir fengu hjartasjúkdóm eða ekki o
    
 Við notum bara þá einstaklinga sem hafa allar breyturnar sem við ætlum að skoða, aðra fjarlægjum við úr gagnasafninu.  
   
-## Tökum létta skoðun á gögnunum
+### Tökum létta skoðun á gögnunum
 Fyrsta skrefið er alltaf að skoða gögnin og sjá hvað einfaldur reikningur gefur okkur. Við skoðum gögnin miða við ár sem tímalengd.
 
 *Helstu tölur*
@@ -115,7 +117,7 @@ hz_2 <- exp(VL_1$res[2,1])
 ```
 Áhættuhlutfallið er `r round(hz_2,2)` sem er það sama og við fengum með handreikningi.  
  
-## Veldisvísisfallið
+### Veldisvísisfallið
 Ef við gerum ráð fyrir veldisvísivexti þá er hægt að meta t.d. 5 ára áhættu fyrir hvorn hóp. Athugið að hér erum við að gera ráð fyrir að áhættan í sérhverjum hópi haldist óbreytt út tímabilið. 
   
 Við notum formúluna $1-e^{-\lambda*ár}$.  

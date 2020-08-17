@@ -90,7 +90,7 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -113,7 +113,7 @@
 
 \title{Tölfræði fyrir almenning}
 \author{Sigurbjörg Anna Guðnadóttir}
-\date{2020-07-16}
+\date{2020-08-17}
 
 \begin{document}
 \maketitle
@@ -133,37 +133,58 @@
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{lif_skod}{%
-\chapter{Skoðun lifunargagna}\label{lif_skod}}
+\hypertarget{reg}{%
+\chapter{Aðhvarfsgreining}\label{reg}}
 
-Western Collaborative Group Study (WCGS) gagnasafnið er í epitools- pakkanum. Þetta eru gögn úr rannsókn þar sem meginmarkmið hennar var að skoða tengsl persónuleikagerðar og hjartasjúkdóma og því eru hjartasjúkdómar aðalútkomubreytan okkar. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, eða létust, eða þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961.
+\hypertarget{luxednuleg-auxf0hvarfsgreining}{%
+\section{Línuleg aðhvarfsgreining}\label{luxednuleg-auxf0hvarfsgreining}}
+
+\hypertarget{luxfdsandi-tuxf6lfruxe6uxf0i}{%
+\subsection{Lýsandi tölfræði}\label{luxfdsandi-tuxf6lfruxe6uxf0i}}
+
+\hypertarget{luxedkanageruxf0}{%
+\subsection{Líkanagerð}\label{luxedkanageruxf0}}
+
+\hypertarget{emmeans}{%
+\subsection{Emmeans}\label{emmeans}}
+
+\hypertarget{tvuxedkosta-auxf0hvarfsgreining}{%
+\section{Tvíkosta aðhvarfsgreining}\label{tvuxedkosta-auxf0hvarfsgreining}}
+
+\hypertarget{lif}{%
+\chapter{Lifunargreining}\label{lif}}
+
+Í þessum kafla munun við styðjast við Western Collaborative Group Study (WCGS) gagnasafnið sem er í epitools- pakkanum. Þetta eru gögn úr rannsókn þar sem meginmarkmið hennar var að skoða tengsl persónuleikagerðar og hjartasjúkdóma og því eru hjartasjúkdómar aðalútkomubreytan okkar. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, eða létust, eða þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961.
 
 Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáföll með og án skýribreytna. A og B flokkunin vísar í hvernig fólk meðhöndlar streitu og álag. Þeir sem eru í A hópi eru með meira keppnisskap, óþolinmóðari og árásagjarnari en þeir sem eru í hópi B. Þær skýribreytur sem við munum skoða eru aldur, magn kólesteról í blóði, blóðþrýstings, reykinga og BMI stuðull.
 
+\hypertarget{lif_skod}{%
+\section{Skoðun lifunargagna}\label{lif_skod}}
+
 \hypertarget{suxe6kjum-guxf6gnin-og-luxf6gum-til}{%
-\section{Sækjum gögnin og lögum til}\label{suxe6kjum-guxf6gnin-og-luxf6gum-til}}
+\subsection{Sækjum gögnin og lögum til}\label{suxe6kjum-guxf6gnin-og-luxf6gum-til}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(wcgs,}\DataTypeTok{package =} \StringTok{"epitools"}\NormalTok{)}
-\NormalTok{wcgs <-}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{(wcgs)}
+\NormalTok{wcgs <{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(wcgs)}
 
-\NormalTok{wcgs <-}\StringTok{ }\NormalTok{wcgs }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{surv_time_y =}\NormalTok{ time169 }\OperatorTok{/}\StringTok{ }\FloatTok{365.24}\NormalTok{,}
-         \DataTypeTok{agec =}\NormalTok{ age0 }\OperatorTok{-}\StringTok{ }\DecValTok{46}\NormalTok{,}
+\NormalTok{wcgs <{-}}\StringTok{ }\NormalTok{wcgs }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{surv\_time\_y =}\NormalTok{ time169 }\OperatorTok{/}\StringTok{ }\FloatTok{365.24}\NormalTok{,}
+         \DataTypeTok{agec =}\NormalTok{ age0 }\OperatorTok{{-}}\StringTok{ }\DecValTok{46}\NormalTok{,}
          \DataTypeTok{cholmmol =}\NormalTok{ chol0 }\OperatorTok{/}\StringTok{ }\DecValTok{39}\NormalTok{,}
          \DataTypeTok{sbp10 =}\NormalTok{ sbp0 }\OperatorTok{/}\StringTok{ }\DecValTok{10}\NormalTok{,}
          \DataTypeTok{dibpat =} \KeywordTok{factor}\NormalTok{(dibpat0, }\DataTypeTok{levels =} \DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"B"}\NormalTok{, }\StringTok{"A"}\NormalTok{)),}
          \DataTypeTok{smoker =} \KeywordTok{factor}\NormalTok{(}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{(ncigs0 }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{), }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)),}
-         \DataTypeTok{bmi =}\NormalTok{ ((weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{(height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{^}\DecValTok{2}\NormalTok{,}
+         \DataTypeTok{bmi =}\NormalTok{ ((weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{(height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{,}
          \DataTypeTok{bmiq3 =} \KeywordTok{cut}\NormalTok{(bmi, }\DataTypeTok{breaks =} \KeywordTok{quantile}\NormalTok{(bmi, }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{3}\NormalTok{)),}
                        \DataTypeTok{include.lowest =}\NormalTok{ T, }\DataTypeTok{right =}\NormalTok{ F)}
 \NormalTok{         )}
-\NormalTok{wcgs_dat <-}\StringTok{ }\NormalTok{wcgs }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(id, }\DataTypeTok{surv_time =}\NormalTok{ time169, surv_time_y, }\DataTypeTok{status=}\NormalTok{chd69,  agec, cholmmol, sbp10, smoker, dibpat, bmi,bmiq3, arcus0) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\KeywordTok{complete.cases}\NormalTok{(.)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{statusf=}\KeywordTok{factor}\NormalTok{(status,}\DataTypeTok{levels=}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{,}\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"No event"}\NormalTok{,}\StringTok{"Yes event"}\NormalTok{)))}
+\NormalTok{wcgs\_dat <{-}}\StringTok{ }\NormalTok{wcgs }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(id, }\DataTypeTok{surv\_time =}\NormalTok{ time169, surv\_time\_y, }\DataTypeTok{status=}\NormalTok{chd69,  agec, cholmmol, sbp10, smoker, dibpat, bmi,bmiq3, arcus0) }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\KeywordTok{complete.cases}\NormalTok{(.)) }\OperatorTok{\%>\%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{statusf=}\KeywordTok{factor}\NormalTok{(status,}\DataTypeTok{levels=}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{,}\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"No event"}\NormalTok{,}\StringTok{"Yes event"}\NormalTok{)))}
 
-\NormalTok{wcgs_dat}\OperatorTok{$}\NormalTok{dibpat <-}\StringTok{ }\KeywordTok{relevel}\NormalTok{(wcgs_dat}\OperatorTok{$}\NormalTok{dibpat, }\StringTok{"A"}\NormalTok{)}
+\NormalTok{wcgs\_dat}\OperatorTok{$}\NormalTok{dibpat <{-}}\StringTok{ }\KeywordTok{relevel}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{dibpat, }\StringTok{"A"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -178,7 +199,7 @@ Breytan chd69 segir til um hvort karlmennirnir fengu hjartasjúkdóm eða ekki o
 Við notum bara þá einstaklinga sem hafa allar breyturnar sem við ætlum að skoða, aðra fjarlægjum við úr gagnasafninu.
 
 \hypertarget{tuxf6kum-luxe9tta-skouxf0un-uxe1-guxf6gnunum}{%
-\section{Tökum létta skoðun á gögnunum}\label{tuxf6kum-luxe9tta-skouxf0un-uxe1-guxf6gnunum}}
+\subsection{Tökum létta skoðun á gögnunum}\label{tuxf6kum-luxe9tta-skouxf0un-uxe1-guxf6gnunum}}
 
 Fyrsta skrefið er alltaf að skoða gögnin og sjá hvað einfaldur reikningur gefur okkur. Við skoðum gögnin miða við ár sem tímalengd.
 
@@ -186,20 +207,20 @@ Fyrsta skrefið er alltaf að skoða gögnin og sjá hvað einfaldur reikningur 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Hversu margir eru í safninu og í hvorum hópi fyrir sig?}
-\NormalTok{rownames <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Allir"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{)}
-\NormalTok{fj_t <-}\StringTok{ }\KeywordTok{dim}\NormalTok{(wcgs_dat)[}\DecValTok{1}\NormalTok{]}
-\NormalTok{fj_g <-}\StringTok{ }\NormalTok{wcgs_dat }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(dibpat) }\OperatorTok{%>%}\StringTok{ }
+\CommentTok{\# Hversu margir eru í safninu og í hvorum hópi fyrir sig?}
+\NormalTok{rownames <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Allir"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{)}
+\NormalTok{fj\_t <{-}}\StringTok{ }\KeywordTok{dim}\NormalTok{(wcgs\_dat)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{fj\_g <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(dibpat) }\OperatorTok{\%>\%}\StringTok{ }
 \StringTok{  }\KeywordTok{count}\NormalTok{()}
 
-\NormalTok{fj <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(fj_t,fj_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]],fj_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]])}
+\NormalTok{fj <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(fj\_t,fj\_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]],fj\_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]])}
 
-\CommentTok{# Hversu margir fengu hjartaáfall í heildina og í hvorum hópi fyrir sig?}
+\CommentTok{\# Hversu margir fengu hjartaáfall í heildina og í hvorum hópi fyrir sig?}
 
-\NormalTok{st_t <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(wcgs_dat}\OperatorTok{$}\NormalTok{status)}
-\NormalTok{st_g <-}\StringTok{ }\NormalTok{wcgs_dat }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(dibpat) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{st\_t <{-}}\StringTok{ }\KeywordTok{sum}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{status)}
+\NormalTok{st\_g <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(dibpat) }\OperatorTok{\%>\%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{tidni =} \KeywordTok{sum}\NormalTok{(status))}
 \end{Highlighting}
 \end{Shaded}
@@ -210,16 +231,16 @@ Fyrsta skrefið er alltaf að skoða gögnin og sjá hvað einfaldur reikningur 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{st <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(st_t,st_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]],st_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]])}
+\NormalTok{st <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(st\_t,st\_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]],st\_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]])}
 
-\CommentTok{# Hver er eftirfylgnitíminn og lambda fyrir all hópana?}
+\CommentTok{\# Hver er eftirfylgnitíminn og lambda fyrir all hópana?}
 
-\NormalTok{ef_t <-}\StringTok{ }\NormalTok{wcgs_dat }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sum_time =} \KeywordTok{sum}\NormalTok{(surv_time_y),}\DataTypeTok{lambda =} \KeywordTok{sum}\NormalTok{(status) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(surv_time_y))}
+\NormalTok{ef\_t <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sum\_time =} \KeywordTok{sum}\NormalTok{(surv\_time\_y),}\DataTypeTok{lambda =} \KeywordTok{sum}\NormalTok{(status) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(surv\_time\_y))}
 
-\NormalTok{ef_g <-}\StringTok{ }\NormalTok{wcgs_lambda <-}\StringTok{ }\NormalTok{wcgs_dat }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(dibpat) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sum_time =} \KeywordTok{sum}\NormalTok{(surv_time_y),}\DataTypeTok{lambda =} \KeywordTok{sum}\NormalTok{(status) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(surv_time_y))}
+\NormalTok{ef\_g <{-}}\StringTok{ }\NormalTok{wcgs\_lambda <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(dibpat) }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sum\_time =} \KeywordTok{sum}\NormalTok{(surv\_time\_y),}\DataTypeTok{lambda =} \KeywordTok{sum}\NormalTok{(status) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(surv\_time\_y))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -229,14 +250,14 @@ Fyrsta skrefið er alltaf að skoða gögnin og sjá hvað einfaldur reikningur 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ef <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(ef_t[[}\DecValTok{1}\NormalTok{]],}\DecValTok{2}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]],}\DecValTok{2}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]],}\DecValTok{2}\NormalTok{))}
-\NormalTok{lambda <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(ef_t[[}\DecValTok{2}\NormalTok{]],}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{]],}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{]],}\DecValTok{4}\NormalTok{))}
+\NormalTok{ef <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(ef\_t[[}\DecValTok{1}\NormalTok{]],}\DecValTok{2}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef\_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]],}\DecValTok{2}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef\_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]],}\DecValTok{2}\NormalTok{))}
+\NormalTok{lambda <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(ef\_t[[}\DecValTok{2}\NormalTok{]],}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef\_g[[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{]],}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(ef\_g[[}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{]],}\DecValTok{4}\NormalTok{))}
 
-\CommentTok{# Setjum í eina töflu}
-\NormalTok{stats <-}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames,fj,st,ef,lambda))}
+\CommentTok{\# Setjum í eina töflu}
+\NormalTok{stats <{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames,fj,st,ef,lambda))}
 
-\CommentTok{# !!! ATH betra útlit}
-\NormalTok{stats <-stats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{( Hópar= rownames, Heildarfjö}\DataTypeTok{ldi =}\NormalTok{ V2,  }\DataTypeTok{Tilfelli =}\NormalTok{ V3, Eftirfylgnití}\DataTypeTok{mi =}\NormalTok{ V4, }\DataTypeTok{lambda =}\NormalTok{ V5)}
+\CommentTok{\# !!! ATH betra útlit}
+\NormalTok{stats <{-}stats }\OperatorTok{\%>\%}\StringTok{ }\KeywordTok{rename}\NormalTok{( Hópar=}\StringTok{ }\NormalTok{rownames, Heildarfjöldi =}\StringTok{ }\NormalTok{V2,  }\DataTypeTok{Tilfelli =}\NormalTok{ V3, Eftirfylgnitími =}\StringTok{ }\NormalTok{V4, }\DataTypeTok{lambda =}\NormalTok{ V5)}
 \NormalTok{stats}
 \end{Highlighting}
 \end{Shaded}
@@ -257,7 +278,7 @@ Eftirfylgnitíminn er sá tími sem einstaklingur er í rannsókninni, hámark 1
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{hz <-}\StringTok{ }\NormalTok{wcgs_lambda}\OperatorTok{$}\NormalTok{lambda[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{wcgs_lambda}\OperatorTok{$}\NormalTok{lambda[}\DecValTok{1}\NormalTok{] }
+\NormalTok{hz <{-}}\StringTok{ }\NormalTok{wcgs\_lambda}\OperatorTok{$}\NormalTok{lambda[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{wcgs\_lambda}\OperatorTok{$}\NormalTok{lambda[}\DecValTok{1}\NormalTok{] }
 \end{Highlighting}
 \end{Shaded}
 
@@ -270,21 +291,21 @@ Líkanið sem við köllum VL\_O er notað til að reikna lambda fyrir allan hó
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{VL_}\DecValTok{0}\NormalTok{ <-}\StringTok{ }\KeywordTok{flexsurvreg}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time_y, status) }\OperatorTok{~}\StringTok{ }\DecValTok{1}\NormalTok{,}\DataTypeTok{data=}\NormalTok{wcgs_dat,}\DataTypeTok{dist=}\StringTok{"exponential"}\NormalTok{)}
-\NormalTok{VL_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{flexsurvreg}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time_y, status) }\OperatorTok{~}\StringTok{ }\NormalTok{dibpat,}\DataTypeTok{data=}\NormalTok{wcgs_dat,}\DataTypeTok{dist=}\StringTok{"exponential"}\NormalTok{)}
+\NormalTok{VL\_}\DecValTok{0}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{flexsurvreg}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time\_y, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1}\NormalTok{,}\DataTypeTok{data=}\NormalTok{wcgs\_dat,}\DataTypeTok{dist=}\StringTok{"exponential"}\NormalTok{)}
+\NormalTok{VL\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{flexsurvreg}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time\_y, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{dibpat,}\DataTypeTok{data=}\NormalTok{wcgs\_dat,}\DataTypeTok{dist=}\StringTok{"exponential"}\NormalTok{)}
 
-\NormalTok{lambda_}\DecValTok{0}\NormalTok{ <-}\StringTok{ }\NormalTok{VL_}\DecValTok{0}\OperatorTok{$}\NormalTok{res[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
-\NormalTok{lambda_a <-}\StringTok{ }\NormalTok{VL_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }
-\NormalTok{lambda_b <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(VL_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\KeywordTok{log}\NormalTok{(VL_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])) }
+\NormalTok{lambda\_}\DecValTok{0}\NormalTok{ <{-}}\StringTok{ }\NormalTok{VL\_}\DecValTok{0}\OperatorTok{$}\NormalTok{res[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\NormalTok{lambda\_a <{-}}\StringTok{ }\NormalTok{VL\_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }
+\NormalTok{lambda\_b <{-}}\StringTok{ }\KeywordTok{exp}\NormalTok{(VL\_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\KeywordTok{log}\NormalTok{(VL\_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{])) }
 
 
-\NormalTok{lambda_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(lambda_}\DecValTok{0}\NormalTok{,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(lambda_a,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(lambda_b,}\DecValTok{4}\NormalTok{))}
+\NormalTok{lambda\_}\DecValTok{2}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(lambda\_}\DecValTok{0}\NormalTok{,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(lambda\_a,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(lambda\_b,}\DecValTok{4}\NormalTok{))}
 
-\CommentTok{# Setjum í eina töflu}
-\NormalTok{stats2 <-}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames, lambda, lambda_}\DecValTok{2}\NormalTok{))}
+\CommentTok{\# Setjum í eina töflu}
+\NormalTok{stats2 <{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames, lambda, lambda\_}\DecValTok{2}\NormalTok{))}
 
-\CommentTok{# !!! ATH betra útlit}
-\NormalTok{stats2 <-}\StringTok{ }\NormalTok{stats2 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{( Hópar= rownames, Lambda_handreiknað =}\StringTok{ }\NormalTok{V2,  Lambda_með}\DataTypeTok{_falli =}\NormalTok{ V3)}
+\CommentTok{\# !!! ATH betra útlit}
+\NormalTok{stats2 <{-}}\StringTok{ }\NormalTok{stats2 }\OperatorTok{\%>\%}\StringTok{ }\KeywordTok{rename}\NormalTok{( Hópar=}\StringTok{ }\NormalTok{rownames, Lambda\_handreiknað =}\StringTok{ }\NormalTok{V2,  Lambda\_með}\DataTypeTok{\_falli =}\NormalTok{ V3)}
 \NormalTok{stats2}
 \end{Highlighting}
 \end{Shaded}
@@ -302,14 +323,14 @@ Getum líka reiknað áhættuhlutfallið
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{hz_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(VL_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}
+\NormalTok{hz\_}\DecValTok{2}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{exp}\NormalTok{(VL\_}\DecValTok{1}\OperatorTok{$}\NormalTok{res[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 Áhættuhlutfallið er 0.43 sem er það sama og við fengum með handreikningi.
 
 \hypertarget{veldisvuxedsisfalliuxf0}{%
-\section{Veldisvísisfallið}\label{veldisvuxedsisfalliuxf0}}
+\subsection{Veldisvísisfallið}\label{veldisvuxedsisfalliuxf0}}
 
 Ef við gerum ráð fyrir veldisvísivexti þá er hægt að meta t.d. 5 ára áhættu fyrir hvorn hóp. Athugið að hér erum við að gera ráð fyrir að áhættan í sérhverjum hópi haldist óbreytt út tímabilið.
 
@@ -317,17 +338,17 @@ Við notum formúluna \(1-e^{-\lambda*ár}\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ar <-}\StringTok{ }\DecValTok{5} \CommentTok{# Hægt að velja hvaða árafjölda sem er, svo lengi sem hann er innan tímalengdar rannsóknar}
-\NormalTok{VL_}\DecValTok{0}\NormalTok{_ahaetta <-}\StringTok{ }\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambda_}\DecValTok{0}\OperatorTok{*}\NormalTok{ar)}
-\NormalTok{VL_A_ahaetta <-}\StringTok{ }\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambda_a}\OperatorTok{*}\NormalTok{ar)}
-\NormalTok{VL_B_ahaetta <-}\StringTok{ }\DecValTok{1}\OperatorTok{-}\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{lambda_b}\OperatorTok{*}\NormalTok{ar)}
+\NormalTok{ar <{-}}\StringTok{ }\DecValTok{5} \CommentTok{\# Hægt að velja hvaða árafjölda sem er, svo lengi sem hann er innan tímalengdar rannsóknar}
+\NormalTok{VL\_}\DecValTok{0}\NormalTok{\_ahaetta <{-}}\StringTok{ }\DecValTok{1}\OperatorTok{{-}}\KeywordTok{exp}\NormalTok{(}\OperatorTok{{-}}\NormalTok{lambda\_}\DecValTok{0}\OperatorTok{*}\NormalTok{ar)}
+\NormalTok{VL\_A\_ahaetta <{-}}\StringTok{ }\DecValTok{1}\OperatorTok{{-}}\KeywordTok{exp}\NormalTok{(}\OperatorTok{{-}}\NormalTok{lambda\_a}\OperatorTok{*}\NormalTok{ar)}
+\NormalTok{VL\_B\_ahaetta <{-}}\StringTok{ }\DecValTok{1}\OperatorTok{{-}}\KeywordTok{exp}\NormalTok{(}\OperatorTok{{-}}\NormalTok{lambda\_b}\OperatorTok{*}\NormalTok{ar)}
 
-\NormalTok{ar_ahaetta <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(VL_}\DecValTok{0}\NormalTok{_ahaetta,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(VL_A_ahaetta,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(VL_B_ahaetta,}\DecValTok{4}\NormalTok{))}
+\NormalTok{ar\_ahaetta <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(VL\_}\DecValTok{0}\NormalTok{\_ahaetta,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(VL\_A\_ahaetta,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(VL\_B\_ahaetta,}\DecValTok{4}\NormalTok{))}
 
-\NormalTok{stats3 <-}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames,fj,st,ef,lambda_}\DecValTok{2}\NormalTok{,ar_ahaetta))}
+\NormalTok{stats3 <{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames,fj,st,ef,lambda\_}\DecValTok{2}\NormalTok{,ar\_ahaetta))}
 
-\CommentTok{# !!! ATH betra útlit}
-\NormalTok{stats3 <-}\StringTok{ }\NormalTok{stats3 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{( Hópar= rownames, Heildarfjö}\DataTypeTok{ldi =}\NormalTok{ V2,  }\DataTypeTok{Tilfelli =}\NormalTok{ V3, Eftirfylgnití}\DataTypeTok{mi =}\NormalTok{ V4, }\DataTypeTok{lambda =}\NormalTok{ V5, áhætta5á}\DataTypeTok{r =}\NormalTok{ V6)}
+\CommentTok{\# !!! ATH betra útlit}
+\NormalTok{stats3 <{-}}\StringTok{ }\NormalTok{stats3 }\OperatorTok{\%>\%}\StringTok{ }\KeywordTok{rename}\NormalTok{( Hópar=}\StringTok{ }\NormalTok{rownames, Heildarfjöldi =}\StringTok{ }\NormalTok{V2,  }\DataTypeTok{Tilfelli =}\NormalTok{ V3, Eftirfylgnitími =}\StringTok{ }\NormalTok{V4, }\DataTypeTok{lambda =}\NormalTok{ V5, áhætta5ár =}\StringTok{ }\NormalTok{V6)}
 \NormalTok{stats3}
 \end{Highlighting}
 \end{Shaded}
@@ -342,10 +363,10 @@ Við notum formúluna \(1-e^{-\lambda*ár}\).
 \end{verbatim}
 
 \hypertarget{KM}{%
-\chapter{Kaplan Meier}\label{KM}}
+\section{Kaplan Meier}\label{KM}}
 
 \hypertarget{kaplan-meier-metilinn}{%
-\section{Kaplan Meier metilinn}\label{kaplan-meier-metilinn}}
+\subsection{Kaplan Meier metilinn}\label{kaplan-meier-metilinn}}
 
 Næst skoðum við Kaplan Meier metilinn en hann er ein langmest notaða tölfræðiaðferðin þegar framkvæmd er lifunargreining, meðal annars vegna þess að á honum byggja svo kölluð Kaplan-Meier gröf sem eru ein algengasta leiðin til að lýsa lifunargögnum.
 
@@ -383,28 +404,28 @@ Notum aðferð Kaplan Meier til að meta 5 ára áhættu á hjartasjúkdómi hj�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Allur hópurinn}
-\NormalTok{KM_}\DecValTok{0}\NormalTok{ <-}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time_y, status) }\OperatorTok{~}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
-\NormalTok{KM_}\DecValTok{0}\NormalTok{_sum_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(KM_}\DecValTok{0}\NormalTok{, }\DataTypeTok{times =} \DecValTok{1}\NormalTok{) }\CommentTok{# times = 1 fyrir 1 ár}
-\NormalTok{KM_}\DecValTok{0}\NormalTok{_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{KM_}\DecValTok{0}\NormalTok{_sum_}\DecValTok{1}\OperatorTok{$}\NormalTok{surv}
-\NormalTok{KM_}\DecValTok{0}\NormalTok{_sum_}\DecValTok{5}\NormalTok{ <-}\StringTok{  }\KeywordTok{summary}\NormalTok{(KM_}\DecValTok{0}\NormalTok{, }\DataTypeTok{times =} \DecValTok{5}\NormalTok{) }\CommentTok{# times = 5 fyrir 5 ár}
-\NormalTok{KM_}\DecValTok{0}\NormalTok{_}\DecValTok{5}\NormalTok{ <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{KM_}\DecValTok{0}\NormalTok{_sum_}\DecValTok{5}\OperatorTok{$}\NormalTok{surv}
+\CommentTok{\# Allur hópurinn}
+\NormalTok{KM\_}\DecValTok{0}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time\_y, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
+\NormalTok{KM\_}\DecValTok{0}\NormalTok{\_sum\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{summary}\NormalTok{(KM\_}\DecValTok{0}\NormalTok{, }\DataTypeTok{times =} \DecValTok{1}\NormalTok{) }\CommentTok{\# times = 1 fyrir 1 ár}
+\NormalTok{KM\_}\DecValTok{0}\NormalTok{\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\DecValTok{1} \OperatorTok{{-}}\StringTok{ }\NormalTok{KM\_}\DecValTok{0}\NormalTok{\_sum\_}\DecValTok{1}\OperatorTok{$}\NormalTok{surv}
+\NormalTok{KM\_}\DecValTok{0}\NormalTok{\_sum\_}\DecValTok{5}\NormalTok{ <{-}}\StringTok{  }\KeywordTok{summary}\NormalTok{(KM\_}\DecValTok{0}\NormalTok{, }\DataTypeTok{times =} \DecValTok{5}\NormalTok{) }\CommentTok{\# times = 5 fyrir 5 ár}
+\NormalTok{KM\_}\DecValTok{0}\NormalTok{\_}\DecValTok{5}\NormalTok{ <{-}}\StringTok{ }\DecValTok{1} \OperatorTok{{-}}\StringTok{ }\NormalTok{KM\_}\DecValTok{0}\NormalTok{\_sum\_}\DecValTok{5}\OperatorTok{$}\NormalTok{surv}
 
-\CommentTok{# Persónuleikagerð A og B}
-\NormalTok{KM_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time_y, status) }\OperatorTok{~}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
-\NormalTok{KM_}\DecValTok{1}\NormalTok{_sum_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(KM_}\DecValTok{1}\NormalTok{, }\DataTypeTok{times =} \DecValTok{1}\NormalTok{) }\CommentTok{# times = 1 fyrir 1 ár}
-\NormalTok{KM_}\DecValTok{1}\NormalTok{_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{KM_}\DecValTok{1}\NormalTok{_sum_}\DecValTok{1}\OperatorTok{$}\NormalTok{surv}
-\NormalTok{KM_}\DecValTok{1}\NormalTok{_sum_}\DecValTok{5}\NormalTok{ <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(KM_}\DecValTok{1}\NormalTok{, }\DataTypeTok{times =} \DecValTok{5}\NormalTok{) }\CommentTok{# times = 5 fyrir 5 ár}
-\NormalTok{KM_}\DecValTok{1}\NormalTok{_}\DecValTok{5}\NormalTok{ <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{KM_}\DecValTok{1}\NormalTok{_sum_}\DecValTok{5}\OperatorTok{$}\NormalTok{surv}
+\CommentTok{\# Persónuleikagerð A og B}
+\NormalTok{KM\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time\_y, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
+\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_sum\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{summary}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{, }\DataTypeTok{times =} \DecValTok{1}\NormalTok{) }\CommentTok{\# times = 1 fyrir 1 ár}
+\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\DecValTok{1} \OperatorTok{{-}}\StringTok{ }\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_sum\_}\DecValTok{1}\OperatorTok{$}\NormalTok{surv}
+\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_sum\_}\DecValTok{5}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{summary}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{, }\DataTypeTok{times =} \DecValTok{5}\NormalTok{) }\CommentTok{\# times = 5 fyrir 5 ár}
+\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_}\DecValTok{5}\NormalTok{ <{-}}\StringTok{ }\DecValTok{1} \OperatorTok{{-}}\StringTok{ }\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_sum\_}\DecValTok{5}\OperatorTok{$}\NormalTok{surv}
 
-\NormalTok{ahaetta_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(KM_}\DecValTok{0}\NormalTok{_}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_}\DecValTok{1}\NormalTok{[}\DecValTok{1}\NormalTok{] ,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_}\DecValTok{1}\NormalTok{[}\DecValTok{2}\NormalTok{], }\DecValTok{4}\NormalTok{))}
-\NormalTok{ahaetta_}\DecValTok{5}\NormalTok{ <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(KM_}\DecValTok{0}\NormalTok{_}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_}\DecValTok{5}\NormalTok{[}\DecValTok{1}\NormalTok{] ,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_}\DecValTok{5}\NormalTok{[}\DecValTok{2}\NormalTok{], }\DecValTok{4}\NormalTok{))}
+\NormalTok{ahaetta\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(KM\_}\DecValTok{0}\NormalTok{\_}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_}\DecValTok{1}\NormalTok{[}\DecValTok{1}\NormalTok{] ,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_}\DecValTok{1}\NormalTok{[}\DecValTok{2}\NormalTok{], }\DecValTok{4}\NormalTok{))}
+\NormalTok{ahaetta\_}\DecValTok{5}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{round}\NormalTok{(KM\_}\DecValTok{0}\NormalTok{\_}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_}\DecValTok{5}\NormalTok{[}\DecValTok{1}\NormalTok{] ,}\DecValTok{4}\NormalTok{), }\KeywordTok{round}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_}\DecValTok{5}\NormalTok{[}\DecValTok{2}\NormalTok{], }\DecValTok{4}\NormalTok{))}
 
-\CommentTok{# Setjum upp í töflu og berum saman við fyrri niðurstöður.}
-\NormalTok{stats4 <-}\StringTok{ }\KeywordTok{as_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames,lambda_}\DecValTok{2}\NormalTok{,ar_ahaetta, ahaetta_}\DecValTok{1}\NormalTok{, ahaetta_}\DecValTok{5}\NormalTok{))}
+\CommentTok{\# Setjum upp í töflu og berum saman við fyrri niðurstöður.}
+\NormalTok{stats4 <{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(rownames,lambda\_}\DecValTok{2}\NormalTok{,ar\_ahaetta, ahaetta\_}\DecValTok{1}\NormalTok{, ahaetta\_}\DecValTok{5}\NormalTok{))}
 
-\CommentTok{# !!! ATH betra útlit}
-\CommentTok{#stats4 <- stats4 %>% rename( Hópar= rownames, Heildarfjöldi = V2,  Tilfelli = V3, Eftirfylgnitími = V4, lambda = V5, áhætta5ár = V6)}
+\CommentTok{\# !!! ATH betra útlit}
+\CommentTok{\#stats4 <{-} stats4 \%>\% rename( Hópar= rownames, Heildarfjöldi = V2,  Tilfelli = V3, Eftirfylgnitími = V4, lambda = V5, áhætta5ár = V6)}
 \NormalTok{stats4}
 \end{Highlighting}
 \end{Shaded}
@@ -423,7 +444,7 @@ Getum líka hugsað þetta út frá lifun, ef við skoðun KM\_1\_sum\_5 þá s�
 !!! ATH mjög ólíkar tölur milli veldisvísisfallsins og KM, hvernig er best að skýra það?
 
 \hypertarget{kaplan-meier-gruxf6f}{%
-\section{Kaplan Meier gröf}\label{kaplan-meier-gruxf6f}}
+\subsection{Kaplan Meier gröf}\label{kaplan-meier-gruxf6f}}
 
 Kaplan Meier gröf eru langalgengasta myndræna framsetningin á lifunargögnum. Þau eru leið til að lýsa lifunarfallinu myndrænt, þ.e.a.s. hversu hátt hlutfall þátttakanda hefur ekki fengið atburð eftir því sem tíminn líður. Gröfin teikna Kaplan Meier matið í sérhverjum tímapunkti og flatar línur milli punktanna. Gröfin eru látin ``falla'' á þeim tímapunktum sem atburðir eiga sér stað í samræmi við það hvernig matið er reiknað. Til þessa að teikna lifunarföllin þá notum við fallið \(ggsurvplot\) úr \(survminer\).
 
@@ -431,8 +452,8 @@ Skoðum fyrst Kaplan-Meier graf fyrir fyrstu 100 dagana fyrir allan hópinn og n
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{KM_}\DecValTok{0}\NormalTok{_day <-}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(time169,chd69)}\OperatorTok{~}\DecValTok{1}\NormalTok{,}\DataTypeTok{data=}\NormalTok{wcgs)}
-\NormalTok{km.plot <-}\StringTok{ }\KeywordTok{ggsurvplot}\NormalTok{(KM_}\DecValTok{0}\NormalTok{_day,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{break.time.by=}\DecValTok{10}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{110}\NormalTok{),}
+\NormalTok{KM\_}\DecValTok{0}\NormalTok{\_day <{-}}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(time169,chd69)}\OperatorTok{\textasciitilde{}}\DecValTok{1}\NormalTok{,}\DataTypeTok{data=}\NormalTok{wcgs)}
+\NormalTok{km.plot <{-}}\StringTok{ }\KeywordTok{ggsurvplot}\NormalTok{(KM\_}\DecValTok{0}\NormalTok{\_day,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{break.time.by=}\DecValTok{10}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{110}\NormalTok{),}
                       \DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.99}\NormalTok{,}\DecValTok{1}\NormalTok{)) }
 \NormalTok{km.plot }
 \end{Highlighting}
@@ -446,7 +467,7 @@ Stækkum nú tímarammann okkar og skoðum Kaplan-Meier grafið fyrir fyrstu 365
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{km.plot <-}\StringTok{ }\KeywordTok{ggsurvplot}\NormalTok{(KM_}\DecValTok{0}\NormalTok{_day,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{break.time.by=}\DecValTok{30}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{365}\NormalTok{),}
+\NormalTok{km.plot <{-}}\StringTok{ }\KeywordTok{ggsurvplot}\NormalTok{(KM\_}\DecValTok{0}\NormalTok{\_day,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{break.time.by=}\DecValTok{30}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{365}\NormalTok{),}
                       \DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.99}\NormalTok{,}\DecValTok{1}\NormalTok{)) }
 \NormalTok{km.plot }
 \end{Highlighting}
@@ -460,7 +481,7 @@ Skoðun nú Kaplan Meier gröfin eftir persónuleikagerð. Breytum skalanum aftu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{km.plot <-}\StringTok{ }\KeywordTok{ggsurvplot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{,}\DataTypeTok{risk.table =}\NormalTok{ T,}
+\NormalTok{km.plot <{-}}\StringTok{ }\KeywordTok{ggsurvplot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{,}\DataTypeTok{risk.table =}\NormalTok{ T,}
                         \DataTypeTok{break.time.by=}\DecValTok{1}\NormalTok{,}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{tables.height=}\FloatTok{0.3}\NormalTok{) }
 \NormalTok{km.plot}
 \end{Highlighting}
@@ -471,13 +492,13 @@ Skoðun nú Kaplan Meier gröfin eftir persónuleikagerð. Breytum skalanum aftu
 Á þessari mynd virðist vera mikill munur á tíðni hjartasjúkdóma eftir persónuleikagerð. Rauði ferillinn, sem táknar persónuleikagerð A, er allur fyrir neðan bláa ferilinn sem táknar persónuleikagerð B. Þar af leiðandi metum við að lifunarfallið sé lægra, þ.e. að líkur þess að vera \textbf{án} hjartasjúkdóms eru minni, sem þýðir að líkurnar á því að \textbf{fá} hjartasjúkdóm eru hærri.
 
 \hypertarget{log-rank-pruxf3f}{%
-\section{Log-rank próf}\label{log-rank-pruxf3f}}
+\subsection{Log-rank próf}\label{log-rank-pruxf3f}}
 
 Nú skoðum við hvort sá munur á tíðni hjartasjúkdóma eftir persónuleikagerðunum sem við sáum bæði með Kaplan Meier metlinum og í Kaplan Meier grafinu sé tölfræðilega marktækur en allt bendir til þess að svo sé. Ein leið til að prófa þann mun er með \textbf{log-rank prófi} en það prófar hvort munur sé á tveimur lifunarföllum. Skipunin sem við notum er \(survdiff\) og er úr \(survival\) pakkanum.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{survdiff}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time_y, status) }\OperatorTok{~}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
+\KeywordTok{survdiff}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time\_y, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -497,7 +518,7 @@ Munurinn reyndist marktækur, p-gildið er \(1 \cdot 10^{-10}\). Logrank prófi�
 Núlltilgátan er að atburðir séu jafn tíðir milli hópanna. Taflan sýnir \emph{Expected} eða væntanlegan fjölda miðað við þá tilgátu. En gögnin sýna (\emph{Observed}) að atburðir eru færri í B hóp og fleiri í A hóp en búast mætti við ef tilgátan væri sönn. Við höfnum þeirri tilgátu og drögum þá ályktun að tíðni atburða sé meiri í A hóp.
 
 \hypertarget{prof_haz}{%
-\chapter{Hlutfallsleg áhætta}\label{prof_haz}}
+\section{Hlutfallsleg áhætta}\label{prof_haz}}
 
 Log-rank prófið segir okkur bara að munur sé á lifun milli hópa en ekki hve mikill hann er. Í log-rank prófinu er hægt að leiðrétta með því að gera stratified próf en það er ekki hægt að leiðrétta fyrir samfelldum breytum. Það er aftur á móti hægt í Cox líkaninu sem er aðhvarfsgreiningarlíkan. Við viljum færa okkur yfir í afhvarfsgreiningu til að meta áhrifsstærðir og til að geta leiðrétt fyrir skýribreytum (e. explanatory variables).
 
@@ -538,7 +559,7 @@ Nú skoðum við gögnin okkar henti fyrir Cox-líkan óbreytt eða hvort við �
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{KM_}\DecValTok{1}\NormalTok{_day <-}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time, status) }\OperatorTok{~}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
+\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_day <{-}}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -546,7 +567,7 @@ Teiknum fyrst lifunargröfin:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_day,}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{col =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_day,}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{col =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -556,7 +577,7 @@ Teiknum næst áhættuna \(F_i(t)=1-S_i(t)\). Það er gert með valinu \emph{fu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_day,}\DataTypeTok{fun=}\StringTok{"event"}\NormalTok{,}\DataTypeTok{col =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_day,}\DataTypeTok{fun=}\StringTok{"event"}\NormalTok{,}\DataTypeTok{col =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -566,7 +587,7 @@ Biðjum næst um uppsöfnuðu hættuföllin og notum þá vörpunina \(y \to -lo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_day,}\DataTypeTok{fun=}\StringTok{"cumhaz"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_day,}\DataTypeTok{fun=}\StringTok{"cumhaz"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -585,7 +606,7 @@ Að lokum veljum við \emph{cloglog} vörpunina sem við höfum mestan áhuga á
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_day,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_day,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -594,7 +615,7 @@ Að lokum veljum við \emph{cloglog} vörpunina sem við höfum mestan áhuga á
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggsurvplot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_day,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{tables.height =} \FloatTok{0.3}\NormalTok{)}
+\KeywordTok{ggsurvplot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_day,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{tables.height =} \FloatTok{0.3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -605,7 +626,7 @@ Skoðum einnig \emph{BMI} eftir að það er búið að skipta henni í þriðju
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{KM_}\DecValTok{1}\NormalTok{_bmi <-}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time, status) }\OperatorTok{~}\StringTok{ }\NormalTok{bmiq3, }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
+\NormalTok{KM\_}\DecValTok{1}\NormalTok{\_bmi <{-}}\StringTok{ }\KeywordTok{survfit}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{bmiq3, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -613,7 +634,7 @@ Skoðum áhættuföllin:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_bmi ,}\DataTypeTok{fun =} \StringTok{"event"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_bmi ,}\DataTypeTok{fun =} \StringTok{"event"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -623,7 +644,7 @@ Svp látum við duga að skoða \emph{cloglog} grafið:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggsurvplot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_bmi ,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{tables.height =} \FloatTok{0.35}\NormalTok{)}
+\KeywordTok{ggsurvplot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_bmi ,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{risk.table =}\NormalTok{ T,}\DataTypeTok{tables.height =} \FloatTok{0.35}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -636,7 +657,7 @@ Svp látum við duga að skoða \emph{cloglog} grafið:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(KM_}\DecValTok{1}\NormalTok{_bmi,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(KM\_}\DecValTok{1}\NormalTok{\_bmi,}\DataTypeTok{fun=}\StringTok{"cloglog"}\NormalTok{,}\DataTypeTok{col=}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -645,7 +666,7 @@ Svp látum við duga að skoða \emph{cloglog} grafið:
 Gröfin eru nokkuð samsíða eftir tímann 900. Það hafa mjög fáir atburðir gerst fyrir þann tíma. Svo hlutfallslega áhætta virðist líka gilda fyrir BMI.
 
 \hypertarget{cox}{%
-\chapter{Cox líkanið}\label{cox}}
+\section{Cox líkanið}\label{cox}}
 
 Cox kom með ákveðna aðferð til að smíða likelihood fall fyrir lifunargreiningu, sjá:
 
@@ -693,7 +714,7 @@ Við byrjum á því að gera Cox-líkanið fyrir persónuleikagerðirnar án no
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Cox_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{coxph}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time, status) }\OperatorTok{~}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
+\NormalTok{Cox\_}\DecValTok{1}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{coxph}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{dibpat, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -703,14 +724,14 @@ Prófum hvort hlutfallsleg áhætta gildir með því að meta leitnina í hætt
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Cox_}\FloatTok{1.}\NormalTok{zph <-}\StringTok{ }\KeywordTok{cox.zph}\NormalTok{(Cox_}\DecValTok{1}\NormalTok{)}
+\NormalTok{Cox\_}\FloatTok{1.}\NormalTok{zph <{-}}\StringTok{ }\KeywordTok{cox.zph}\NormalTok{(Cox\_}\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(Cox_}\FloatTok{1.}\NormalTok{zph)}
-\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\KeywordTok{coef}\NormalTok{(Cox_}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(Cox\_}\FloatTok{1.}\NormalTok{zph)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\KeywordTok{coef}\NormalTok{(Cox\_}\DecValTok{1}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -719,7 +740,7 @@ Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkun
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Cox_}\FloatTok{1.}\NormalTok{zph}
+\NormalTok{Cox\_}\FloatTok{1.}\NormalTok{zph}
 \end{Highlighting}
 \end{Shaded}
 
@@ -734,10 +755,10 @@ Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkun
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{czp_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{cox.zph}\NormalTok{(Cox_}\DecValTok{1}\NormalTok{,}\DataTypeTok{transform =} \StringTok{"rank"}\NormalTok{)}
+\NormalTok{czp\_}\DecValTok{2}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{cox.zph}\NormalTok{(Cox\_}\DecValTok{1}\NormalTok{,}\DataTypeTok{transform =} \StringTok{"rank"}\NormalTok{)}
 
-\KeywordTok{plot}\NormalTok{(czp_}\DecValTok{2}\NormalTok{)}
-\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\KeywordTok{coef}\NormalTok{(Cox_}\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(czp\_}\DecValTok{2}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\KeywordTok{coef}\NormalTok{(Cox\_}\DecValTok{1}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -749,8 +770,8 @@ Skoðum núna Cox-líkanið fyrir BMI, getum hérna notað upphaflegu samfelldu 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Cox_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{coxph}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time, status) }\OperatorTok{~}\StringTok{ }\NormalTok{bmi, }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
-\NormalTok{Cox_}\DecValTok{2}
+\NormalTok{Cox\_}\DecValTok{2}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{coxph}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time, status) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{bmi, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
+\NormalTok{Cox\_}\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -769,8 +790,8 @@ Prófum hvort hlutfallleg áhætta gildir með því að meta leitnina í hættu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Cox_}\FloatTok{2.}\NormalTok{zph <-}\StringTok{ }\KeywordTok{cox.zph}\NormalTok{(Cox_}\DecValTok{2}\NormalTok{)}
-\NormalTok{Cox_}\FloatTok{2.}\NormalTok{zph}
+\NormalTok{Cox\_}\FloatTok{2.}\NormalTok{zph <{-}}\StringTok{ }\KeywordTok{cox.zph}\NormalTok{(Cox\_}\DecValTok{2}\NormalTok{)}
+\NormalTok{Cox\_}\FloatTok{2.}\NormalTok{zph}
 \end{Highlighting}
 \end{Shaded}
 
@@ -782,7 +803,7 @@ Prófum hvort hlutfallleg áhætta gildir með því að meta leitnina í hættu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(Cox_}\FloatTok{2.}\NormalTok{zph)}
+\KeywordTok{plot}\NormalTok{(Cox\_}\FloatTok{2.}\NormalTok{zph)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -794,8 +815,8 @@ Reyndar er niðurstaðan sú sama fyrir allar helstu breytur í þessu gagnasafn
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Cox_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\KeywordTok{coxph}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv_time, status) }\OperatorTok{~}\StringTok{  }\NormalTok{agec }\OperatorTok{+}\StringTok{ }\NormalTok{cholmmol }\OperatorTok{+}\StringTok{ }\NormalTok{sbp10 }\OperatorTok{+}\NormalTok{smoker }\OperatorTok{+}\StringTok{ }\NormalTok{bmi  }\OperatorTok{+}\StringTok{ }\NormalTok{dibpat }\OperatorTok{+}\StringTok{ }\NormalTok{arcus0  , }\DataTypeTok{data =}\NormalTok{ wcgs_dat)}
-\NormalTok{Cox_}\DecValTok{3}
+\NormalTok{Cox\_}\DecValTok{3}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{coxph}\NormalTok{(}\KeywordTok{Surv}\NormalTok{(surv\_time, status) }\OperatorTok{\textasciitilde{}}\StringTok{  }\NormalTok{agec }\OperatorTok{+}\StringTok{ }\NormalTok{cholmmol }\OperatorTok{+}\StringTok{ }\NormalTok{sbp10 }\OperatorTok{+}\NormalTok{smoker }\OperatorTok{+}\StringTok{ }\NormalTok{bmi  }\OperatorTok{+}\StringTok{ }\NormalTok{dibpat }\OperatorTok{+}\StringTok{ }\NormalTok{arcus0  , }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
+\NormalTok{Cox\_}\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -819,7 +840,7 @@ Reyndar er niðurstaðan sú sama fyrir allar helstu breytur í þessu gagnasafn
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{cox.zph}\NormalTok{(Cox_}\DecValTok{3}\NormalTok{)}
+\KeywordTok{cox.zph}\NormalTok{(Cox\_}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -837,7 +858,7 @@ Reyndar er niðurstaðan sú sama fyrir allar helstu breytur í þessu gagnasafn
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{cox_}\DecValTok{3}\NormalTok{_coef <-}\StringTok{ }\NormalTok{Cox_}\DecValTok{3}\OperatorTok{$}\NormalTok{coefficients}
+\NormalTok{cox\_}\DecValTok{3}\NormalTok{\_coef <{-}}\StringTok{ }\NormalTok{Cox\_}\DecValTok{3}\OperatorTok{$}\NormalTok{coefficients}
 \end{Highlighting}
 \end{Shaded}
 

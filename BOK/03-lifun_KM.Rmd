@@ -1,6 +1,6 @@
-# Kaplan Meier {#KM}
+## Kaplan Meier {#KM}
 
-## Kaplan Meier metilinn
+### Kaplan Meier metilinn
 Næst skoðum við Kaplan Meier metilinn en hann er ein langmest notaða tölfræðiaðferðin þegar framkvæmd er lifunargreining, meðal annars vegna þess að á honum byggja svo kölluð Kaplan-Meier gröf sem eru ein algengasta leiðin til að lýsa lifunargögnum. 
 
 Fyrst skulum við kynna til sögunnar svokallað **lifunarfall** (e. survival curve). Lifunarfallið er yfirleitt táknað með $S(t)$ og túlkun fallsins er svohljóðandi
@@ -57,7 +57,7 @@ Getum líka hugsað þetta út frá lifun, ef við skoðun KM_1_sum_5 þá sést
 
 !!! ATH mjög ólíkar tölur milli veldisvísisfallsins og KM, hvernig er best að skýra það?
 
-## Kaplan Meier gröf
+### Kaplan Meier gröf
 
 Kaplan Meier gröf eru langalgengasta myndræna framsetningin á lifunargögnum. Þau eru leið til að lýsa lifunarfallinu myndrænt, þ.e.a.s. hversu hátt hlutfall þátttakanda hefur ekki fengið atburð eftir því sem tíminn líður. Gröfin teikna Kaplan Meier matið í sérhverjum tímapunkti og flatar línur milli punktanna. Gröfin eru látin "falla" á þeim tímapunktum sem atburðir eiga sér stað í samræmi við það hvernig matið er reiknað. Til þessa að teikna lifunarföllin þá notum við fallið $ggsurvplot$ úr $survminer$.
 
@@ -90,7 +90,7 @@ km.plot
 
 Á þessari mynd virðist vera mikill munur á tíðni hjartasjúkdóma eftir persónuleikagerð. Rauði ferillinn, sem táknar persónuleikagerð A, er allur fyrir neðan bláa ferilinn sem táknar persónuleikagerð B. Þar af leiðandi metum við að lifunarfallið sé lægra, þ.e. að líkur þess að vera **án** hjartasjúkdóms eru minni, sem þýðir að líkurnar á því að **fá** hjartasjúkdóm eru hærri.
 
-## Log-rank próf
+### Log-rank próf
 Nú skoðum við hvort sá munur á tíðni hjartasjúkdóma eftir persónuleikagerðunum sem við sáum bæði með Kaplan Meier metlinum og í Kaplan Meier grafinu sé tölfræðilega marktækur en allt bendir til þess að svo sé. Ein leið til að prófa þann mun er með **log-rank prófi** en það prófar hvort munur sé á tveimur lifunarföllum. Skipunin sem við notum er $survdiff$ og er úr $survival$ pakkanum.  
 ```{r,echo=TRUE, warning=FALSE, message=FALSE}
 survdiff(Surv(surv_time_y, status) ~ dibpat, data = wcgs_dat)

@@ -1,4 +1,4 @@
-# Cox líkanið {#cox}
+## Cox líkanið {#cox}
 
 
 Cox kom með ákveðna aðferð til að smíða likelihood fall fyrir lifunargreiningu, sjá:

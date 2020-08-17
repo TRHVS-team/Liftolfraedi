@@ -1,0 +1,13 @@
+# Aðhvarfsgreining {#reg }
+
+
+## Línuleg aðhvarfsgreining
+
+### Lýsandi tölfræði
+
+### Líkanagerð
+
+### Emmeans
+
+
+## Tvíkosta aðhvarfsgreining
