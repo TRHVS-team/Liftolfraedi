@@ -24,7 +24,11 @@
 <meta name="author" content="Sigurbjörg Anna Guðnadóttir" />
 
 
+<<<<<<< HEAD
 <meta name="date" content="2020-08-17" />
+=======
+<meta name="date" content="2020-07-20" />
+>>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
+<<<<<<< HEAD
 <li class="chapter" data-level="1" data-path="kaf.html"><a href="kaf.html"><i class="fa fa-check"></i><b>1</b> Kafli</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="kaf.html"><a href="kaf.html#undirkafli"><i class="fa fa-check"></i><b>1.1</b> Undirkafli</a>
@@ -143,6 +148,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.2.1" data-path="kaf.html"><a href="kaf.html#sniðugt"><i class="fa fa-check"></i><b>1.2.1</b> Sniðugt</a></li>
 </ul></li>
+=======
+<li class="chapter" data-level="1" data-path="lif-skod.html"><a href="lif-skod.html"><i class="fa fa-check"></i><b>1</b> Skoðun lifunargagna</a><ul>
+<li class="chapter" data-level="1.1" data-path="lif-skod.html"><a href="lif-skod.html#sækjum-gögnin-og-lögum-til"><i class="fa fa-check"></i><b>1.1</b> Sækjum gögnin og lögum til</a></li>
+<li class="chapter" data-level="1.2" data-path="lif-skod.html"><a href="lif-skod.html#tökum-létta-skoðun-á-gögnunum"><i class="fa fa-check"></i><b>1.2</b> Tökum létta skoðun á gögnunum</a></li>
+<li class="chapter" data-level="1.3" data-path="lif-skod.html"><a href="lif-skod.html#tafla-1"><i class="fa fa-check"></i><b>1.3</b> Tafla 1</a></li>
+<li class="chapter" data-level="1.4" data-path="lif-skod.html"><a href="lif-skod.html#veldisvísisfallið"><i class="fa fa-check"></i><b>1.4</b> Veldisvísisfallið</a></li>
+>>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
 </ul></li>
 <li class="chapter" data-level="2" data-path="lif.html"><a href="lif.html"><i class="fa fa-check"></i><b>2</b> Lifunargreining</a>
 <ul>
@@ -204,29 +216,29 @@ S(t) = \text{Líkur þess að einstaklingur fá ekki atburð fram að tíma $t$.
 <p>þar sem <span class="math inline">\(d_i\)</span> táknar fjölda þeirra sem fengu atburðinn á tímapunkti <span class="math inline">\(i\)</span> en <span class="math inline">\(n_i\)</span> er fjöldi þeirra sem er <em>enn í áhættu</em> að fá atburðinn á tímapunkti <span class="math inline">\(i\)</span>, þ.e.a.s. hafa hvorki fengið atburðinn, né verið skertir.</p>
 <p>Í fyrsta tímapunktinum er Kaplan Meier metillinn hreinlega hlutfall þeirra sem ekki var kominn með hjartasjúkdóm af þeim sem ekki voru orðnir skertir á þeim tímapunkti (þ.e.a.s. af þeim sem voru enn í eftirfylgd). Fyrir næsta tímapunkt þarf að reikna einn mínus hlutfall fjölda þeirra sem fékk hjartasjúkdóm <em>á þeim tímapunkti</em> af þeim sem enn voru í eftirfylgd á þeim tímapunkti og margfalda það gildi við síðasta reiknaða Kaplan-Meier gildið. Þannig er haldið áfram koll af kolli fyrir alla tímapunktana. Athugið að Kaplan Meier matið er eingöngu metið á þeim tímapunktum þegar atburður á sér stað. Ef við viljum meta lifunarfallið á tímapunktum sem lenda á milli þessara gilda notum við Kaplan-Meier matið fyrir <em>næsta tímapunkt á undan</em>.</p>
 <p>Notum aðferð Kaplan Meier til að meta 5 ára áhættu á hjartasjúkdómi hjá öllum annars vegar og hópunum tveimur hins vegar. Notum fallið <span class="math inline">\(survfit\)</span> úr pakkanum <span class="math inline">\(survival\)</span>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="KM.html#cb22-1"></a><span class="co"># Allur hópurinn</span></span>
-<span id="cb22-2"><a href="KM.html#cb22-2"></a>KM_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> wcgs_dat)</span>
-<span id="cb22-3"><a href="KM.html#cb22-3"></a>KM_<span class="dv">0</span>_sum_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">1</span>) <span class="co"># times = 1 fyrir 1 ár</span></span>
-<span id="cb22-4"><a href="KM.html#cb22-4"></a>KM_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">0</span>_sum_<span class="dv">1</span><span class="op">$</span>surv</span>
-<span id="cb22-5"><a href="KM.html#cb22-5"></a>KM_<span class="dv">0</span>_sum_<span class="dv">5</span> &lt;-<span class="st">  </span><span class="kw">summary</span>(KM_<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">5</span>) <span class="co"># times = 5 fyrir 5 ár</span></span>
-<span id="cb22-6"><a href="KM.html#cb22-6"></a>KM_<span class="dv">0</span>_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">0</span>_sum_<span class="dv">5</span><span class="op">$</span>surv</span>
-<span id="cb22-7"><a href="KM.html#cb22-7"></a></span>
-<span id="cb22-8"><a href="KM.html#cb22-8"></a><span class="co"># Persónuleikagerð A og B</span></span>
-<span id="cb22-9"><a href="KM.html#cb22-9"></a>KM_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span>
-<span id="cb22-10"><a href="KM.html#cb22-10"></a>KM_<span class="dv">1</span>_sum_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">1</span>, <span class="dt">times =</span> <span class="dv">1</span>) <span class="co"># times = 1 fyrir 1 ár</span></span>
-<span id="cb22-11"><a href="KM.html#cb22-11"></a>KM_<span class="dv">1</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">1</span>_sum_<span class="dv">1</span><span class="op">$</span>surv</span>
-<span id="cb22-12"><a href="KM.html#cb22-12"></a>KM_<span class="dv">1</span>_sum_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">1</span>, <span class="dt">times =</span> <span class="dv">5</span>) <span class="co"># times = 5 fyrir 5 ár</span></span>
-<span id="cb22-13"><a href="KM.html#cb22-13"></a>KM_<span class="dv">1</span>_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">1</span>_sum_<span class="dv">5</span><span class="op">$</span>surv</span>
-<span id="cb22-14"><a href="KM.html#cb22-14"></a></span>
-<span id="cb22-15"><a href="KM.html#cb22-15"></a>ahaetta_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(KM_<span class="dv">0</span>_<span class="dv">1</span>,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">1</span>[<span class="dv">1</span>] ,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">1</span>[<span class="dv">2</span>], <span class="dv">4</span>))</span>
-<span id="cb22-16"><a href="KM.html#cb22-16"></a>ahaetta_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(KM_<span class="dv">0</span>_<span class="dv">5</span>,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">5</span>[<span class="dv">1</span>] ,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">5</span>[<span class="dv">2</span>], <span class="dv">4</span>))</span>
-<span id="cb22-17"><a href="KM.html#cb22-17"></a></span>
-<span id="cb22-18"><a href="KM.html#cb22-18"></a><span class="co"># Setjum upp í töflu og berum saman við fyrri niðurstöður.</span></span>
-<span id="cb22-19"><a href="KM.html#cb22-19"></a>stats4 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">cbind</span>(rownames,lambda_<span class="dv">2</span>,ar_ahaetta, ahaetta_<span class="dv">1</span>, ahaetta_<span class="dv">5</span>))</span>
-<span id="cb22-20"><a href="KM.html#cb22-20"></a></span>
-<span id="cb22-21"><a href="KM.html#cb22-21"></a><span class="co"># !!! ATH betra útlit</span></span>
-<span id="cb22-22"><a href="KM.html#cb22-22"></a><span class="co">#stats4 &lt;- stats4 %&gt;% rename( Hópar= rownames, Heildarfjöldi = V2,  Tilfelli = V3, Eftirfylgnitími = V4, lambda = V5, áhætta5ár = V6)</span></span>
-<span id="cb22-23"><a href="KM.html#cb22-23"></a>stats4</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="KM.html#cb31-1"></a><span class="co"># Allur hópurinn</span></span>
+<span id="cb31-2"><a href="KM.html#cb31-2"></a>KM_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb31-3"><a href="KM.html#cb31-3"></a>KM_<span class="dv">0</span>_sum_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">1</span>) <span class="co"># times = 1 fyrir 1 ár</span></span>
+<span id="cb31-4"><a href="KM.html#cb31-4"></a>KM_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">0</span>_sum_<span class="dv">1</span><span class="op">$</span>surv</span>
+<span id="cb31-5"><a href="KM.html#cb31-5"></a>KM_<span class="dv">0</span>_sum_<span class="dv">5</span> &lt;-<span class="st">  </span><span class="kw">summary</span>(KM_<span class="dv">0</span>, <span class="dt">times =</span> <span class="dv">5</span>) <span class="co"># times = 5 fyrir 5 ár</span></span>
+<span id="cb31-6"><a href="KM.html#cb31-6"></a>KM_<span class="dv">0</span>_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">0</span>_sum_<span class="dv">5</span><span class="op">$</span>surv</span>
+<span id="cb31-7"><a href="KM.html#cb31-7"></a></span>
+<span id="cb31-8"><a href="KM.html#cb31-8"></a><span class="co"># Persónuleikagerð A og B</span></span>
+<span id="cb31-9"><a href="KM.html#cb31-9"></a>KM_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span>
+<span id="cb31-10"><a href="KM.html#cb31-10"></a>KM_<span class="dv">1</span>_sum_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">1</span>, <span class="dt">times =</span> <span class="dv">1</span>) <span class="co"># times = 1 fyrir 1 ár</span></span>
+<span id="cb31-11"><a href="KM.html#cb31-11"></a>KM_<span class="dv">1</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">1</span>_sum_<span class="dv">1</span><span class="op">$</span>surv</span>
+<span id="cb31-12"><a href="KM.html#cb31-12"></a>KM_<span class="dv">1</span>_sum_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">summary</span>(KM_<span class="dv">1</span>, <span class="dt">times =</span> <span class="dv">5</span>) <span class="co"># times = 5 fyrir 5 ár</span></span>
+<span id="cb31-13"><a href="KM.html#cb31-13"></a>KM_<span class="dv">1</span>_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>KM_<span class="dv">1</span>_sum_<span class="dv">5</span><span class="op">$</span>surv</span>
+<span id="cb31-14"><a href="KM.html#cb31-14"></a></span>
+<span id="cb31-15"><a href="KM.html#cb31-15"></a>ahaetta_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(KM_<span class="dv">0</span>_<span class="dv">1</span>,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">1</span>[<span class="dv">1</span>] ,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">1</span>[<span class="dv">2</span>], <span class="dv">4</span>))</span>
+<span id="cb31-16"><a href="KM.html#cb31-16"></a>ahaetta_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">round</span>(KM_<span class="dv">0</span>_<span class="dv">5</span>,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">5</span>[<span class="dv">1</span>] ,<span class="dv">4</span>), <span class="kw">round</span>(KM_<span class="dv">1</span>_<span class="dv">5</span>[<span class="dv">2</span>], <span class="dv">4</span>))</span>
+<span id="cb31-17"><a href="KM.html#cb31-17"></a></span>
+<span id="cb31-18"><a href="KM.html#cb31-18"></a><span class="co"># Setjum upp í töflu og berum saman við fyrri niðurstöður.</span></span>
+<span id="cb31-19"><a href="KM.html#cb31-19"></a>stats4 &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">cbind</span>(rownames,lambda_<span class="dv">2</span>,ar_ahaetta, ahaetta_<span class="dv">1</span>, ahaetta_<span class="dv">5</span>))</span>
+<span id="cb31-20"><a href="KM.html#cb31-20"></a></span>
+<span id="cb31-21"><a href="KM.html#cb31-21"></a><span class="co"># !!! ATH betra útlit</span></span>
+<span id="cb31-22"><a href="KM.html#cb31-22"></a><span class="co">#stats4 &lt;- stats4 %&gt;% rename( Hópar= rownames, Heildarfjöldi = V2,  Tilfelli = V3, Eftirfylgnitími = V4, lambda = V5, áhætta5ár = V6)</span></span>
+<span id="cb31-23"><a href="KM.html#cb31-23"></a>stats4</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   rownames V2     V3     V4     V5    
 ##   &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
@@ -240,29 +252,29 @@ S(t) = \text{Líkur þess að einstaklingur fá ekki atburð fram að tíma $t$.
 <h2><span class="header-section-number">3.2</span> Kaplan Meier gröf</h2>
 <p>Kaplan Meier gröf eru langalgengasta myndræna framsetningin á lifunargögnum. Þau eru leið til að lýsa lifunarfallinu myndrænt, þ.e.a.s. hversu hátt hlutfall þátttakanda hefur ekki fengið atburð eftir því sem tíminn líður. Gröfin teikna Kaplan Meier matið í sérhverjum tímapunkti og flatar línur milli punktanna. Gröfin eru látin “falla” á þeim tímapunktum sem atburðir eiga sér stað í samræmi við það hvernig matið er reiknað. Til þessa að teikna lifunarföllin þá notum við fallið <span class="math inline">\(ggsurvplot\)</span> úr <span class="math inline">\(survminer\)</span>.</p>
 <p>Skoðum fyrst Kaplan-Meier graf fyrir fyrstu 100 dagana fyrir allan hópinn og notum því tímaeininguna dagur.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="KM.html#cb24-1"></a>KM_<span class="dv">0</span>_day &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(time169,chd69)<span class="op">~</span><span class="dv">1</span>,<span class="dt">data=</span>wcgs)</span>
-<span id="cb24-2"><a href="KM.html#cb24-2"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">0</span>_day,<span class="dt">risk.table =</span> T,<span class="dt">break.time.by=</span><span class="dv">10</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">110</span>),</span>
-<span id="cb24-3"><a href="KM.html#cb24-3"></a>                      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.99</span>,<span class="dv">1</span>)) </span>
-<span id="cb24-4"><a href="KM.html#cb24-4"></a>km.plot </span></code></pre></div>
-<p><img src="BOK_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="KM.html#cb33-1"></a>KM_<span class="dv">0</span>_day &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(time169,chd69)<span class="op">~</span><span class="dv">1</span>,<span class="dt">data=</span>wcgs)</span>
+<span id="cb33-2"><a href="KM.html#cb33-2"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">0</span>_day,<span class="dt">risk.table =</span> T,<span class="dt">break.time.by=</span><span class="dv">10</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">110</span>),</span>
+<span id="cb33-3"><a href="KM.html#cb33-3"></a>                      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.99</span>,<span class="dv">1</span>)) </span>
+<span id="cb33-4"><a href="KM.html#cb33-4"></a>km.plot </span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Grafið byrjar í <span class="math inline">\(y=1.00\)</span>, þegar <span class="math inline">\(t=0\)</span>, enda hefur enginn fengið hjartasjúkdóm við byrjun rannsóknarinnar. Á tíma <span class="math inline">\(t=18\)</span> fékk fyrsti maðurinn hjartasjúkdóm. Þar dettur línan úr 1.00 í 0.9997. Næsta “fall” verður við <span class="math inline">\(t=21\)</span> þegar næsti maður fékk hjartaáfall og svo koll af kolli.</p>
 <p>Stækkum nú tímarammann okkar og skoðum Kaplan-Meier grafið fyrir fyrstu 365 dagana:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="KM.html#cb25-1"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">0</span>_day,<span class="dt">risk.table =</span> T,<span class="dt">break.time.by=</span><span class="dv">30</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">365</span>),</span>
-<span id="cb25-2"><a href="KM.html#cb25-2"></a>                      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.99</span>,<span class="dv">1</span>)) </span>
-<span id="cb25-3"><a href="KM.html#cb25-3"></a>km.plot </span></code></pre></div>
-<p><img src="BOK_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="KM.html#cb34-1"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">0</span>_day,<span class="dt">risk.table =</span> T,<span class="dt">break.time.by=</span><span class="dv">30</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">365</span>),</span>
+<span id="cb34-2"><a href="KM.html#cb34-2"></a>                      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.99</span>,<span class="dv">1</span>)) </span>
+<span id="cb34-3"><a href="KM.html#cb34-3"></a>km.plot </span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Núna hafa nokkur lóðrétt strik bæst við. Þar eiga skerðingar sér stað þ.e. á þeim tímapunktum hefur einhver þátttakandi hætt í eftirfylgd af einhverjum ástæðum. Kaplan-Meier metilinn er bara metinn á þeim tímapunktum sem atburðir eiga sér stað, svo grafið breytist ekki á þeim tímapunktum sem skerðingar eiga sér stað. Sum tímarit kjósa að fá Kaplan-Meier gröf með slíkum merkingum þegar skerðingar eru en önnur ekki. Það er ætíð hægt að stilla til í R (nota censor = FALSE í ggsurvplot).</p>
 <p>Skoðun nú Kaplan Meier gröfin eftir persónuleikagerð. Breytum skalanum aftur í ár.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="KM.html#cb26-1"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">1</span>,<span class="dt">risk.table =</span> T,</span>
-<span id="cb26-2"><a href="KM.html#cb26-2"></a>                        <span class="dt">break.time.by=</span><span class="dv">1</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>),<span class="dt">tables.height=</span><span class="fl">0.3</span>) </span>
-<span id="cb26-3"><a href="KM.html#cb26-3"></a>km.plot</span></code></pre></div>
-<p><img src="BOK_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="KM.html#cb35-1"></a>km.plot &lt;-<span class="st"> </span><span class="kw">ggsurvplot</span>(KM_<span class="dv">1</span>,<span class="dt">risk.table =</span> T,</span>
+<span id="cb35-2"><a href="KM.html#cb35-2"></a>                        <span class="dt">break.time.by=</span><span class="dv">1</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="fl">0.8</span>,<span class="dv">1</span>),<span class="dt">tables.height=</span><span class="fl">0.3</span>) </span>
+<span id="cb35-3"><a href="KM.html#cb35-3"></a>km.plot</span></code></pre></div>
+<p><img src="BOK_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Á þessari mynd virðist vera mikill munur á tíðni hjartasjúkdóma eftir persónuleikagerð. Rauði ferillinn, sem táknar persónuleikagerð A, er allur fyrir neðan bláa ferilinn sem táknar persónuleikagerð B. Þar af leiðandi metum við að lifunarfallið sé lægra, þ.e. að líkur þess að vera <strong>án</strong> hjartasjúkdóms eru minni, sem þýðir að líkurnar á því að <strong>fá</strong> hjartasjúkdóm eru hærri.</p>
 </div>
 <div id="log-rank-próf" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Log-rank próf</h2>
 <p>Nú skoðum við hvort sá munur á tíðni hjartasjúkdóma eftir persónuleikagerðunum sem við sáum bæði með Kaplan Meier metlinum og í Kaplan Meier grafinu sé tölfræðilega marktækur en allt bendir til þess að svo sé. Ein leið til að prófa þann mun er með <strong>log-rank prófi</strong> en það prófar hvort munur sé á tveimur lifunarföllum. Skipunin sem við notum er <span class="math inline">\(survdiff\)</span> og er úr <span class="math inline">\(survival\)</span> pakkanum.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="KM.html#cb27-1"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="KM.html#cb36-1"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(surv_time_y, status) <span class="op">~</span><span class="st"> </span>dibpat, <span class="dt">data =</span> wcgs_dat)</span></code></pre></div>
 <pre><code>## Call:
 ## survdiff(formula = Surv(surv_time_y, status) ~ dibpat, data = wcgs_dat)
 ## 

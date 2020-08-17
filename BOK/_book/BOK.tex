@@ -113,7 +113,11 @@
 
 \title{Tölfræði fyrir almenning}
 \author{Sigurbjörg Anna Guðnadóttir}
+<<<<<<< HEAD
 \date{2020-08-17}
+=======
+\date{2020-07-20}
+>>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
 
 \begin{document}
 \maketitle
@@ -130,6 +134,8 @@
 \KeywordTok{library}\NormalTok{(survival)}
 \KeywordTok{library}\NormalTok{(flexsurv)}
 \KeywordTok{library}\NormalTok{(survminer)}
+\KeywordTok{library}\NormalTok{(arsenal)}
+\KeywordTok{library}\NormalTok{(table1)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -176,7 +182,11 @@ Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáf
          \DataTypeTok{sbp10 =}\NormalTok{ sbp0 }\OperatorTok{/}\StringTok{ }\DecValTok{10}\NormalTok{,}
          \DataTypeTok{dibpat =} \KeywordTok{factor}\NormalTok{(dibpat0, }\DataTypeTok{levels =} \DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"B"}\NormalTok{, }\StringTok{"A"}\NormalTok{)),}
          \DataTypeTok{smoker =} \KeywordTok{factor}\NormalTok{(}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{(ncigs0 }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{), }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)),}
+<<<<<<< HEAD
          \DataTypeTok{bmi =}\NormalTok{ ((weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{(height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{,}
+=======
+         \DataTypeTok{bmi =}\NormalTok{ (weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{0.454}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{((height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{/}\DecValTok{100}\NormalTok{)}\OperatorTok{^}\DecValTok{2}\NormalTok{,}
+>>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
          \DataTypeTok{bmiq3 =} \KeywordTok{cut}\NormalTok{(bmi, }\DataTypeTok{breaks =} \KeywordTok{quantile}\NormalTok{(bmi, }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{3}\NormalTok{)),}
                        \DataTypeTok{include.lowest =}\NormalTok{ T, }\DataTypeTok{right =}\NormalTok{ F)}
 \NormalTok{         )}
@@ -329,6 +339,55 @@ Getum líka reiknað áhættuhlutfallið
 
 Áhættuhlutfallið er 0.43 sem er það sama og við fengum með handreikningi.
 
+\hypertarget{tafla-1}{%
+\section{Tafla 1}\label{tafla-1}}
+
+Þar sem við gerum yfirleitt líkön með skýribreytum þá er gott að útbúa töflu 1 til þess að fá tilfinningu fyrir dreifingu þeirra. Til eru ýmsar skipanir til að gera þessa töflu, meðal annars \(tableyby\) í pakkanum \(arsenal\). Gott er að nefna breyturnar fyrst með skiljanlegum heitum. Notum til þess \(label\) úr pakkanum table1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{label}\NormalTok{(wcgs_dat}\OperatorTok{$}\NormalTok{dibpat) <-}\StringTok{ "Hegðunarhópur"}
+\StringTok{label(wcgs_dat$agec) <- "}\NormalTok{Aldur}\StringTok{"}
+\StringTok{label(wcgs_dat$cholmmol) <- "}\NormalTok{Kólestról"}
+\KeywordTok{label}\NormalTok{(wcgs_dat}\OperatorTok{$}\NormalTok{sbp10) <-}\StringTok{ "Blóðþrýstingur"}
+\StringTok{label(wcgs_dat$smoker) <- "}\NormalTok{Reykingar}\StringTok{"}
+\StringTok{label(wcgs_dat$bmi) <- "}\NormalTok{BMI}\StringTok{"}
+\StringTok{label(wcgs_dat$arcus0) <- "}\NormalTok{Hornhimnubogi}\StringTok{" ## !!! ATH er þetta rétt íslenska?}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tab1 <-}\StringTok{ }\KeywordTok{tableby}\NormalTok{(dibpat }\OperatorTok{~}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{agec }\OperatorTok{+}\StringTok{ }\NormalTok{cholmmol }\OperatorTok{+}\StringTok{ }\NormalTok{sbp10 }\OperatorTok{+}\StringTok{ }\NormalTok{smoker }\OperatorTok{+}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{arcus0, }\DataTypeTok{data=}\NormalTok{ wcgs_dat)}
+\KeywordTok{summary}\NormalTok{(tab1, }\DataTypeTok{text =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## |               |   A (N=1583)    |   B (N=1557)    | Total (N=3140)  | p value|
+## |:--------------|:---------------:|:---------------:|:---------------:|-------:|
+## |BMI            |                 |                 |                 |   0.130|
+## |-  Mean (SD)   | 24.609 (2.600)  | 24.470 (2.531)  | 24.540 (2.567)  |        |
+## |-  Range       | 11.202 - 37.285 | 15.676 - 38.986 | 11.202 - 38.986 |        |
+## |Aldur          |                 |                 |                 | < 0.001|
+## |-  Mean (SD)   |  0.769 (5.697)  | -0.228 (5.282)  |  0.275 (5.517)  |        |
+## |-  Range       | -7.000 - 13.000 | -7.000 - 13.000 | -7.000 - 13.000 |        |
+## |Kólestról      |                 |                 |                 |   0.001|
+## |-  Mean (SD)   |  5.867 (1.135)  |  5.740 (1.088)  |  5.804 (1.113)  |        |
+## |-  Range       | 2.641 - 16.538  | 2.821 - 10.256  | 2.641 - 16.538  |        |
+## |Blóðþrýstingur |                 |                 |                 | < 0.001|
+## |-  Mean (SD)   | 12.977 (1.568)  | 12.742 (1.430)  | 12.860 (1.506)  |        |
+## |-  Range       | 10.000 - 21.200 | 9.800 - 23.000  | 9.800 - 23.000  |        |
+## |Reykingar      |                 |                 |                 | < 0.001|
+## |-  No          |   782 (49.4%)   |   864 (55.5%)   |  1646 (52.4%)   |        |
+## |-  Yes         |   801 (50.6%)   |   693 (44.5%)   |  1494 (47.6%)   |        |
+## |Hornhimnubogi  |                 |                 |                 |   0.010|
+## |-  Mean (SD)   |  0.320 (0.466)  |  0.277 (0.448)  |  0.299 (0.458)  |        |
+## |-  Range       |  0.000 - 1.000  |  0.000 - 1.000  |  0.000 - 1.000  |        |
+\end{verbatim}
+
 \hypertarget{veldisvuxedsisfalliuxf0}{%
 \subsection{Veldisvísisfallið}\label{veldisvuxedsisfalliuxf0}}
 
@@ -459,7 +518,7 @@ Skoðum fyrst Kaplan-Meier graf fyrir fyrstu 100 dagana fyrir allan hópinn og n
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-12-1.pdf}
 
 Grafið byrjar í \(y=1.00\), þegar \(t=0\), enda hefur enginn fengið hjartasjúkdóm við byrjun rannsóknarinnar. Á tíma \(t=18\) fékk fyrsti maðurinn hjartasjúkdóm. Þar dettur línan úr 1.00 í 0.9997. Næsta ``fall'' verður við \(t=21\) þegar næsti maður fékk hjartaáfall og svo koll af kolli.
 
@@ -473,7 +532,7 @@ Stækkum nú tímarammann okkar og skoðum Kaplan-Meier grafið fyrir fyrstu 365
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-11-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-13-1.pdf}
 
 Núna hafa nokkur lóðrétt strik bæst við. Þar eiga skerðingar sér stað þ.e. á þeim tímapunktum hefur einhver þátttakandi hætt í eftirfylgd af einhverjum ástæðum. Kaplan-Meier metilinn er bara metinn á þeim tímapunktum sem atburðir eiga sér stað, svo grafið breytist ekki á þeim tímapunktum sem skerðingar eiga sér stað. Sum tímarit kjósa að fá Kaplan-Meier gröf með slíkum merkingum þegar skerðingar eru en önnur ekki. Það er ætíð hægt að stilla til í R (nota censor = FALSE í ggsurvplot).
 
@@ -487,7 +546,7 @@ Skoðun nú Kaplan Meier gröfin eftir persónuleikagerð. Breytum skalanum aftu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-12-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-14-1.pdf}
 
 Á þessari mynd virðist vera mikill munur á tíðni hjartasjúkdóma eftir persónuleikagerð. Rauði ferillinn, sem táknar persónuleikagerð A, er allur fyrir neðan bláa ferilinn sem táknar persónuleikagerð B. Þar af leiðandi metum við að lifunarfallið sé lægra, þ.e. að líkur þess að vera \textbf{án} hjartasjúkdóms eru minni, sem þýðir að líkurnar á því að \textbf{fá} hjartasjúkdóm eru hærri.
 
@@ -571,7 +630,7 @@ Teiknum fyrst lifunargröfin:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-15-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-17-1.pdf}
 
 Teiknum næst áhættuna \(F_i(t)=1-S_i(t)\). Það er gert með valinu \emph{fun=``event''} til að nota vörpunina \(y \to 1-y\) á lifunarfallið.
 
@@ -581,7 +640,7 @@ Teiknum næst áhættuna \(F_i(t)=1-S_i(t)\). Það er gert með valinu \emph{fu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-16-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-18-1.pdf}
 
 Biðjum næst um uppsöfnuðu hættuföllin og notum þá vörpunina \(y \to -log(y)\) á lifunarföllin því \(H_i(t) = -\log(S_i(t))\). Þetta er svo algengt að sú vörpun fær nafnið \emph{cumhaz} í lifunar pakkanum.
 
@@ -591,7 +650,7 @@ Biðjum næst um uppsöfnuðu hættuföllin og notum þá vörpunina \(y \to -lo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-17-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-19-1.pdf}
 
 Takið eftir að hér er ekki mikill munur á \(1-S_i(t)\) og \(-log(S_i(t))\) vegna þess að
 
@@ -610,7 +669,7 @@ Að lokum veljum við \emph{cloglog} vörpunina sem við höfum mestan áhuga á
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-18-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-20-1.pdf}
 Þetta er líka hægt að gera í \(survminer\) pakkanum:
 
 \begin{Shaded}
@@ -619,7 +678,7 @@ Að lokum veljum við \emph{cloglog} vörpunina sem við höfum mestan áhuga á
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-19-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-21-1.pdf}
 Það eru fáir atburðir fyrstu 300 dagana. En eftir það virðist fast bil vera á milli lograna af uppsöfnuðu hættuföllunum. En þau færast samt nær. Það er ekki alveg fullkomlega fast hættuhlutfall, en nógu nálægt því til þess að gera ráð fyrir að hlutfallslega áhætta gildir og beita Cox-líkaninu á óbreytt gögnin.
 
 Skoðum einnig \emph{BMI} eftir að það er búið að skipta henni í þriðjunga og gera hana að flokkaðri skýribreytu:
@@ -638,7 +697,7 @@ Skoðum áhættuföllin:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-21-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-23-1.pdf}
 
 Svp látum við duga að skoða \emph{cloglog} grafið:
 
@@ -653,7 +712,7 @@ Svp látum við duga að skoða \emph{cloglog} grafið:
 ## Results may be unexpected or may change in future versions of ggplot2.
 \end{verbatim}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-22-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-24-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -661,7 +720,7 @@ Svp látum við duga að skoða \emph{cloglog} grafið:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-23-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-25-1.pdf}
 
 Gröfin eru nokkuð samsíða eftir tímann 900. Það hafa mjög fáir atburðir gerst fyrir þann tíma. Svo hlutfallslega áhætta virðist líka gilda fyrir BMI.
 
@@ -735,7 +794,7 @@ Prófum hvort hlutfallsleg áhætta gildir með því að meta leitnina í hætt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-26-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-28-1.pdf}
 Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkunin er þó ekki marktæk tölfræðilega. Sem staðfestir að okkur er óhætt að nota Cox-líkanið.
 
 \begin{Shaded}
@@ -762,7 +821,7 @@ Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkun
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-28-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-30-1.pdf}
 
 Skoðum nú niðurstöðu Cox-líkansins fyrir áhættuhlutfallið og berum saman við fyrri niðurstöður. Samkvæmt Cox er áhættuhlutfallið 0.43 og öryggisbilið ( 0.33, 0.56). Við fengum sama áhættuhlutfall með handreikningi og með því að gera ráð fyrir veldisvísidreifingu. !!! ATH er það rétt skilið hjá mér að það sé ekki rétt að reikna áhættuhlutfall fyrir Kaplan Meier metilinn?
 
@@ -779,8 +838,8 @@ Skoðum núna Cox-líkanið fyrir BMI, getum hérna notað upphaflegu samfelldu 
 ## Call:
 ## coxph(formula = Surv(surv_time, status) ~ bmi, data = wcgs_dat)
 ## 
-##      coef exp(coef) se(coef)     z        p
-## bmi 15842       Inf     4101 3.863 0.000112
+##        coef exp(coef) se(coef)     z        p
+## bmi 0.08863   1.09268  0.02294 3.863 0.000112
 ## 
 ## Likelihood ratio test=14.1  on 1 df, p=0.0001731
 ## n= 3140, number of events= 255
@@ -807,7 +866,7 @@ Prófum hvort hlutfallleg áhætta gildir með því að meta leitnina í hættu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-31-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-33-1.pdf}
 
 Niðurstaðan er að hlutfallsleg áhætta virðist einnig halda fyrir bmi.
 
@@ -825,14 +884,14 @@ Reyndar er niðurstaðan sú sama fyrir allar helstu breytur í þessu gagnasafn
 ## coxph(formula = Surv(surv_time, status) ~ agec + cholmmol + sbp10 + 
 ##     smoker + bmi + dibpat + arcus0, data = wcgs_dat)
 ## 
-##                 coef  exp(coef)   se(coef)      z        p
-## agec       5.719e-02  1.059e+00  1.135e-02  5.040 4.64e-07
-## cholmmol   3.234e-01  1.382e+00  4.137e-02  7.817 5.39e-15
-## sbp10      1.844e-01  1.202e+00  3.802e-02  4.849 1.24e-06
-## smokerYes  6.108e-01  1.842e+00  1.319e-01  4.630 3.66e-06
-## bmi        1.015e+04        Inf  4.367e+03  2.325   0.0201
-## dibpatB   -6.664e-01  5.135e-01  1.371e-01 -4.861 1.17e-06
-## arcus0     2.156e-01  1.241e+00  1.322e-01  1.631   0.1030
+##               coef exp(coef) se(coef)      z        p
+## agec       0.05719   1.05886  0.01135  5.040 4.64e-07
+## cholmmol   0.32339   1.38181  0.04137  7.817 5.39e-15
+## sbp10      0.18436   1.20245  0.03802  4.849 1.24e-06
+## smokerYes  0.61075   1.84182  0.13192  4.630 3.66e-06
+## bmi        0.05681   1.05846  0.02443  2.325   0.0201
+## dibpatB   -0.66644   0.51353  0.13711 -4.861 1.17e-06
+## arcus0     0.21561   1.24061  0.13223  1.631   0.1030
 ## 
 ## Likelihood ratio test=198.4  on 7 df, p=< 2.2e-16
 ## n= 3140, number of events= 255
@@ -864,7 +923,9 @@ Reyndar er niðurstaðan sú sama fyrir allar helstu breytur í þessu gagnasafn
 
 Öll p-gildin eru vel yfir 0.05 sem bendir til þess að hlutfallsleg áhætta gildir fyrir allar þessar breytur.
 
-Lifunarlíkanið sem við fáum ef við notum allar þessar breytur er \(h_{1}(t)=e^{0.0572*agec+0.3234*cholmmol+0.1844*sbp10+0.6108*smoke+\ensuremath{1.0154599\times 10^{4}}*bmi+-0.6664*dibpat +0.2156*arcus}*h_{0}(t)\) Þar sem \(h_{0}(t)\) er hazard-fallið þegar allar samfelldu breyturnar eru 0, sem þýðir að upphaflega aldursbreytan er 46, reykingar og arcus eru nei og hegðunarhópurinn er B.
+Lifunarlíkanið sem við fáum ef við notum allar þessar breytur er \(h_{1}(t)=e^{0.0572*agec+0.3234*cholmmol+0.1844*sbp10+0.6108*smoke+0.0568*bmi+-0.6664*dibpat +0.2156*arcus}*h_{0}(t)\) Þar sem \(h_{0}(t)\) er hazard-fallið þegar allar samfelldu breyturnar eru 0, sem þýðir að upphaflega aldursbreytan er 46, reykingar og arcus eru nei og hegðunarhópurinn er B.
+
+Þegar líkönin eru borin saman sést að stuðullinn fyrir bmi í óleiðrétta líkaninu er 0.0886 og í því leiðrétta 0.0568. !!! ATH segja eitthvað meira um túlkun á þessu.
 
   \bibliography{book.bib,packages.bib}
 

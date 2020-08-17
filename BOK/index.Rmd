@@ -17,6 +17,8 @@ library(tidyverse)
 library(survival)
 library(flexsurv)
 library(survminer)
+library(arsenal)
+library(table1)
 ```
 
 ```{r, include=FALSE}

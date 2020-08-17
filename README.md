@@ -1,2 +1,2 @@
-# Tolfraedi_f_almenning
+# Líftölfræði
 Efni fyrir vefinn
