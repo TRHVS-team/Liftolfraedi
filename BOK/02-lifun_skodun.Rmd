@@ -116,10 +116,6 @@ Getum líka reiknað áhættuhlutfallið
 hz_2 <- exp(VL_1$res[2,1])
 ```
 Áhættuhlutfallið er `r round(hz_2,2)` sem er það sama og við fengum með handreikningi.  
-<<<<<<< HEAD
- 
-### Veldisvísisfallið
-=======
 
 ## Tafla 1
 Þar sem við gerum yfirleitt líkön með skýribreytum þá er gott að útbúa töflu 1 til þess að fá tilfinningu fyrir dreifingu þeirra. Til eru ýmsar skipanir til að gera þessa töflu, meðal annars $tableyby$ í pakkanum $arsenal$. Gott er að nefna breyturnar fyrst með skiljanlegum heitum. Notum til þess $label$ úr pakkanum table1 
@@ -141,7 +137,6 @@ summary(tab1, text = TRUE)
 ```
 
 ## Veldisvísisfallið
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
 Ef við gerum ráð fyrir veldisvísivexti þá er hægt að meta t.d. 5 ára áhættu fyrir hvorn hóp. Athugið að hér erum við að gera ráð fyrir að áhættan í sérhverjum hópi haldist óbreytt út tímabilið. 
   
 Við notum formúluna $1-e^{-\lambda*ár}$.  

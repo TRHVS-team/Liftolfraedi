@@ -113,11 +113,7 @@
 
 \title{Tölfræði fyrir almenning}
 \author{Sigurbjörg Anna Guðnadóttir}
-<<<<<<< HEAD
-\date{2020-08-17}
-=======
-\date{2020-07-20}
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
+\date{2020-08-18}
 
 \begin{document}
 \maketitle
@@ -140,22 +136,504 @@
 \end{Shaded}
 
 \hypertarget{reg}{%
-\chapter{Aðhvarfsgreining}\label{reg}}
+\chapter{Línuleg aðhvarfsgreining}\label{reg}}
 
-\hypertarget{luxednuleg-auxf0hvarfsgreining}{%
-\section{Línuleg aðhvarfsgreining}\label{luxednuleg-auxf0hvarfsgreining}}
+Í línulegri aðhvarfsgreiningu gildir að útkoman þarf að vera línuleg breyta. Það gildir ekki um skýribreyturnar.
+
+Þeir pakkar sem við notum eru:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(epitools)}
+\KeywordTok{library}\NormalTok{(arsenal)}
+\KeywordTok{library}\NormalTok{(ggpubr)}
+\KeywordTok{library}\NormalTok{(table1)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{luxfdsandi-tuxf6lfruxe6uxf0i}{%
-\subsection{Lýsandi tölfræði}\label{luxfdsandi-tuxf6lfruxe6uxf0i}}
+\section{Lýsandi tölfræði}\label{luxfdsandi-tuxf6lfruxe6uxf0i}}
+
+Western Collaborative Group Study (WCGS) gagnasafnið er í epitools- pakkanum. Gagnasafnið byggir á rannsókn sem var með meginmarkmið að skoða tengsl persónuleikagerðar og hjartasjúkdóma. Viðfangsefnin voru 3154 karlmenn á aldrinum 39 - 59 ára, þeim var fylgt eftir í allt að 10 ár þangað til þeir fengu hjartasjúkdóm, létust, þeir urðu 70 ára eða eftirfylgni lauk af öðrum ástæðum. Viðfangsefnin komu inn í rannsóknina á árunum 1960-1961. Í þessum kafla og næstu ætlum við að skoða tengsl kólesteróls og reykinga.
+
+\hypertarget{suxe6kjum-guxf6gnin-og-luxf6gum-til}{%
+\subsection{Sækjum gögnin og lögum til}\label{suxe6kjum-guxf6gnin-og-luxf6gum-til}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(wcgs)}
+\NormalTok{wcgs <{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(wcgs)}
+
+\NormalTok{wcgs <{-}}\StringTok{ }\NormalTok{wcgs }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{agec =}\NormalTok{ age0 }\OperatorTok{{-}}\StringTok{ }\DecValTok{46}\NormalTok{,}
+         \DataTypeTok{cholmmol =}\NormalTok{ chol0 }\OperatorTok{/}\StringTok{ }\DecValTok{39}\NormalTok{,}
+         \DataTypeTok{sbp10 =}\NormalTok{ sbp0 }\OperatorTok{/}\StringTok{ }\DecValTok{10}\NormalTok{,}
+         \DataTypeTok{dibpat =} \KeywordTok{factor}\NormalTok{(dibpat0, }\DataTypeTok{levels =} \DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"B"}\NormalTok{, }\StringTok{"A"}\NormalTok{)),}
+         \DataTypeTok{smoker =} \KeywordTok{factor}\NormalTok{(}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{(ncigs0 }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{), }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)), }\CommentTok{\# ATH, sé til hvort ég nota}
+         \DataTypeTok{bmi =}\NormalTok{ (weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{0.454}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{((height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{/}\DecValTok{100}\NormalTok{)}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{,}
+         \DataTypeTok{bmiq3 =} \KeywordTok{cut}\NormalTok{(bmi, }\DataTypeTok{breaks =} \KeywordTok{quantile}\NormalTok{(bmi, }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{3}\NormalTok{)), }\CommentTok{\# ATH, veit ekki hvort ég held þessu}
+                     \DataTypeTok{include.lowest =}\NormalTok{ T, }\DataTypeTok{right =}\NormalTok{ F)}
+\NormalTok{  )}
+
+\NormalTok{wcgs\_dat <{-}}\StringTok{ }\NormalTok{wcgs }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(id, agec, cholmmol, sbp10, ncigs0, dibpat, bmi, arcus0) }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\KeywordTok{complete.cases}\NormalTok{(.)) }
+
+\NormalTok{wcgs\_dat}\OperatorTok{$}\NormalTok{dibpat <{-}}\StringTok{ }\KeywordTok{relevel}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{dibpat, }\StringTok{"A"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Við búum til nýja aldursbreytu þar sem við erum búin að staðla hana m.v. meðaldurinn í hópnum. Meðalaldurinn er 46.28 og drögum við þvi 46 frá aldrinum. Það mun auðvelda túlkun á líkönum.\\
+!!! ATH af hverju deilum við með 10 og 39?.\\
+Breytan dibpat0 eru persónuleikagerðirnar, við setjum hana sem flokkabreytu (e. factor).\\
+Til þess að reikna BMI þá þurfum við að breyta hæðinni í metra og þyngdinni í kíló. Útbúum einnig flokkabreytu fyrir bmi þar sem við skiptum henni í 3 jafna hluta.
+
+Í þessari úrvinnslu notum við bara þá einstaklinga sem hafa allar breyturnar sem við ætlum að skoða, aðra fjarlægjum við úr gagnasafninu.
+
+Gott er að setja ``label'' á breyturnar til að hafa íslensku í gröfum og öðrum myndum. Notum til þess skipunina \(label\) úr pakkanum \(arsenal\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{cholmmol) <{-}}\StringTok{ "Kólesteról"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{agec) <{-}}\StringTok{ "Miðjaður Aldur"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{bmi) <{-}}\StringTok{ "BMI"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{dibpat) <{-}}\StringTok{ "Hegðunarhópur"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{sbp10) <{-}}\StringTok{ "Blóðþrýstingur"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0) <{-}}\StringTok{ "Fjöldi sígaréttna"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{arcus0) <{-}}\StringTok{ "Arcus"}  \CommentTok{\# ATH!!! Hvað er arcus?}
+\end{Highlighting}
+\end{Shaded}
+
+Mikilvægt skref í allri tölfræðiúrvinnslu er hreinsun gagnanna, t.d. skoða hvort öll gildi séu eðlileg. Við gerum það ekki hérna en við skoðum töflu 1, helstu lýsistærðir og dreifingu gagnanna.
+
+\hypertarget{dreifing-helstu-breytna}{%
+\subsection{Dreifing helstu breytna}\label{dreifing-helstu-breytna}}
+
+Skoðum dreifingu þeirra breytna sem við höfum mestan áhuga á, það er kólesteról og reykingar. Gott getur verið að skoða skýribreyturnar á svipaðan hátt. Við gerð grafa notum við skipanir úr pakkanum \(tidyverse\), einnig notum við skipunina \(ggarrange\) úr pakkanum \(ggpubr\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kol <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ cholmmol)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_bar}\NormalTok{(}\DataTypeTok{fill=}\DecValTok{4}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Kólesteról"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{\textquotesingle{}Kólesteról\textquotesingle{}}\NormalTok{, }\DataTypeTok{y=}\StringTok{\textquotesingle{}Count\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_bw}\NormalTok{()}
+
+\NormalTok{reyk <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ncigs0)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom\_bar}\NormalTok{(}\DataTypeTok{fill=}\DecValTok{4}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Reykingar"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{\textquotesingle{}Reykingar\textquotesingle{}}\NormalTok{, }\DataTypeTok{y=}\StringTok{\textquotesingle{}Count\textquotesingle{}}\NormalTok{) }\OperatorTok{+}\StringTok{  }
+\StringTok{  }\KeywordTok{theme\_bw}\NormalTok{()}
+
+\KeywordTok{ggarrange}\NormalTok{(kol, reyk,}\DataTypeTok{ncol=}\DecValTok{2}\NormalTok{, }\DataTypeTok{nrow=}\DecValTok{1}\NormalTok{) }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{annotate\_figure}\NormalTok{(}
+    \DataTypeTok{top =} \KeywordTok{text\_grob}\NormalTok{(}\StringTok{"Dreifing útkomu og útsetningar"}\NormalTok{,}\DataTypeTok{face =} \StringTok{"bold"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{14}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+Oft er líka áhugavert að skoða hvernig fjórðungsmörkin eru fyrir breyturnar.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qu\_chol <{-}}\StringTok{ }\KeywordTok{quantile}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{cholmmol)}
+\NormalTok{qu\_chol }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        0%       25%       50%       75%      100% 
+##  2.641026  5.051282  5.717949  6.487179 16.538462
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qu\_cig <{-}}\StringTok{ }\KeywordTok{quantile}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0)}
+\NormalTok{qu\_cig}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   0%  25%  50%  75% 100% 
+##    0    0    0   20   99
+\end{verbatim}
+
+Hérna sést t.d. að 50\% karlmannanna er með kólesteról á bílinu 5.05 til 6.49. Einnig að langflestir reykja ekki, en 25\% af karlmönnum reykja 20 sígaréttur eða meira.
+
+\hypertarget{tafla-1}{%
+\subsection{Tafla 1}\label{tafla-1}}
+
+ATH!!! Vantar text um tilgang töflu 1.
+ATH!!! Myndum við vilja hafa aðra breytu efst.
+Í töflu 1 þá verður breytan sem er í hausnum að vera flokkabreyta, ef breytan sem við viljum skipta hópnum eftir er ekki flokkabreyta þá er hægt að útbúa hana með einhvers konar bilskiptingu. Hérna prófum við að skipta að kólestrólinu með fjórðungsmörkunum. Aðrar breytur geta verið hvort sem er flokkabreytur eða samfelldar.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wcgs\_dat <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{chol\_q =} \KeywordTok{cut}\NormalTok{(cholmmol, }\DataTypeTok{breaks =} \KeywordTok{quantile}\NormalTok{(cholmmol, }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{4}\NormalTok{)), }
+                      \DataTypeTok{include.lowest =}\NormalTok{ T, }\DataTypeTok{right =}\NormalTok{ F))}
+\end{Highlighting}
+\end{Shaded}
+
+Til eru ýmsir skipanir til þess að gera töflu 1, sú sem við notum hérna er \(tableby\) úr pakkanum \(arsenal\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tab\_wcgs <{-}}\StringTok{ }\KeywordTok{tableby}\NormalTok{(chol\_q }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{ncigs0 }\OperatorTok{+}\StringTok{ }\NormalTok{agec }\OperatorTok{+}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{dibpat }\OperatorTok{+}\StringTok{ }\NormalTok{sbp10 }\OperatorTok{+}\StringTok{ }\NormalTok{arcus0, }\DataTypeTok{data =}\NormalTok{ wcgs\_dat)}
+\KeywordTok{summary}\NormalTok{(tab\_wcgs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lcccccr@{}}
+\toprule
+\begin{minipage}[b]{0.17\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering
+{[}2.64,5.05) (N=775)\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering
+{[}5.05,5.72) (N=776)\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering
+{[}5.72,6.49) (N=802)\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering
+{[}6.49,16.5{]} (N=787)\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering
+Total (N=3140)\strut
+\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedleft
+p value\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+\textbf{Fjöldi sígaréttna}\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\textless{} 0.001\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Mean (SD)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+9.819 (13.651)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+10.781 (14.433)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+12.399 (14.939)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+13.255 (14.679)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+11.577 (14.494)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Range\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 60.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 80.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 99.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 70.000\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+0.000 - 99.000\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+\textbf{Miðjaður Aldur}\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\textless{} 0.001\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Mean (SD)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-0.466 (5.360)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-0.179 (5.475)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.677 (5.528)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+1.041 (5.574)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+0.275 (5.517)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Range\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-7.000 - 13.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-7.000 - 13.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-7.000 - 13.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-7.000 - 13.000\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+-7.000 - 13.000\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+\textbf{BMI}\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\textless{} 0.001\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Mean (SD)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+24.339 (2.697)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+24.333 (2.592)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+24.747 (2.526)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+24.730 (2.420)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+24.540 (2.567)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Range\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+11.202 - 38.986\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+15.676 - 37.267\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+16.889 - 35.763\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+17.737 - 35.735\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+11.202 - 38.986\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+\textbf{Hegðunarhópur}\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+0.030\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~A\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+359 (46.3\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+387 (49.9\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+416 (51.9\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+421 (53.5\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+1583 (50.4\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~B\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+416 (53.7\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+389 (50.1\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+386 (48.1\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+366 (46.5\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+1557 (49.6\%)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+\textbf{Blóðþrýstingur}\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\textless{} 0.001\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Mean (SD)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+12.624 (1.430)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+12.726 (1.420)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+12.964 (1.540)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+13.120 (1.575)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+12.860 (1.506)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Range\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+9.800 - 21.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+10.000 - 21.200\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+10.000 - 20.800\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+10.000 - 23.000\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+9.800 - 23.000\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+\textbf{Arcus}\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\textless{} 0.001\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Mean (SD)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.226 (0.418)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.277 (0.448)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.323 (0.468)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.367 (0.482)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+0.299 (0.458)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright
+~~~Range\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 1.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 1.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 1.000\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+0.000 - 1.000\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering
+0.000 - 1.000\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedleft
+\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Ýmsar leiðir eru til að skoða gögnin frekar og ætlum við að sýna nokkur dæmi um það, en það er alls ekki tæmandi listi og oft gott að gera fyrir fleiri breytur en við gerum hérna.
+
+Skoðum myndrænt meðaltal og staðalfrávik fjölda sígaréttna út frá kólestrólhópum. Það gerum við með ``boxplotti''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{as.factor}\NormalTok{(chol\_q),  }\DataTypeTok{y=}\NormalTok{ncigs0, }\DataTypeTok{fill=}\KeywordTok{as.factor}\NormalTok{(chol\_q))) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom\_boxplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{\textquotesingle{}Kólesteról\textquotesingle{}}\NormalTok{, }\DataTypeTok{y=}\StringTok{\textquotesingle{}Sígaréttufjöldi\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Kólestról og reykingar"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_bw}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-10-1.pdf}
+Við sjáum að meðaltal hækkar í seinni tveimur hópunum en staðalfrávikin virðast svipuð.
+
+Stundum er gott að sjá hvort það séu einhver víxláhrif á milli breytna. Skoðum því hvort áhrif sígaréttna á kólestról sé eins hjá hegðunarhópunum tveimur. Hérna notum við upphaflegu samfelldu kólesteról breytuna en skiptum sígaréttureykingum í 3 flokka: Reykja ekki, 1 pakki, meira en einn pakki.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wcgs\_dat <{-}}\StringTok{ }\NormalTok{wcgs\_dat }\OperatorTok{\%>\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{ncigs0\_3 =} \KeywordTok{ifelse}\NormalTok{(ncigs0 }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{"Reyklaus"}\NormalTok{,}\KeywordTok{ifelse}\NormalTok{(ncigs0 }\OperatorTok{<=}\DecValTok{20}\NormalTok{,}\StringTok{"1 pakki"}\NormalTok{,}\StringTok{"Meira"}\NormalTok{)))}
+
+\CommentTok{\# Endurröðum}
+\NormalTok{wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0\_}\DecValTok{3}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0\_}\DecValTok{3}\NormalTok{)}
+\NormalTok{wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0\_}\DecValTok{3}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{relevel}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0\_}\DecValTok{3}\NormalTok{,}\StringTok{"1 pakki"}\NormalTok{)}
+\NormalTok{wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0\_}\DecValTok{3}\NormalTok{ <{-}}\StringTok{ }\KeywordTok{relevel}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{ncigs0\_}\DecValTok{3}\NormalTok{,}\StringTok{"Reyklaus"}\NormalTok{)}
+
+\NormalTok{wcgs\_dat  }\OperatorTok{\%>\%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{fill=}\DecValTok{4}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ncigs0\_}\DecValTok{3}\NormalTok{, }\DataTypeTok{color =}\NormalTok{ dibpat, }\DataTypeTok{group =}\NormalTok{ dibpat, }\DataTypeTok{y =}\NormalTok{ cholmmol) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{\textquotesingle{}Fjöldi sígaréttna\textquotesingle{}}\NormalTok{, }\DataTypeTok{y=}\StringTok{\textquotesingle{}Kólesteról\textquotesingle{}}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat\_summary}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ mean, }\DataTypeTok{geom =} \StringTok{"point"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat\_summary}\NormalTok{(}\DataTypeTok{fun =}\NormalTok{ mean, }\DataTypeTok{geom =} \StringTok{"line"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Kólesteról og reykingar"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{color =} \StringTok{"Hegðunarhópur"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-11-1.pdf}
+Sjáum að hóparnir tveir koma ekki alveg eins út. Um þá sem reykja ekki gildir að, þeir sem eru í hegðunarhópi A er kólesterólið mun hærra en þegar við skoðum þá sem reykja 1 pakka á dag eða minna þá minnkar munurinn. Svo frá einum pakka og yfir í meira þá stendur hópur B í stað en hópur A hækkar og bilið á milli þeirra eykst. Svo víxláhrif virðast til staðar.
 
 \hypertarget{luxedkanageruxf0}{%
-\subsection{Líkanagerð}\label{luxedkanageruxf0}}
+\section{Líkanagerð}\label{luxedkanageruxf0}}
 
 \hypertarget{emmeans}{%
-\subsection{Emmeans}\label{emmeans}}
+\section{Emmeans}\label{emmeans}}
 
 \hypertarget{tvuxedkosta-auxf0hvarfsgreining}{%
-\section{Tvíkosta aðhvarfsgreining}\label{tvuxedkosta-auxf0hvarfsgreining}}
+\chapter{Tvíkosta aðhvarfsgreining}\label{tvuxedkosta-auxf0hvarfsgreining}}
 
 \hypertarget{lif}{%
 \chapter{Lifunargreining}\label{lif}}
@@ -167,8 +645,8 @@ Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáf
 \hypertarget{lif_skod}{%
 \section{Skoðun lifunargagna}\label{lif_skod}}
 
-\hypertarget{suxe6kjum-guxf6gnin-og-luxf6gum-til}{%
-\subsection{Sækjum gögnin og lögum til}\label{suxe6kjum-guxf6gnin-og-luxf6gum-til}}
+\hypertarget{suxe6kjum-guxf6gnin-og-luxf6gum-til-1}{%
+\subsection{Sækjum gögnin og lögum til}\label{suxe6kjum-guxf6gnin-og-luxf6gum-til-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -182,11 +660,7 @@ Við ætlum að skoða áhrif mismunandi persónuleikagerða A og B á hjartaáf
          \DataTypeTok{sbp10 =}\NormalTok{ sbp0 }\OperatorTok{/}\StringTok{ }\DecValTok{10}\NormalTok{,}
          \DataTypeTok{dibpat =} \KeywordTok{factor}\NormalTok{(dibpat0, }\DataTypeTok{levels =} \DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"B"}\NormalTok{, }\StringTok{"A"}\NormalTok{)),}
          \DataTypeTok{smoker =} \KeywordTok{factor}\NormalTok{(}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{(ncigs0 }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{), }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)),}
-<<<<<<< HEAD
-         \DataTypeTok{bmi =}\NormalTok{ ((weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{(height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{,}
-=======
-         \DataTypeTok{bmi =}\NormalTok{ (weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{0.454}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{((height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{/}\DecValTok{100}\NormalTok{)}\OperatorTok{^}\DecValTok{2}\NormalTok{,}
->>>>>>> e753d9c23e9958d156b4a950770cf2575cbcc25a
+         \DataTypeTok{bmi =}\NormalTok{ (weight0 }\OperatorTok{*}\StringTok{ }\FloatTok{0.454}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{((height0 }\OperatorTok{*}\StringTok{ }\FloatTok{2.54}\NormalTok{)}\OperatorTok{/}\DecValTok{100}\NormalTok{)}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{,}
          \DataTypeTok{bmiq3 =} \KeywordTok{cut}\NormalTok{(bmi, }\DataTypeTok{breaks =} \KeywordTok{quantile}\NormalTok{(bmi, }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\DecValTok{3}\NormalTok{)),}
                        \DataTypeTok{include.lowest =}\NormalTok{ T, }\DataTypeTok{right =}\NormalTok{ F)}
 \NormalTok{         )}
@@ -339,26 +813,26 @@ Getum líka reiknað áhættuhlutfallið
 
 Áhættuhlutfallið er 0.43 sem er það sama og við fengum með handreikningi.
 
-\hypertarget{tafla-1}{%
-\section{Tafla 1}\label{tafla-1}}
+\hypertarget{tafla-1-1}{%
+\section{Tafla 1}\label{tafla-1-1}}
 
 Þar sem við gerum yfirleitt líkön með skýribreytum þá er gott að útbúa töflu 1 til þess að fá tilfinningu fyrir dreifingu þeirra. Til eru ýmsar skipanir til að gera þessa töflu, meðal annars \(tableyby\) í pakkanum \(arsenal\). Gott er að nefna breyturnar fyrst með skiljanlegum heitum. Notum til þess \(label\) úr pakkanum table1
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{label}\NormalTok{(wcgs_dat}\OperatorTok{$}\NormalTok{dibpat) <-}\StringTok{ "Hegðunarhópur"}
-\StringTok{label(wcgs_dat$agec) <- "}\NormalTok{Aldur}\StringTok{"}
-\StringTok{label(wcgs_dat$cholmmol) <- "}\NormalTok{Kólestról"}
-\KeywordTok{label}\NormalTok{(wcgs_dat}\OperatorTok{$}\NormalTok{sbp10) <-}\StringTok{ "Blóðþrýstingur"}
-\StringTok{label(wcgs_dat$smoker) <- "}\NormalTok{Reykingar}\StringTok{"}
-\StringTok{label(wcgs_dat$bmi) <- "}\NormalTok{BMI}\StringTok{"}
-\StringTok{label(wcgs_dat$arcus0) <- "}\NormalTok{Hornhimnubogi}\StringTok{" ## !!! ATH er þetta rétt íslenska?}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{dibpat) <{-}}\StringTok{ "Hegðunarhópur"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{agec) <{-}}\StringTok{ "Aldur"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{cholmmol) <{-}}\StringTok{ "Kólestról"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{sbp10) <{-}}\StringTok{ "Blóðþrýstingur"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{smoker) <{-}}\StringTok{ "Reykingar"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{bmi) <{-}}\StringTok{ "BMI"}
+\KeywordTok{label}\NormalTok{(wcgs\_dat}\OperatorTok{$}\NormalTok{arcus0) <{-}}\StringTok{ "Hornhimnubogi"} \CommentTok{\#\# !!! ATH er þetta rétt íslenska?}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tab1 <-}\StringTok{ }\KeywordTok{tableby}\NormalTok{(dibpat }\OperatorTok{~}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{agec }\OperatorTok{+}\StringTok{ }\NormalTok{cholmmol }\OperatorTok{+}\StringTok{ }\NormalTok{sbp10 }\OperatorTok{+}\StringTok{ }\NormalTok{smoker }\OperatorTok{+}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{arcus0, }\DataTypeTok{data=}\NormalTok{ wcgs_dat)}
+\NormalTok{tab1 <{-}}\StringTok{ }\KeywordTok{tableby}\NormalTok{(dibpat }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{agec }\OperatorTok{+}\StringTok{ }\NormalTok{cholmmol }\OperatorTok{+}\StringTok{ }\NormalTok{sbp10 }\OperatorTok{+}\StringTok{ }\NormalTok{smoker }\OperatorTok{+}\StringTok{ }\NormalTok{bmi }\OperatorTok{+}\StringTok{ }\NormalTok{arcus0, }\DataTypeTok{data=}\NormalTok{ wcgs\_dat)}
 \KeywordTok{summary}\NormalTok{(tab1, }\DataTypeTok{text =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -389,7 +863,7 @@ Getum líka reiknað áhættuhlutfallið
 \end{verbatim}
 
 \hypertarget{veldisvuxedsisfalliuxf0}{%
-\subsection{Veldisvísisfallið}\label{veldisvuxedsisfalliuxf0}}
+\section{Veldisvísisfallið}\label{veldisvuxedsisfalliuxf0}}
 
 Ef við gerum ráð fyrir veldisvísivexti þá er hægt að meta t.d. 5 ára áhættu fyrir hvorn hóp. Athugið að hér erum við að gera ráð fyrir að áhættan í sérhverjum hópi haldist óbreytt út tímabilið.
 
@@ -518,7 +992,7 @@ Skoðum fyrst Kaplan-Meier graf fyrir fyrstu 100 dagana fyrir allan hópinn og n
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-12-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-21-1.pdf}
 
 Grafið byrjar í \(y=1.00\), þegar \(t=0\), enda hefur enginn fengið hjartasjúkdóm við byrjun rannsóknarinnar. Á tíma \(t=18\) fékk fyrsti maðurinn hjartasjúkdóm. Þar dettur línan úr 1.00 í 0.9997. Næsta ``fall'' verður við \(t=21\) þegar næsti maður fékk hjartaáfall og svo koll af kolli.
 
@@ -532,7 +1006,7 @@ Stækkum nú tímarammann okkar og skoðum Kaplan-Meier grafið fyrir fyrstu 365
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-22-1.pdf}
 
 Núna hafa nokkur lóðrétt strik bæst við. Þar eiga skerðingar sér stað þ.e. á þeim tímapunktum hefur einhver þátttakandi hætt í eftirfylgd af einhverjum ástæðum. Kaplan-Meier metilinn er bara metinn á þeim tímapunktum sem atburðir eiga sér stað, svo grafið breytist ekki á þeim tímapunktum sem skerðingar eiga sér stað. Sum tímarit kjósa að fá Kaplan-Meier gröf með slíkum merkingum þegar skerðingar eru en önnur ekki. Það er ætíð hægt að stilla til í R (nota censor = FALSE í ggsurvplot).
 
@@ -546,7 +1020,7 @@ Skoðun nú Kaplan Meier gröfin eftir persónuleikagerð. Breytum skalanum aftu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-14-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-23-1.pdf}
 
 Á þessari mynd virðist vera mikill munur á tíðni hjartasjúkdóma eftir persónuleikagerð. Rauði ferillinn, sem táknar persónuleikagerð A, er allur fyrir neðan bláa ferilinn sem táknar persónuleikagerð B. Þar af leiðandi metum við að lifunarfallið sé lægra, þ.e. að líkur þess að vera \textbf{án} hjartasjúkdóms eru minni, sem þýðir að líkurnar á því að \textbf{fá} hjartasjúkdóm eru hærri.
 
@@ -630,7 +1104,7 @@ Teiknum fyrst lifunargröfin:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-17-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-26-1.pdf}
 
 Teiknum næst áhættuna \(F_i(t)=1-S_i(t)\). Það er gert með valinu \emph{fun=``event''} til að nota vörpunina \(y \to 1-y\) á lifunarfallið.
 
@@ -640,7 +1114,7 @@ Teiknum næst áhættuna \(F_i(t)=1-S_i(t)\). Það er gert með valinu \emph{fu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-18-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-27-1.pdf}
 
 Biðjum næst um uppsöfnuðu hættuföllin og notum þá vörpunina \(y \to -log(y)\) á lifunarföllin því \(H_i(t) = -\log(S_i(t))\). Þetta er svo algengt að sú vörpun fær nafnið \emph{cumhaz} í lifunar pakkanum.
 
@@ -650,7 +1124,7 @@ Biðjum næst um uppsöfnuðu hættuföllin og notum þá vörpunina \(y \to -lo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-19-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-28-1.pdf}
 
 Takið eftir að hér er ekki mikill munur á \(1-S_i(t)\) og \(-log(S_i(t))\) vegna þess að
 
@@ -669,7 +1143,7 @@ Að lokum veljum við \emph{cloglog} vörpunina sem við höfum mestan áhuga á
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-20-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-29-1.pdf}
 Þetta er líka hægt að gera í \(survminer\) pakkanum:
 
 \begin{Shaded}
@@ -678,7 +1152,7 @@ Að lokum veljum við \emph{cloglog} vörpunina sem við höfum mestan áhuga á
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-21-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-30-1.pdf}
 Það eru fáir atburðir fyrstu 300 dagana. En eftir það virðist fast bil vera á milli lograna af uppsöfnuðu hættuföllunum. En þau færast samt nær. Það er ekki alveg fullkomlega fast hættuhlutfall, en nógu nálægt því til þess að gera ráð fyrir að hlutfallslega áhætta gildir og beita Cox-líkaninu á óbreytt gögnin.
 
 Skoðum einnig \emph{BMI} eftir að það er búið að skipta henni í þriðjunga og gera hana að flokkaðri skýribreytu:
@@ -697,7 +1171,7 @@ Skoðum áhættuföllin:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-23-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-32-1.pdf}
 
 Svp látum við duga að skoða \emph{cloglog} grafið:
 
@@ -712,7 +1186,7 @@ Svp látum við duga að skoða \emph{cloglog} grafið:
 ## Results may be unexpected or may change in future versions of ggplot2.
 \end{verbatim}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-24-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-33-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -720,7 +1194,7 @@ Svp látum við duga að skoða \emph{cloglog} grafið:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-25-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-34-1.pdf}
 
 Gröfin eru nokkuð samsíða eftir tímann 900. Það hafa mjög fáir atburðir gerst fyrir þann tíma. Svo hlutfallslega áhætta virðist líka gilda fyrir BMI.
 
@@ -794,7 +1268,7 @@ Prófum hvort hlutfallsleg áhætta gildir með því að meta leitnina í hætt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-28-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-37-1.pdf}
 Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkunin er þó ekki marktæk tölfræðilega. Sem staðfestir að okkur er óhætt að nota Cox-líkanið.
 
 \begin{Shaded}
@@ -821,7 +1295,7 @@ Leitnin er niður á við þ.e. hættuhlutfallið minnkar með tímanum. Lækkun
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-30-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-39-1.pdf}
 
 Skoðum nú niðurstöðu Cox-líkansins fyrir áhættuhlutfallið og berum saman við fyrri niðurstöður. Samkvæmt Cox er áhættuhlutfallið 0.43 og öryggisbilið ( 0.33, 0.56). Við fengum sama áhættuhlutfall með handreikningi og með því að gera ráð fyrir veldisvísidreifingu. !!! ATH er það rétt skilið hjá mér að það sé ekki rétt að reikna áhættuhlutfall fyrir Kaplan Meier metilinn?
 
@@ -866,7 +1340,7 @@ Prófum hvort hlutfallleg áhætta gildir með því að meta leitnina í hættu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{BOK_files/figure-latex/unnamed-chunk-33-1.pdf}
+\includegraphics{BOK_files/figure-latex/unnamed-chunk-42-1.pdf}
 
 Niðurstaðan er að hlutfallsleg áhætta virðist einnig halda fyrir bmi.
 
